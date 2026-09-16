@@ -151,15 +151,136 @@ const MockData = {
     }
   ],
 
-  // Catálogo de Produtos para Venda / Gestão
+  // Catálogo de Produtos para Venda & Gestão de Estoque
   produtosCatalogo: [
-    { id: 101, nome: "iPhone 14 Pro Max 256GB Deep Purple", sku: "IP14PM-256-DP", precoVenda: 5890.00, custoMedio: 4600.00, estoque: 4, categoria: "Smartphones" },
-    { id: 102, nome: "iPhone 13 128GB Grafite", sku: "IP13-128-GR", precoVenda: 3190.00, custoMedio: 2450.00, estoque: 8, categoria: "Smartphones" },
-    { id: 103, nome: "iPhone 12 128GB Preto", sku: "IP12-128-PR", precoVenda: 2550.00, custoMedio: 1980.00, estoque: 6, categoria: "Smartphones" },
-    { id: 104, nome: "iPhone 11 64GB Branco", sku: "IP11-64-BR", precoVenda: 1890.00, custoMedio: 1420.00, estoque: 11, categoria: "Smartphones" },
-    { id: 105, nome: "Apple Watch Series 8 45mm", sku: "AW-S8-45", precoVenda: 2390.00, custoMedio: 1750.00, estoque: 5, categoria: "Smartwatches" },
-    { id: 106, nome: "AirPods Pro 2ª Geração", sku: "APP-GEN2", precoVenda: 1450.00, custoMedio: 980.00, estoque: 14, categoria: "Acessórios" },
-    { id: 107, nome: "MacBook Air M1 256GB Space Gray", sku: "MBA-M1-SG", precoVenda: 4890.00, custoMedio: 3800.00, estoque: 2, categoria: "Notebooks" }
+    {
+      id: 101,
+      nome: "iPhone 14 Pro Max 256GB Deep Purple",
+      sku: "IP14PM-256-DP",
+      investimento: 4600.00,
+      precoVenda: 5890.00,
+      lucroProjetado: 1290.00,
+      margemProjetada: 21.9,
+      gigas: "256GB",
+      cor: "Deep Purple",
+      bateria: 96,
+      quantidade: 4,
+      diasEstoque: 12,
+      categoria: "Smartphones",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 102,
+      nome: "iPhone 13 128GB Grafite",
+      sku: "IP13-128-GR",
+      investimento: 2450.00,
+      precoVenda: 3190.00,
+      lucroProjetado: 740.00,
+      margemProjetada: 23.2,
+      gigas: "128GB",
+      cor: "Grafite",
+      bateria: 92,
+      quantidade: 8,
+      diasEstoque: 18,
+      categoria: "Smartphones",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 103,
+      nome: "iPhone 12 128GB Preto",
+      sku: "IP12-128-PR",
+      investimento: 1980.00,
+      precoVenda: 2550.00,
+      lucroProjetado: 570.00,
+      margemProjetada: 22.4,
+      gigas: "128GB",
+      cor: "Preto",
+      bateria: 88,
+      quantidade: 6,
+      diasEstoque: 28,
+      categoria: "Smartphones",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 104,
+      nome: "Apple Watch Series 8 45mm",
+      sku: "AW-S8-45-MN",
+      investimento: 1750.00,
+      precoVenda: 2390.00,
+      lucroProjetado: 640.00,
+      margemProjetada: 26.8,
+      gigas: null, // Sem armazenamento específico
+      cor: "Midnight",
+      bateria: 100,
+      quantidade: 5,
+      diasEstoque: 22,
+      categoria: "Smartwatches",
+      imagem: "assets/products/apple_watch.jpg"
+    },
+    {
+      id: 105,
+      nome: "iPhone 11 64GB Branco",
+      sku: "IP11-64-BR",
+      investimento: 1420.00,
+      precoVenda: 1890.00,
+      lucroProjetado: 470.00,
+      margemProjetada: 24.9,
+      gigas: "64GB",
+      cor: "Branco",
+      bateria: 85,
+      quantidade: 11,
+      diasEstoque: 42,
+      categoria: "Smartphones",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 106,
+      nome: "MacBook Air M1 256GB Space Gray",
+      sku: "MBA-M1-SG",
+      investimento: 3800.00,
+      precoVenda: 4890.00,
+      lucroProjetado: 1090.00,
+      margemProjetada: 22.3,
+      gigas: "256GB",
+      cor: "Space Gray",
+      bateria: 94,
+      quantidade: 2,
+      diasEstoque: 15,
+      categoria: "Notebooks",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 107,
+      nome: "AirPods Pro 2ª Geração MagSafe",
+      sku: "APP-GEN2-MAG",
+      investimento: 980.00,
+      precoVenda: 1450.00,
+      lucroProjetado: 470.00,
+      margemProjetada: 32.4,
+      gigas: null, // Não se aplica
+      cor: "Branco Glacial",
+      bateria: null, // Sem medição individual de % bateria
+      quantidade: 14,
+      diasEstoque: 54,
+      categoria: "Acessórios",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 108,
+      nome: "Samsung Galaxy S23 Ultra 512GB",
+      sku: "S23U-512-PH",
+      investimento: 3950.00,
+      precoVenda: 5190.00,
+      lucroProjetado: 1240.00,
+      margemProjetada: 23.9,
+      gigas: "512GB",
+      cor: "Phantom Black",
+      bateria: 97,
+      quantidade: 3,
+      diasEstoque: 9,
+      categoria: "Smartphones",
+      imagem: "assets/products/iphone13.png"
+    }
   ],
 
   // Lista de Vendas Recentes
@@ -255,5 +376,166 @@ const MockData = {
     { id: 1, titulo: "Estoque Baixo", desc: "MacBook Air M1 possui apenas 2 unidades.", tempo: "Há 25 min", unread: true },
     { id: 2, titulo: "Venda Aprovada", desc: "Venda #VND-8492 no Mercado Livre foi paga via PIX.", tempo: "Há 1h", unread: true },
     { id: 3, titulo: "Meta Atingida", desc: "Parabéns! Faturamento superou R$ 20.000 no mês.", tempo: "Há 3h", unread: false }
+  ],
+
+  // Despesas Cadastradas (Fixas e Variáveis)
+  despesas: [
+    // --- DESPESAS FIXAS ---
+    {
+      id: 1,
+      tipo: "fixa",
+      descricao: "Aluguel & Ponto Comercial",
+      categoria: "Aluguel & Instalações",
+      icone: "🏢",
+      valor: 1200.00,
+      data: "Todo dia 10",
+      dataVencimento: "2026-08-10",
+      status: "pago",
+      formaPagamento: "PIX",
+      recorrente: true,
+      observacao: "Contrato Anual Loja Física"
+    },
+    {
+      id: 2,
+      tipo: "fixa",
+      descricao: "Internet Fibra 600MB + Telefonia",
+      categoria: "Internet & Telefone",
+      icone: "🌐",
+      valor: 150.00,
+      data: "Todo dia 15",
+      dataVencimento: "2026-08-15",
+      status: "pago",
+      formaPagamento: "Boleto Bancário",
+      recorrente: true,
+      observacao: "Vivo Fibra Comercial"
+    },
+    {
+      id: 3,
+      tipo: "fixa",
+      descricao: "Ferramentas & Softwares SaaS",
+      categoria: "Software & SaaS",
+      icone: "💻",
+      valor: 190.00,
+      data: "Todo dia 20",
+      dataVencimento: "2026-08-20",
+      status: "avencer",
+      formaPagamento: "Cartão de Crédito",
+      recorrente: true,
+      observacao: "Bling ERP + Shopify"
+    },
+    {
+      id: 4,
+      tipo: "fixa",
+      descricao: "Honorários Contabilidade",
+      categoria: "Contabilidade & Jurídico",
+      icone: "📑",
+      valor: 350.00,
+      data: "Todo dia 25",
+      dataVencimento: "2026-08-25",
+      status: "pendente",
+      formaPagamento: "PIX",
+      recorrente: true,
+      observacao: "Assessoria Fiscal & Emissão NF"
+    },
+    {
+      id: 5,
+      tipo: "fixa",
+      descricao: "Energia Elétrica (Enel)",
+      categoria: "Energia Elétrica",
+      icone: "⚡",
+      valor: 180.00,
+      data: "Todo dia 28",
+      dataVencimento: "2026-08-28",
+      status: "pago",
+      formaPagamento: "Boleto Bancário",
+      recorrente: true,
+      observacao: "Consumo Loja"
+    },
+
+    // --- DESPESAS VARIÁVEIS ---
+    {
+      id: 6,
+      tipo: "variavel",
+      descricao: "Gasolina (Abastecimento Retirada Lote)",
+      categoria: "Gasolina & Combustível",
+      icone: "⛽",
+      valor: 220.00,
+      data: "04/08/2026",
+      dataVencimento: "2026-08-04",
+      status: "pago",
+      formaPagamento: "Cartão de Débito",
+      recorrente: false,
+      observacao: "Posto Shell - Viagem busca fornecedor"
+    },
+    {
+      id: 7,
+      tipo: "variavel",
+      descricao: "Refeição & Alimentação em Trânsito",
+      categoria: "Refeição & Alimentação",
+      icone: "🍽️",
+      valor: 85.50,
+      data: "03/08/2026",
+      dataVencimento: "2026-08-03",
+      status: "pago",
+      formaPagamento: "PIX",
+      recorrente: false,
+      observacao: "Almoço na Santa Ifigênia"
+    },
+    {
+      id: 8,
+      tipo: "variavel",
+      descricao: "Pedágio Rodovia dos Bandeirantes",
+      categoria: "Pedágio & Estacionamento",
+      icone: "🛣️",
+      valor: 34.80,
+      data: "02/08/2026",
+      dataVencimento: "2026-08-02",
+      status: "pago",
+      formaPagamento: "Sem Parar",
+      recorrente: false,
+      observacao: "2 praças de pedágio ida e volta"
+    },
+    {
+      id: 9,
+      tipo: "variavel",
+      descricao: "Embalagens & Plástico Bolha 100m",
+      categoria: "Embalagens & Logística",
+      icone: "📦",
+      valor: 160.00,
+      data: "01/08/2026",
+      dataVencimento: "2026-08-01",
+      status: "pago",
+      formaPagamento: "PIX",
+      recorrente: false,
+      observacao: "Caixas correios + fita lacre"
+    },
+    {
+      id: 10,
+      tipo: "variavel",
+      descricao: "Meta Ads (Anúncios Tráfego Pago Instagram)",
+      categoria: "Marketing & Ads",
+      icone: "📢",
+      valor: 450.00,
+      data: "28/07/2026",
+      dataVencimento: "2026-07-28",
+      status: "pago",
+      formaPagamento: "Cartão de Crédito",
+      recorrente: false,
+      observacao: "Campanha iPhone 13 & Watch"
+    },
+    {
+      id: 11,
+      tipo: "variavel",
+      descricao: "Entrega Expressa Motoboy (Cliente VIP)",
+      categoria: "Fretes & Entregas",
+      icone: "🚚",
+      valor: 45.00,
+      data: "27/07/2026",
+      dataVencimento: "2026-07-27",
+      status: "pago",
+      formaPagamento: "PIX",
+      recorrente: false,
+      observacao: "Entrega direta na Av. Paulista"
+    }
   ]
 };

@@ -7,16 +7,41 @@
   <meta name="theme-color" content="#090c14">
   <title>GarimPro | Controle Financeiro & Gestão de Vendas</title>
 
+  <!-- Anti-FOUC Session Gatekeeper: protege index.html e impede flash de tela deslogada -->
+  <script>
+    (function() {
+      var s = localStorage.getItem('garimpa_auth_session') || sessionStorage.getItem('garimpa_auth_session');
+      if (!s) {
+        window.location.replace('login.html');
+      } else {
+        try {
+          var u = JSON.parse(s);
+          if (!u || !u.authenticated) {
+            window.location.replace('login.html');
+          }
+        } catch(e) {
+          window.location.replace('login.html');
+        }
+      }
+    })();
+  </script>
+
   <!-- Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237c3aed'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
 
-  <!-- Folhas de Estilo Modulares -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/tables.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <!-- Tipografia Moderna Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo Modulares (com versionamento anti-cache) -->
+  <link rel="stylesheet" href="css/variables.css?v=3.8">
+  <link rel="stylesheet" href="css/base.css?v=3.8">
+  <link rel="stylesheet" href="css/layout.css?v=3.8">
+  <link rel="stylesheet" href="css/components.css?v=3.8">
+  <link rel="stylesheet" href="css/tables.css?v=3.8">
+  <link rel="stylesheet" href="css/responsive.css?v=3.8">
+  <link rel="stylesheet" href="css/auth.css?v=3.8">
 </head>
 <body>
 
@@ -52,6 +77,12 @@
             <span class="brand-subtitle">Gestão Financeira</span>
           </div>
         </a>
+        <button class="sidebar-close-btn" id="btnSidebarClose" aria-label="Fechar Menu" title="Fechar Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
 
       <!-- Navegação da Sidebar -->
@@ -61,7 +92,7 @@
           <div class="nav-section-title">Principal</div>
           <ul class="nav-list">
             <li class="nav-item active">
-              <a class="nav-link" data-nav-view="dashboard">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="dashboard">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -71,27 +102,27 @@
                       <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
                   </span>
-                  <span>Dashboard</span>
+                  <span>Menu</span>
                 </div>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="produtos">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="produtos">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                      <line x1="3" y1="6" x2="21" y2="6"></line>
-                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
                     </svg>
                   </span>
-                  <span>Produtos</span>
+                  <span>Estoque</span>
                 </div>
                 <span class="nav-badge">148</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="vendas">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="vendas">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -105,20 +136,6 @@
                 <span class="nav-badge">21</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-nav-view="estoque">
-                <div class="nav-link-content">
-                  <span class="nav-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
-                  </span>
-                  <span>Estoque</span>
-                </div>
-              </a>
-            </li>
           </ul>
         </div>
 
@@ -127,7 +144,7 @@
           <div class="nav-section-title">Financeiro</div>
           <ul class="nav-list">
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="financeiro">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="financeiro">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -140,7 +157,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="despesas">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="despesas">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -153,7 +170,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="relatorios">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="relatorios">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -174,7 +191,22 @@
           <div class="nav-section-title">Sistema</div>
           <ul class="nav-list">
             <li class="nav-item">
-              <a class="nav-link" data-nav-view="configuracoes">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="sugestoes">
+                <div class="nav-link-content">
+                  <span class="nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18h6"></path>
+                      <path d="M10 22h4"></path>
+                      <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"></path>
+                    </svg>
+                  </span>
+                  <span>Sugestão</span>
+                </div>
+                <span class="nav-badge" style="background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35);">Novo</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-nav-view="configuracoes">
                 <div class="nav-link-content">
                   <span class="nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -203,7 +235,7 @@
               <span class="user-role">Administrador</span>
             </div>
           </div>
-          <button class="btn-logout" title="Sair do sistema" onclick="App.showToast('Sessão encerrada.')">
+          <button class="btn-logout" title="Sair do sistema" onclick="Auth.logout()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
@@ -283,6 +315,19 @@
               </div>
               <div class="notification-list" id="notificationList"></div>
             </div>
+          </div>
+
+          <!-- Perfil do Usuário e Logout Rápido no Header (Apenas Desktop) -->
+          <div class="user-header-badge">
+            <div class="user-avatar">IS</div>
+            <span class="user-name">Igor Silva</span>
+            <button class="btn-logout" title="Sair do sistema" aria-label="Sair do sistema">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </button>
           </div>
 
           <!-- Botão Nova Venda (Desktop) -->
@@ -561,81 +606,155 @@
         </div>
 
         <!-- ================================================================
-             VIEW 2: PRODUTOS (CATÁLOGO & ESTOQUE)
+             VIEW 2: PRODUTOS & CONTROLE DE ESTOQUE
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-produtos" style="display: none;">
+          
+          <!-- Header do Módulo -->
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
               <div>
-                <h2 class="h2">Catálogo de Produtos & Precificação</h2>
-                <p class="text-sm">Gestão de estoque, margens de lucro e custos médios ponderados</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Catálogo de Produtos & Estoque</h2>
+                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão de equipamentos, valor investido, especificações e projeção de lucro</p>
+                  </div>
+                </div>
               </div>
-              <button class="btn btn-primary" onclick="App.showToast('Funcionalidade de cadastro rápido aberta')">+ Novo Produto</button>
+              <button class="btn btn-primary btn-trigger-new-product" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Adicionar Produto</span>
+              </button>
             </div>
-            
-            <div class="kpi-grid" style="margin: var(--space-4) 0;">
-              <div class="kpi-card">
-                <span class="kpi-label">Produtos Cadastrados</span>
-                <div class="kpi-value">148 itens</div>
+          </div>
+
+          <!-- Indicadores de Estoque Padronizados (Grid 4 Cards SaaS) -->
+          <section class="kpi-grid">
+            <!-- Card 1: Quantidade em Estoque -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-purple">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                </div>
+                <span class="kpi-label">Volume em Estoque</span>
               </div>
-              <div class="kpi-card">
-                <span class="kpi-label">Valor em Estoque</span>
-                <div class="kpi-value">R$ 64.800,00</div>
-              </div>
-              <div class="kpi-card">
-                <span class="kpi-label">Custo Médio Ponderado</span>
-                <div class="kpi-value">R$ 437,80</div>
-              </div>
-              <div class="kpi-card">
-                <span class="kpi-label">Em Estoque Mínimo</span>
-                <div class="kpi-value" style="color:var(--danger);">6 produtos</div>
+              <div class="kpi-value" id="prodKpiTotalQtd">53 un</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="prodKpiTotalModelos">8 modelos</span>
+                <span class="kpi-trend-context" id="prodKpiEstoqueContext">cadastrados</span>
               </div>
             </div>
 
-            <!-- Lista de Produtos -->
-            <div class="ranking-list" style="margin-top: var(--space-4);">
-              <div class="ranking-item">
-                <div class="ranking-left">
-                  <div class="ranking-thumb">📱</div>
-                  <div class="ranking-info">
-                    <span class="ranking-title">iPhone 14 Pro Max 256GB Deep Purple</span>
-                    <span class="ranking-subtitle">SKU: IP14PM-256-DP • Custo Médio: R$ 4.600,00</span>
-                  </div>
+            <!-- Card 2: Maior Retorno Financeiro -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-emerald">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                  </svg>
                 </div>
-                <div class="ranking-right">
-                  <span class="ranking-revenue" style="color:var(--text-primary);">R$ 5.890,00</span>
-                  <span class="badge badge-success">4 em estoque</span>
-                </div>
+                <span class="kpi-label">Maior Retorno</span>
               </div>
-
-              <div class="ranking-item">
-                <div class="ranking-left">
-                  <div class="ranking-thumb">📱</div>
-                  <div class="ranking-info">
-                    <span class="ranking-title">iPhone 13 128GB Grafite</span>
-                    <span class="ranking-subtitle">SKU: IP13-128-GR • Custo Médio: R$ 2.450,00</span>
-                  </div>
-                </div>
-                <div class="ranking-right">
-                  <span class="ranking-revenue" style="color:var(--text-primary);">R$ 3.190,00</span>
-                  <span class="badge badge-success">8 em estoque</span>
-                </div>
-              </div>
-
-              <div class="ranking-item">
-                <div class="ranking-left">
-                  <div class="ranking-thumb">💻</div>
-                  <div class="ranking-info">
-                    <span class="ranking-title">MacBook Air M1 256GB Space Gray</span>
-                    <span class="ranking-subtitle">SKU: MBA-M1-SG • Custo Médio: R$ 3.800,00</span>
-                  </div>
-                </div>
-                <div class="ranking-right">
-                  <span class="ranking-revenue" style="color:var(--text-primary);">R$ 4.890,00</span>
-                  <span class="badge badge-danger">2 em estoque (Alerta)</span>
-                </div>
+              <div class="kpi-value kpi-value-product" id="prodKpiTopRetornoNome" title="iPhone 14 Pro Max">iPhone 14 Pro Max</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="prodKpiTopRetornoLucro">+R$ 1.290,00/un</span>
+                <span class="kpi-trend-context" id="prodKpiTopRetornoMargem">21.9% margem</span>
               </div>
             </div>
+
+            <!-- Card 3: Mais Tempo em Estoque (Demora na Saída) -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-amber">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <span class="kpi-label" title="Maior Tempo em Estoque">Mais Tempo Estoque</span>
+              </div>
+              <div class="kpi-value kpi-value-product" id="prodKpiLentaSaidaNome" title="AirPods Pro 2ª Geração">AirPods Pro 2ª Geração</div>
+              <div class="kpi-trend warning">
+                <span class="kpi-trend-pill" id="prodKpiLentaSaidaDias">54 dias parado</span>
+                <span class="kpi-trend-context" id="prodKpiLentaSaidaQtd">14 un em estoque</span>
+              </div>
+            </div>
+
+            <!-- Card 4: Baixa Lucratividade -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-red">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                </div>
+                <span class="kpi-label">Baixa Lucratividade</span>
+              </div>
+              <div class="kpi-value kpi-value-product" id="prodKpiBaixaLucroNome" style="color: #f87171;" title="iPhone 14 Pro Max">iPhone 14 Pro Max</div>
+              <div class="kpi-trend negative">
+                <span class="kpi-trend-pill" id="prodKpiBaixaLucroMargem">21.9% margem</span>
+                <span class="kpi-trend-context" id="prodKpiBaixaLucroDica">revisar preço</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Filtros & Tabela/Lista de Produtos em Estoque -->
+          <div class="card">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <h3 class="card-title">Inventário em Tempo Real</h3>
+              <span class="text-sm" style="color: var(--text-tertiary);">Rastreamento individual e especificações</span>
+            </div>
+
+            <!-- Filtros & Barra de Busca de Produtos -->
+            <div class="products-toolbar" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle);">
+              <div style="position: relative; flex: 1; min-width: 240px; max-width: 400px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="prodSearchInput" class="form-input" placeholder="Buscar por modelo, cor ou capacidade..." style="padding-left: 36px; height: 38px; font-size: 0.85rem;">
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="prod-filter-pill active" data-prod-filter="all">Todos</button>
+                <button class="prod-filter-pill" data-prod-filter="Smartphones">Smartphones</button>
+                <button class="prod-filter-pill" data-prod-filter="Smartwatches">Smartwatches</button>
+                <button class="prod-filter-pill" data-prod-filter="Notebooks">Notebooks</button>
+                <button class="prod-filter-pill" data-prod-filter="Acessórios">Acessórios</button>
+              </div>
+            </div>
+
+            <!-- Lista de Produtos em Estoque -->
+            <div id="productsStockList" class="products-stock-list" style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Itens renderizados via JS -->
+            </div>
+
+            <!-- Botão Ver Mais -->
+            <div id="prodLoadMoreContainer" style="margin-top: var(--space-4); text-align: center; display: flex; justify-content: center;">
+              <button id="btnLoadMoreProducts" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 0.88rem; font-weight: 600; border-radius: var(--radius-full);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span id="btnLoadMoreLabel">Ver mais equipamentos</span>
+              </button>
+            </div>
+
           </div>
         </div>
 
@@ -643,18 +762,186 @@
              VIEW 3: VENDAS (HISTÓRICO COMPLETO)
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-vendas" style="display: none;">
+          
+          <!-- Header do Módulo Vendas -->
           <div class="card">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Histórico de Vendas & Pedidos</h2>
+                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gerenciamento completo de pedidos realizados, faturamento por canal e status</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-trigger-new-sale" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-color: rgba(59, 130, 246, 0.3);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Registrar Venda</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Indicadores de Vendas Padronizados (Grid 4 Cards SaaS) -->
+          <section class="kpi-grid">
+            <!-- Card 1: Vendas Realizadas -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-purple">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                </div>
+                <span class="kpi-label">Vendas Realizadas</span>
+              </div>
+              <div class="kpi-value" id="salesHistoryKpiCount">21</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">↑ 31,2%</span>
+                <span class="kpi-trend-context">vs Julho</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Faturamento Total -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-blue">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </div>
+                <span class="kpi-label">Faturamento Total</span>
+              </div>
+              <div class="kpi-value" id="salesHistoryKpiFaturamento">R$ 20.180,00</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">↑ 21,6%</span>
+                <span class="kpi-trend-context">vs Julho</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Lucro Líquido Real -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-green">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                  </svg>
+                </div>
+                <span class="kpi-label">Lucro Líquido Real</span>
+              </div>
+              <div class="kpi-value" style="color: #34d399;" id="salesHistoryKpiLucro">R$ 2.879,50</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">↑ 14,3%</span>
+                <span class="kpi-trend-context">vs Julho</span>
+              </div>
+            </div>
+
+            <!-- Card 4: Ticket Médio -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-orange">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                  </svg>
+                </div>
+                <span class="kpi-label">Ticket Médio</span>
+              </div>
+              <div class="kpi-value" id="salesHistoryKpiTicket">R$ 960,95</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">Meta R$ 900</span>
+                <span class="kpi-trend-context">por venda</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Tabela Responsiva e Adaptativa (Histórico de Vendas Registradas) -->
+          <section class="card">
             <div class="card-header">
               <div>
-                <h2 class="h2">Histórico de Pedidos e Vendas</h2>
-                <p class="text-sm">Rastreamento de canais de venda, taxas de plataforma e margens apuradas</p>
+                <h3 class="card-title">Últimas vendas registradas</h3>
+                <span class="text-sm" id="salesHistoryTotalCount">Carregando vendas...</span>
               </div>
-              <button class="btn btn-primary btn-trigger-new-sale">+ Nova Venda</button>
+              <button class="btn btn-secondary btn-trigger-new-sale" style="padding: 6px 12px; font-size: 0.8rem;">
+                + Registrar Venda
+              </button>
             </div>
-            <p style="color:var(--text-tertiary); margin-top: var(--space-4);">
-              Visualize os pedidos filtrados em tempo real na aba principal ou use a exportação contábil para relatórios fiscais.
-            </p>
-          </div>
+
+            <!-- Barra de Ferramentas / Filtros Instantâneos -->
+            <div class="table-toolbar">
+              <div class="table-search-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-tertiary);">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="salesHistorySearchInput" placeholder="Buscar por cliente, produto ou #ID...">
+              </div>
+
+              <div class="table-filter-group">
+                <select class="table-filter-select" id="salesHistoryPlatformFilter">
+                  <option value="all">Todos os Canais</option>
+                  <option value="meli">Mercado Livre</option>
+                  <option value="shopee">Shopee</option>
+                  <option value="wpp">WhatsApp</option>
+                  <option value="insta">Instagram</option>
+                  <option value="outros">Balcão / Loja</option>
+                </select>
+
+                <select class="table-filter-select" id="salesHistoryStatusFilter">
+                  <option value="all">Todos os Status</option>
+                  <option value="concluído">Concluído</option>
+                  <option value="pendente">Pendente</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Visualização Desktop (Tabela Multicoluna com Hover) -->
+            <div class="table-responsive-wrapper">
+              <table class="desktop-table-view">
+                <thead>
+                  <tr>
+                    <th>ID Venda</th>
+                    <th>Cliente & Data</th>
+                    <th>Canal</th>
+                    <th>Itens</th>
+                    <th>Pagamento</th>
+                    <th>Valor Total</th>
+                    <th>Lucro Líquido</th>
+                    <th style="text-align: right;">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="salesHistoryTableDesktopTbody"></tbody>
+              </table>
+
+              <!-- Visualização Mobile & Tablet (Cards Estruturados e Adaptativos) -->
+              <div class="mobile-card-list-view" id="salesHistoryMobileCardList"></div>
+            </div>
+
+            <!-- Paginação -->
+            <div class="table-pagination">
+              <span>Página 1 de 4</span>
+              <div class="pagination-controls">
+                <button class="pagination-btn" disabled>&lsaquo;</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">&rsaquo;</button>
+              </div>
+            </div>
+          </section>
+
         </div>
 
         <!-- ================================================================
@@ -683,88 +970,992 @@
         </div>
 
         <!-- ================================================================
-             VIEW 5: FINANCEIRO & FLUXO DE CAIXA
+             VIEW 5: FINANCEIRO, INVESTIMENTOS, ROI & FLUXO DE CAIXA
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-financeiro" style="display: none;">
+          
+          <!-- Header do Painel Financeiro -->
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
               <div>
-                <h2 class="h2">Painel Financeiro & DRE</h2>
-                <p class="text-sm">Demonstrativo de resultado do exercício, fluxo de caixa e conciliação bancária</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="1" x2="12" y2="23"></line>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Painel Financeiro, Investimentos & Lucratividade</h2>
+                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Visão detalhada de capital investido, faturamento, lucratividade real obtida, DRE e projeções</p>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary" onclick="App.showToast('📄 Demonstrativo DRE exportado com sucesso!')" style="padding: 9px 16px; font-weight: 600; font-size: 0.82rem;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span>Exportar Relatório</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-trigger-new-sale" style="padding: 9px 16px; font-weight: 700; font-size: 0.82rem;">
+                  <span>+ Nova Venda</span>
+                </button>
               </div>
             </div>
-            <div class="kpi-grid" style="margin-top: var(--space-4);">
+            
+            <!-- 4 Cards de Indicadores Financeiros Executivos (KPIs Principais) -->
+            <section class="kpi-grid" style="margin-top: var(--space-4);">
+              <!-- Card 1: Valor Total Investido -->
               <div class="kpi-card">
-                <span class="kpi-label">Receita Bruta</span>
-                <div class="kpi-value">R$ 20.180,00</div>
+                <div class="kpi-top-row">
+                  <div class="kpi-icon-badge kpi-icon-blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                  </div>
+                  <span class="kpi-label">Capital Total</span>
+                </div>
+                <div class="kpi-value" id="finKpiTotalInvested">R$ 107.420,00</div>
+                <div class="kpi-trend positive">
+                  <span class="kpi-trend-pill" id="finKpiInvestedSub">Estoque + Operação</span>
+                  <span class="kpi-trend-context">alocado</span>
+                </div>
               </div>
+
+              <!-- Card 2: Lucro Líquido Real Obtido -->
               <div class="kpi-card">
-                <span class="kpi-label">(-) Custos CMV</span>
-                <div class="kpi-value" style="color:var(--danger);">R$ 15.460,50</div>
+                <div class="kpi-top-row">
+                  <div class="kpi-icon-badge kpi-icon-green">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                      <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="kpi-label">Lucro Líquido</span>
+                </div>
+                <div class="kpi-value" style="color: #34d399;" id="finKpiNetProfit">R$ 2.879,50</div>
+                <div class="kpi-trend positive">
+                  <span class="kpi-trend-pill" id="finKpiMarginSub">14.3% margem real</span>
+                  <span class="kpi-trend-context">no caixa</span>
+                </div>
               </div>
+
+              <!-- Card 3: Retorno sobre Investimento (ROI Médio) -->
               <div class="kpi-card">
-                <span class="kpi-label">(-) Despesas Operacionais</span>
-                <div class="kpi-value" style="color:var(--danger);">R$ 1.840,00</div>
+                <div class="kpi-top-row">
+                  <div class="kpi-icon-badge kpi-icon-purple">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                      <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
+                  </div>
+                  <span class="kpi-label">Retorno Médio (ROI)</span>
+                </div>
+                <div class="kpi-value" style="color: #c084fc;" id="finKpiRoiVal">34.8%</div>
+                <div class="kpi-trend positive">
+                  <span class="kpi-trend-pill">Markup 1.35x</span>
+                  <span class="kpi-trend-context">giro 16d</span>
+                </div>
               </div>
+
+              <!-- Card 4: Lucro Projetado em Estoque -->
               <div class="kpi-card">
-                <span class="kpi-label">(=) Lucro Líquido Real</span>
-                <div class="kpi-value" style="color:var(--success);">R$ 2.879,50</div>
+                <div class="kpi-top-row">
+                  <div class="kpi-icon-badge kpi-icon-amber">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                      <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                    </svg>
+                  </div>
+                  <span class="kpi-label">Lucro Projetado</span>
+                </div>
+                <div class="kpi-value" style="color: #fbbf24;" id="finKpiProjectedProfit">R$ 30.880,00</div>
+                <div class="kpi-trend positive">
+                  <span class="kpi-trend-pill" id="finKpiStockPotentialSub">148 unidades</span>
+                  <span class="kpi-trend-context">potencial</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Grade Estratégica: DRE Gerencial Cascata + Alocação de Capital -->
+          <div class="expenses-two-column-grid">
+            
+            <!-- Coluna 1: Demonstrativo de Resultados do Exercício (DRE Gerencial Completo) -->
+            <div class="card expense-column-card">
+              <div class="card-header expense-column-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.3) 100%); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">
+                    📊
+                  </div>
+                  <div>
+                    <h3 class="card-title" style="font-size: 1.05rem;">Demonstrativo DRE (Mês Atual)</h3>
+                    <span class="text-sm" style="color: var(--text-tertiary);">Detalhamento do faturamento bruto até o lucro líquido real</span>
+                  </div>
+                </div>
+                <div class="badge badge-success" style="font-size: 0.75rem; padding: 4px 10px;">
+                  Agosto 2026
+                </div>
+              </div>
+
+              <!-- Lista Cascata de Linhas da DRE -->
+              <div class="dre-cascade-container">
+                
+                <!-- Linha 1: Receita Bruta -->
+                <div class="dre-cascade-row dre-row-positive">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(+)</span>
+                      <span class="dre-title">Receita Bruta com Vendas</span>
+                    </div>
+                    <span class="dre-value" id="dreRowReceitaBruta">R$ 20.180,00</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarReceitaBruta" style="width: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span id="dreRowSalesCountMeta">21 vendas realizadas nos canais</span>
+                    <span class="dre-meta-pct">100.0% da Receita</span>
+                  </div>
+                </div>
+
+                <!-- Linha 2: Deduções e Taxas de Canais -->
+                <div class="dre-cascade-row dre-row-negative">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(-)</span>
+                      <span class="dre-title">Taxas de Plataformas & Meios</span>
+                    </div>
+                    <span class="dre-value text-danger" id="dreRowTaxas">- R$ 780,00</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarTaxas" style="width: 3.8%; background: #f87171;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span>Mercado Livre, Shopee e maquininhas</span>
+                    <span class="dre-meta-pct" id="dreRowTaxasPct">3.8% da Receita</span>
+                  </div>
+                </div>
+
+                <!-- Linha 3: Receita Líquida Operacional -->
+                <div class="dre-cascade-row dre-row-subtotal">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(=)</span>
+                      <span class="dre-title">Receita Líquida Operacional</span>
+                    </div>
+                    <span class="dre-value" id="dreRowReceitaLiquida" style="color: #38bdf8;">R$ 19.400,00</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarReceitaLiquida" style="width: 96.2%; background: #38bdf8;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span>Faturamento após taxas de intermediação</span>
+                    <span class="dre-meta-pct" id="dreRowReceitaLiquidaPct">96.2%</span>
+                  </div>
+                </div>
+
+                <!-- Linha 4: CMV (Custo dos Produtos Vendidos) -->
+                <div class="dre-cascade-row dre-row-negative">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(-)</span>
+                      <span class="dre-title">Custo das Mercadorias (CMV)</span>
+                    </div>
+                    <span class="dre-value text-danger" id="dreRowCMV">- R$ 13.454,70</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarCMV" style="width: 66.7%; background: #f87171;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span>Valor de compra / aquisição dos produtos vendidos</span>
+                    <span class="dre-meta-pct" id="dreRowCMVPct">66.7% da Receita</span>
+                  </div>
+                </div>
+
+                <!-- Linha 5: Lucro Bruto Comercial -->
+                <div class="dre-cascade-row dre-row-subtotal">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(=)</span>
+                      <span class="dre-title">Lucro Bruto Comercial</span>
+                    </div>
+                    <span class="dre-value" id="dreRowLucroBruto" style="color: #a78bfa;">R$ 5.945,30</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarLucroBruto" style="width: 29.5%; background: #a78bfa;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span>Margem de contribuição antes das despesas</span>
+                    <span class="dre-meta-pct" id="dreRowMargemBrutaPct">Margem Bruta: 29.5%</span>
+                  </div>
+                </div>
+
+                <!-- Linha 6: Despesas Fixas -->
+                <div class="dre-cascade-row dre-row-negative">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(-)</span>
+                      <span class="dre-title">Despesas Fixas Estruturais</span>
+                    </div>
+                    <span class="dre-value text-danger" id="dreRowDespesasFixas">- R$ 2.070,00</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarDespesasFixas" style="width: 10.3%; background: #f472b6;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span id="dreRowFixedMeta">Aluguel, ferramentas SaaS, internet e energia</span>
+                    <span class="dre-meta-pct" id="dreRowFixedPct">10.3% da Receita</span>
+                  </div>
+                </div>
+
+                <!-- Linha 7: Despesas Variáveis -->
+                <div class="dre-cascade-row dre-row-negative">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol">(-)</span>
+                      <span class="dre-title">Despesas Variáveis Operacionais</span>
+                    </div>
+                    <span class="dre-value text-danger" id="dreRowDespesasVar">- R$ 995,30</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarDespesasVar" style="width: 4.9%; background: #fb923c;"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span id="dreRowVarMeta">Gasolina, alimentação, fretes e anúncios</span>
+                    <span class="dre-meta-pct" id="dreRowVarPct">4.9% da Receita</span>
+                  </div>
+                </div>
+
+                <!-- Linha 8: Lucro Líquido Real Final -->
+                <div class="dre-cascade-row dre-row-total-highlight">
+                  <div class="dre-row-main">
+                    <div class="dre-row-title-box">
+                      <span class="dre-symbol" style="background: rgba(16, 185, 129, 0.3); color: #34d399;">(=)</span>
+                      <span class="dre-title" style="font-size: 1.02rem; font-weight: 800;">LUCRO LÍQUIDO REAL (CAIXA)</span>
+                    </div>
+                    <span class="dre-value" id="dreRowLucroLiquidoFinal" style="font-size: 1.25rem; font-weight: 800; color: #34d399;">R$ 2.879,50</span>
+                  </div>
+                  <div class="dre-progress-bar-bg">
+                    <div class="dre-progress-bar-fill" id="dreBarLucroLiquido" style="width: 14.3%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                  </div>
+                  <div class="dre-row-meta">
+                    <span style="font-weight: 600; color: #34d399;">Sobra Líquida Real no Bolso / Empresa</span>
+                    <span class="dre-meta-pct" style="font-weight: 700; color: #34d399;" id="dreRowMargemFinalPct">Margem Líquida: 14.3%</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Coluna 2: Alocação de Capital, Onde Está o Dinheiro & Unit Economics -->
+            <div class="card expense-column-card" style="display: flex; flex-direction: column; gap: var(--space-4);">
+              <div class="card-header expense-column-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%); border: 1px solid rgba(59, 130, 246, 0.4); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);">
+                    💼
+                  </div>
+                  <div>
+                    <h3 class="card-title" style="font-size: 1.05rem;">Alocação de Capital & Saúde</h3>
+                    <span class="text-sm" style="color: var(--text-tertiary);">Onde o capital da empresa está distribuído</span>
+                  </div>
+                </div>
+                <div class="badge badge-primary" style="font-size: 0.72rem; padding: 4px 8px;">
+                  Score: 94/100
+                </div>
+              </div>
+
+              <!-- Barra Multicolorida de Distribuição de Ativos -->
+              <div class="capital-allocation-box">
+                <div class="capital-multi-bar">
+                  <div class="capital-segment seg-estoque" id="capSegEstoque" style="width: 78.5%;" title="Estoque: 78.5%"></div>
+                  <div class="capital-segment seg-receber" id="capSegReceber" style="width: 6.2%;" title="A Receber: 6.2%"></div>
+                  <div class="capital-segment seg-caixa" id="capSegCaixa" style="width: 15.3%;" title="Caixa / Saldo: 15.3%"></div>
+                </div>
+
+                <!-- Lista dos Componentes de Capital -->
+                <div class="capital-breakdown-list">
+                  
+                  <div class="capital-item-row">
+                    <div class="capital-item-left">
+                      <span class="capital-color-dot" style="background: #3b82f6;"></span>
+                      <div>
+                        <strong class="capital-item-title">Capital em Estoque (Produtos)</strong>
+                        <span class="capital-item-sub" id="capEstoqueSubText">148 unidades compradas disponíveis</span>
+                      </div>
+                    </div>
+                    <div class="capital-item-right">
+                      <span class="capital-item-val" id="capAllocEstoqueVal">R$ 107.420,00</span>
+                      <span class="capital-item-pct" id="capAllocEstoquePct">78.5%</span>
+                    </div>
+                  </div>
+
+                  <div class="capital-item-row">
+                    <div class="capital-item-left">
+                      <span class="capital-color-dot" style="background: #f59e0b;"></span>
+                      <div>
+                        <strong class="capital-item-title">Contas a Receber (Canais / Prazos)</strong>
+                        <span class="capital-item-sub">Vendas parceladas e repasses pendentes</span>
+                      </div>
+                    </div>
+                    <div class="capital-item-right">
+                      <span class="capital-item-val" id="capAllocReceberVal">R$ 4.250,00</span>
+                      <span class="capital-item-pct" id="capAllocReceberPct">6.2%</span>
+                    </div>
+                  </div>
+
+                  <div class="capital-item-row">
+                    <div class="capital-item-left">
+                      <span class="capital-color-dot" style="background: #10b981;"></span>
+                      <div>
+                        <strong class="capital-item-title">Caixa Realizado / Saldo Operacional</strong>
+                        <span class="capital-item-sub">Faturamento recebido líquido disponível</span>
+                      </div>
+                    </div>
+                    <div class="capital-item-right">
+                      <span class="capital-item-val" id="capAllocCaixaVal">R$ 20.180,00</span>
+                      <span class="capital-item-pct" id="capAllocCaixaPct">15.3%</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Grid de Métricas de Performance Financeira (Unit Economics) -->
+              <div style="border-top: 1px solid rgba(255, 255, 255, 0.07); padding-top: var(--space-3);">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 10px;">
+                  Indicadores de Eficiência do Negócio
+                </span>
+
+                <div class="fin-metrics-mini-grid">
+                  
+                  <div class="fin-metric-tile">
+                    <span class="fin-tile-label">Ticket Médio</span>
+                    <strong class="fin-tile-val" id="finMetricTicketMedio">R$ 960,95</strong>
+                    <span class="fin-tile-sub">por transação</span>
+                  </div>
+
+                  <div class="fin-metric-tile">
+                    <span class="fin-tile-label">Lucro Médio / Venda</span>
+                    <strong class="fin-tile-val" id="finMetricLucroMedio" style="color: #34d399;">R$ 428,50</strong>
+                    <span class="fin-tile-sub">sobra média</span>
+                  </div>
+
+                  <div class="fin-metric-tile">
+                    <span class="fin-tile-label">Ponto de Equilíbrio</span>
+                    <strong class="fin-tile-val" id="finMetricBreakEven">R$ 12.350,00</strong>
+                    <span class="fin-tile-sub">atingido dia 18</span>
+                  </div>
+
+                  <div class="fin-metric-tile">
+                    <span class="fin-tile-label">Giro de Estoque</span>
+                    <strong class="fin-tile-val" style="color: #c084fc;">16 dias</strong>
+                    <span class="fin-tile-sub">tempo médio em loja</span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Tabela Financeira: Histórico de Vendas com Análise de Custo Investido e Lucro Real -->
+          <div class="card">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div>
+                <h3 class="card-title" style="font-size: 1.1rem; font-weight: 800;">Rentabilidade Detalhada por Transação</h3>
+                <span class="text-sm" style="color: var(--text-tertiary);">Análise de preço de venda, custo investido (CMV), margem líquida e lucro em cada operação</span>
+              </div>
+              <div class="badge badge-primary" style="font-size: 0.75rem; padding: 4px 10px;" id="finSalesTableBadge">
+                21 operações auditadas
+              </div>
+            </div>
+
+            <div class="table-responsive-wrapper">
+              <table class="desktop-table-view">
+                <thead>
+                  <tr>
+                    <th>#ID & Data</th>
+                    <th>Cliente & Canal</th>
+                    <th>Produto Vendido</th>
+                    <th>Valor Venda</th>
+                    <th>Custo Investido (CMV)</th>
+                    <th>Lucro Líquido</th>
+                    <th>Margem %</th>
+                    <th style="text-align: right;">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="financialSalesTbody">
+                  <!-- Renderizado dinamicamente via JS -->
+                </tbody>
+              </table>
+
+              <!-- Versão Mobile de Cards Financeiros -->
+              <div class="mobile-card-list-view" id="financialSalesMobileList">
+                <!-- Renderizado dinamicamente via JS -->
               </div>
             </div>
           </div>
+
         </div>
 
         <!-- ================================================================
-             VIEW 6: DESPESAS
+             VIEW 6: DESPESAS (FIXAS E VARIÁVEIS)
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-despesas" style="display: none;">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
               <div>
-                <h2 class="h2">Controle de Despesas e Contas</h2>
-                <p class="text-sm">Classificação por categorias, vencimentos e contas a pagar</p>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <line x1="2" y1="10" x2="22" y2="10"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Controle de Despesas & Contas</h2>
+                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão segmentada de despesas fixas estruturais e variáveis operacionais</p>
+                  </div>
+                </div>
               </div>
-              <button class="btn btn-primary" onclick="App.showToast('Modal de nova despesa aberto')">+ Nova Despesa</button>
+              <button class="btn btn-primary btn-trigger-new-expense" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4); background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); border-color: rgba(236, 72, 153, 0.3);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Nova Despesa</span>
+              </button>
             </div>
-            <div class="payment-mini-grid" style="margin-top: var(--space-4);">
-              <div class="payment-pill-card">
-                <div class="payment-pill-header">
-                  <span class="payment-pill-name">Aluguel & Ponto</span>
-                  <span class="badge badge-success">Pago</span>
+          </div>
+
+          <!-- Indicadores Rápidos de Despesas Padronizados (Grid 4 Cards SaaS) -->
+          <section class="kpi-grid">
+            <!-- Card 1: Total Geral de Despesas -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-pink">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
                 </div>
-                <span class="payment-pill-val">R$ 1.200,00</span>
+                <span class="kpi-label">Total de Despesas</span>
               </div>
-              <div class="payment-pill-card">
-                <div class="payment-pill-header">
-                  <span class="payment-pill-name">Anúncios & Tráfego</span>
-                  <span class="badge badge-success">Pago</span>
-                </div>
-                <span class="payment-pill-val">R$ 450,00</span>
-              </div>
-              <div class="payment-pill-card">
-                <div class="payment-pill-header">
-                  <span class="payment-pill-name">Ferramentas & SaaS</span>
-                  <span class="badge badge-warning">A Vencer</span>
-                </div>
-                <span class="payment-pill-val">R$ 190,00</span>
+              <div class="kpi-value" style="color: #f472b6;" id="kpiExpenseTotal">R$ 0,00</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="kpiExpenseCount">0 despesas</span>
+                <span class="kpi-trend-context">no mês</span>
               </div>
             </div>
+
+            <!-- Card 2: Total Despesas Fixas -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-blue">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                </div>
+                <span class="kpi-label">Despesas Fixas</span>
+              </div>
+              <div class="kpi-value" id="kpiExpenseFixedTotal">R$ 0,00</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="kpiExpenseFixedCount">0 contas</span>
+                <span class="kpi-trend-context">recorrentes</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Total Despesas Variáveis -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-orange">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </div>
+                <span class="kpi-label">Despesas Variáveis</span>
+              </div>
+              <div class="kpi-value" id="kpiExpenseVarTotal">R$ 0,00</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="kpiExpenseVarCount">0 gastos</span>
+                <span class="kpi-trend-context">operacionais</span>
+              </div>
+            </div>
+
+            <!-- Card 4: % da Receita -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-emerald">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="5" x2="5" y2="19"></line>
+                    <circle cx="6.5" cy="6.5" r="2.5"></circle>
+                    <circle cx="17.5" cy="17.5" r="2.5"></circle>
+                  </svg>
+                </div>
+                <span class="kpi-label">% sobre Receita</span>
+              </div>
+              <div class="kpi-value" id="kpiExpensePctFaturamento">15.2%</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">Saudável</span>
+                <span class="kpi-trend-context">impacto DRE</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Barra de Segmentação & Filtros Rápidos (Ultra-Moderna / Mobile First) -->
+          <div class="expense-segment-wrapper">
+            <div class="expense-segment-tabs" id="expenseSegmentTabs">
+              <button type="button" class="expense-segment-tab active" data-expense-tab="all">
+                <span class="segment-tab-icon">📊</span>
+                <span class="segment-tab-text">Todas as Despesas</span>
+                <span class="segment-tab-badge" id="tabExpenseTotalCount">0</span>
+              </button>
+              <button type="button" class="expense-segment-tab" data-expense-tab="fixa">
+                <span class="segment-tab-icon">🏢</span>
+                <span class="segment-tab-text">Despesas Fixas</span>
+                <span class="segment-tab-badge" id="tabExpenseFixedCount">0</span>
+              </button>
+              <button type="button" class="expense-segment-tab" data-expense-tab="variavel">
+                <span class="segment-tab-icon">⚡</span>
+                <span class="segment-tab-text">Despesas Variáveis</span>
+                <span class="segment-tab-badge" id="tabExpenseVarCount">0</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Grade Principal com 2 Cards Grandes: Fixas e Variáveis -->
+          <div class="expenses-two-column-grid" id="expensesGridContainer">
+            
+            <!-- Card 1: Despesas Fixas -->
+            <div class="card expense-column-card expense-fixed-col" id="colFixedExpensesCard">
+              <div class="card-header expense-column-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="expense-col-icon fixed-icon">
+                    🏢
+                  </div>
+                  <div>
+                    <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem;">
+                      Despesas Fixas
+                      <span class="expense-count-pill" id="badgeFixedCount">0</span>
+                    </h3>
+                    <span class="text-sm" style="color: var(--text-tertiary);">Aluguel, ferramentas SaaS, internet, luz</span>
+                  </div>
+                </div>
+                <div class="expense-col-total" id="colFixedTotal">R$ 0,00</div>
+              </div>
+
+              <div class="expense-list-container" id="listFixedExpenses">
+                <!-- Lista de despesas fixas renderizada via JS -->
+              </div>
+            </div>
+
+            <!-- Card 2: Despesas Variáveis -->
+            <div class="card expense-column-card expense-var-col" id="colVariableExpensesCard">
+              <div class="card-header expense-column-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="expense-col-icon variable-icon">
+                    ⚡
+                  </div>
+                  <div>
+                    <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem;">
+                      Despesas Variáveis
+                      <span class="expense-count-pill" id="badgeVarCount">0</span>
+                    </h3>
+                    <span class="text-sm" style="color: var(--text-tertiary);">Gasolina, refeição, pedágio, fretes</span>
+                  </div>
+                </div>
+                <div class="expense-col-total" id="colVarTotal">R$ 0,00</div>
+              </div>
+
+              <div class="expense-list-container" id="listVariableExpenses">
+                <!-- Lista de despesas variáveis renderizada via JS -->
+              </div>
+            </div>
+
           </div>
         </div>
 
         <!-- ================================================================
-             VIEW 7: RELATÓRIOS & BI
+             VIEW 7: RELATÓRIOS GERENCIAIS & EXPORTAÇÃO POR PERÍODO
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-relatorios" style="display: none;">
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <h2 class="h2">Relatórios Gerenciais</h2>
-                <p class="text-sm">Análise de rentabilidade por canal, margem média e giro de estoque</p>
+          
+          <!-- Card de Cabeçalho: Central de Exportação & Relatórios -->
+          <div class="card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(124, 58, 237, 0.25); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </div>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <h2 class="h2" style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Central de Exportação & Relatórios</h2>
+                    <span class="badge" style="background: rgba(124, 58, 237, 0.2); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35); font-size: 0.72rem; font-weight: 700;">Hub Executivo</span>
+                  </div>
+                  <p class="text-sm" style="color: var(--text-tertiary); margin-top: 2px; margin-bottom: 0;">Configure o período e selecione exatamente os módulos que deseja exportar em Excel (CSV), PDF ou texto consolidado.</p>
+                </div>
               </div>
-              <button class="btn btn-secondary" onclick="App.showToast('Exportando PDF do relatório...')">📥 Exportar PDF</button>
+              
+              <!-- Live Status Pill -->
+              <div id="reportSelectionLiveBadge" style="display: flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 10px; padding: 6px 14px; font-size: 0.82rem; color: #93c5fd; font-weight: 600;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 8px #3b82f6;"></span>
+                <span id="reportSelectedScopeText">Todos os Módulos • Agosto 2026</span>
+              </div>
             </div>
           </div>
+
+          <!-- PASSO 1: Seleção de Período -->
+          <div class="card">
+            <div class="card-header" style="align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(59, 130, 246, 0.2); color: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">1</span>
+                <div>
+                  <h3 class="card-title" style="font-size: 1.05rem; font-weight: 800; margin: 0;">Selecione o Período do Relatório</h3>
+                  <span class="text-xs" style="color: var(--text-tertiary);">Defina o intervalo de datas para extração dos lançamentos</span>
+                </div>
+              </div>
+              <div style="font-size: 0.80rem; color: var(--text-secondary); font-weight: 600;">
+                Período ativo: <strong style="color: var(--accent);" id="reportActivePeriodLabel">Agosto 2026 (Mês Atual)</strong>
+              </div>
+            </div>
+
+            <!-- Period Pills -->
+            <div style="padding: 16px 0 6px 0; display: flex; flex-direction: column; gap: 12px;">
+              <div class="prod-filter-pills" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" class="prod-filter-pill" data-report-period="hoje" onclick="App.setReportPeriod('hoje')">⚡ Hoje</button>
+                <button type="button" class="prod-filter-pill" data-report-period="ontem" onclick="App.setReportPeriod('ontem')">Ontem</button>
+                <button type="button" class="prod-filter-pill" data-report-period="7dias" onclick="App.setReportPeriod('7dias')">Últimos 7 dias</button>
+                <button type="button" class="prod-filter-pill active" data-report-period="mes_atual" onclick="App.setReportPeriod('mes_atual')">Agosto 2026 (Mês Atual)</button>
+                <button type="button" class="prod-filter-pill" data-report-period="mes_anterior" onclick="App.setReportPeriod('mes_anterior')">Julho 2026 (Mês Anterior)</button>
+                <button type="button" class="prod-filter-pill" data-report-period="ano_atual" onclick="App.setReportPeriod('ano_atual')">Ano 2026</button>
+                <button type="button" class="prod-filter-pill" data-report-period="todos" onclick="App.setReportPeriod('todos')">Todo o Histórico</button>
+                <button type="button" class="prod-filter-pill" data-report-period="personalizado" onclick="App.setReportPeriod('personalizado')">📅 Personalizado</button>
+              </div>
+
+              <!-- Custom Date Row -->
+              <div id="reportCustomDateRow" style="display: none; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 12px 16px; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary);">Intervalo Personalizado:</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <input type="date" id="reportDateStart" class="form-input" style="height: 36px; font-size: 0.82rem; padding: 0 10px;" onchange="App.applyCustomReportDates()">
+                  <span style="font-size: 0.80rem; color: var(--text-tertiary);">até</span>
+                  <input type="date" id="reportDateEnd" class="form-input" style="height: 36px; font-size: 0.82rem; padding: 0 10px;" onchange="App.applyCustomReportDates()">
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="App.applyCustomReportDates()" style="padding: 6px 14px; font-size: 0.80rem;">Aplicar Intervalo</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASSO 2: Seleção de Tipo de Relatório / Módulos -->
+          <div class="card">
+            <div class="card-header" style="flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(124, 58, 237, 0.2); color: #c4b5fd; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">2</span>
+                <div>
+                  <h3 class="card-title" style="font-size: 1.05rem; font-weight: 800; margin: 0;">Selecione os Tipos de Relatório</h3>
+                  <span class="text-xs" style="color: var(--text-tertiary);">Escolha quais dados e demonstrativos devem compor o arquivo final</span>
+                </div>
+              </div>
+
+              <!-- Quick Action Helpers -->
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary" onclick="App.toggleAllReportModules(true)" style="padding: 6px 12px; font-size: 0.78rem; font-weight: 600;">✓ Selecionar Todos</button>
+                <button type="button" class="btn btn-secondary" onclick="App.toggleAllReportModules(false)" style="padding: 6px 12px; font-size: 0.78rem;">Desmarcar Todos</button>
+              </div>
+            </div>
+
+            <!-- Grid de Cards Interativos de Módulos -->
+            <div class="export-modules-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px;">
+              
+              <!-- Card 1: Vendas -->
+              <div class="export-module-card selected" id="moduleCard-vendas" onclick="App.toggleReportModule('vendas')">
+                <div class="export-module-top">
+                  <div class="export-module-icon" style="background: rgba(124, 58, 237, 0.15); color: #a78bfa; border: 1px solid rgba(124, 58, 237, 0.3);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                  </div>
+                  <div class="export-module-checkbox">
+                    <input type="checkbox" id="chkReport-vendas" checked onclick="event.stopPropagation(); App.toggleReportModule('vendas');">
+                  </div>
+                </div>
+                <div class="export-module-body">
+                  <h4 class="export-module-title">Relatório de Vendas</h4>
+                  <p class="export-module-desc">Histórico completo de pedidos, canais (Mercado Livre, Shopee, WhatsApp), clientes, faturamento, custos CMV e margem unitária.</p>
+                </div>
+                <div class="export-module-footer">
+                  <span class="badge badge-primary" id="badgeReportVendasCount">21 vendas</span>
+                  <span style="font-size: 0.74rem; color: var(--text-tertiary);" id="badgeReportVendasTotal">R$ 20.180,00</span>
+                </div>
+              </div>
+
+              <!-- Card 2: Despesas -->
+              <div class="export-module-card selected" id="moduleCard-despesas" onclick="App.toggleReportModule('despesas')">
+                <div class="export-module-top">
+                  <div class="export-module-icon" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="1" x2="12" y2="23"></line>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <div class="export-module-checkbox">
+                    <input type="checkbox" id="chkReport-despesas" checked onclick="event.stopPropagation(); App.toggleReportModule('despesas');">
+                  </div>
+                </div>
+                <div class="export-module-body">
+                  <h4 class="export-module-title">Relatório de Despesas</h4>
+                  <p class="export-module-desc">Detalhamento de despesas fixas e variáveis, centros de custos, datas de vencimento, formas de pagamento e status de quitação.</p>
+                </div>
+                <div class="export-module-footer">
+                  <span class="badge" style="background: rgba(239, 68, 68, 0.18); color: #fca5a5;" id="badgeReportDespesasCount">11 despesas</span>
+                  <span style="font-size: 0.74rem; color: var(--text-tertiary);" id="badgeReportDespesasTotal">R$ 1.840,00</span>
+                </div>
+              </div>
+
+              <!-- Card 3: Financeiro / DRE -->
+              <div class="export-module-card selected" id="moduleCard-financeiro" onclick="App.toggleReportModule('financeiro')">
+                <div class="export-module-top">
+                  <div class="export-module-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                      <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                  </div>
+                  <div class="export-module-checkbox">
+                    <input type="checkbox" id="chkReport-financeiro" checked onclick="event.stopPropagation(); App.toggleReportModule('financeiro');">
+                  </div>
+                </div>
+                <div class="export-module-body">
+                  <h4 class="export-module-title">Financeiro & DRE Consolidado</h4>
+                  <p class="export-module-desc">Demonstrativo de Resultado do Exercício (DRE), receita líquida, taxas de intermediação, CMV, custos operacionais e margem líquida.</p>
+                </div>
+                <div class="export-module-footer">
+                  <span class="badge badge-success" id="badgeReportLucroLiquido">+ R$ 2.879,50</span>
+                  <span style="font-size: 0.74rem; color: #34d399; font-weight: 700;" id="badgeReportMargemPct">14.3% líquido</span>
+                </div>
+              </div>
+
+              <!-- Card 4: Estoque -->
+              <div class="export-module-card selected" id="moduleCard-estoque" onclick="App.toggleReportModule('estoque')">
+                <div class="export-module-top">
+                  <div class="export-module-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </div>
+                  <div class="export-module-checkbox">
+                    <input type="checkbox" id="chkReport-estoque" checked onclick="event.stopPropagation(); App.toggleReportModule('estoque');">
+                  </div>
+                </div>
+                <div class="export-module-body">
+                  <h4 class="export-module-title">Estoque & Catálogo de Produtos</h4>
+                  <p class="export-module-desc">Posição de inventário em tempo real, SKU, categorias, quantidade em estoque, custo de aquisição, preço de venda e potencial de lucro.</p>
+                </div>
+                <div class="export-module-footer">
+                  <span class="badge" style="background: rgba(59, 130, 246, 0.18); color: #93c5fd;" id="badgeReportEstoqueCount">8 produtos</span>
+                  <span style="font-size: 0.74rem; color: var(--text-tertiary);" id="badgeReportEstoqueTotal">R$ 64.800,00</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- PASSO 3: Exportação e Formatos -->
+          <div class="card" style="background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid var(--border-subtle);">
+            <div class="card-header" style="align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #34d399; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">3</span>
+                <div>
+                  <h3 class="card-title" style="font-size: 1.05rem; font-weight: 800; margin: 0;">Exportar Relatório Personalizado</h3>
+                  <span class="text-xs" style="color: var(--text-tertiary);">Escolha o formato de saída para download ou compartilhamento</span>
+                </div>
+              </div>
+              
+              <!-- Scope summary text -->
+              <div id="exportReadySummary" style="font-size: 0.84rem; color: var(--text-secondary);">
+                Pronto para exportar: <strong style="color: #60a5fa;" id="exportTotalItemsCount">4 módulos selecionados</strong>
+              </div>
+            </div>
+
+            <!-- Action Buttons Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 16px;">
+              
+              <!-- Botão Excel / CSV -->
+              <button type="button" class="export-action-btn" onclick="App.exportReportCSV()" title="Baixar planilha compatível com Microsoft Excel, Google Sheets e LibreOffice">
+                <div class="export-action-btn-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="export-action-btn-content">
+                  <div class="export-action-btn-title">Planilha Excel (.CSV)</div>
+                  <div class="export-action-btn-subtitle">Exporta tabelas e dados brutos selecionados</div>
+                </div>
+                <span class="export-action-btn-badge" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7;">.CSV</span>
+              </button>
+
+              <!-- Botão Imprimir / PDF -->
+              <button type="button" class="export-action-btn primary" onclick="App.exportReportPDF()" title="Gerar relatório diagramado pronto para impressão ou salvar em PDF">
+                <div class="export-action-btn-icon" style="background: rgba(124, 58, 237, 0.2); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                </div>
+                <div class="export-action-btn-content">
+                  <div class="export-action-btn-title">Imprimir / Salvar PDF</div>
+                  <div class="export-action-btn-subtitle">Relatório executivo completo e formatado</div>
+                </div>
+                <span class="export-action-btn-badge" style="background: rgba(255, 255, 255, 0.2); color: #ffffff;">.PDF</span>
+              </button>
+
+              <!-- Botão Copiar Resumo -->
+              <button type="button" class="export-action-btn" onclick="App.copyReportSummary()" title="Copiar resumo textual para WhatsApp, Telegram ou e-mail">
+                <div class="export-action-btn-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </div>
+                <div class="export-action-btn-content">
+                  <div class="export-action-btn-title">Copiar Texto Formatado</div>
+                  <div class="export-action-btn-subtitle">Resumo pronto para envio em mensagens</div>
+                </div>
+                <span class="export-action-btn-badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Texto</span>
+              </button>
+
+              <!-- Botão JSON Estruturado -->
+              <button type="button" class="export-action-btn" onclick="App.exportReportJSON()" title="Exportar dados estruturados em JSON para integração ou backup">
+                <div class="export-action-btn-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <div class="export-action-btn-content">
+                  <div class="export-action-btn-title">Backup de Dados (JSON)</div>
+                  <div class="export-action-btn-subtitle">Exportação técnica estruturada</div>
+                </div>
+                <span class="export-action-btn-badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d;">.JSON</span>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Container dinâmico exclusivo para Impressão e PDF (Oculto na interface normal) -->
+          <div id="printReportDocument" style="display: none;"></div>
+
+        </div>
+
+        <!-- ================================================================
+             VIEW NOVO: SUGESTÃO & MELHORIAS
+             ================================================================ -->
+        <div class="page-view flex flex-col gap-6" id="view-sugestoes" style="display: none;">
+          
+          <div class="card">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                    <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Central de Sugestões & Novas Ideias</h2>
+                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Espaço reservado para elaborar, registrar e planejar novas funcionalidades e melhorias para o sistema</p>
+                </div>
+              </div>
+              <span class="badge badge-primary" style="padding: 6px 12px; font-size: 0.78rem; font-weight: 700;">💡 Módulo de Ideias</span>
+            </div>
+
+            <!-- Formulário para Criar/Elaborar Nova Sugestão -->
+            <form id="formNewSuggestion" class="flex flex-col gap-4" style="margin-top: var(--space-4); background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 18px 20px;">
+              <h3 style="font-size: 0.96rem; font-weight: 700; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 8px;">
+                <span>✍️ Elaborar Nova Sugestão ou Recurso</span>
+              </h3>
+              
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="sugCategory">Categoria da Ideia</label>
+                  <select id="sugCategory" class="form-select" required>
+                    <option value="💡 Nova Funcionalidade">💡 Nova Funcionalidade</option>
+                    <option value="🚀 Otimização / Performance">🚀 Otimização / Performance</option>
+                    <option value="🎨 Design & Usabilidade">🎨 Design & Usabilidade</option>
+                    <option value="📊 Relatórios & Gráficos">📊 Relatórios & Gráficos</option>
+                    <option value="🔗 Integração Marketplace">🔗 Integração Marketplace</option>
+                    <option value="⚙️ Automação & Configuração">⚙️ Automação & Configuração</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="sugPriority">Prioridade de Implementação</label>
+                  <select id="sugPriority" class="form-select">
+                    <option value="Alta">🔥 Alta (Prioritária)</option>
+                    <option value="Média" selected>⚡ Média (Importante)</option>
+                    <option value="Baixa">🌱 Baixa (Futuro)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sugTitle">Título da Sugestão / Ideia</label>
+                <input type="text" id="sugTitle" class="form-input" placeholder="Ex: Integração automática de emissão de NF-e ou alerta de estoque baixo por WhatsApp" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sugDescription">Detalhamento da Sugestão (Como deve funcionar?)</label>
+                <textarea id="sugDescription" class="form-input" rows="3" placeholder="Descreva os detalhes da ideia, pontos chave ou requisitos que você deseja implementar no sistema..." style="resize: vertical; min-height: 70px;"></textarea>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="padding: 10px 22px; font-weight: 700; background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Salvar Sugestão</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Mural de Sugestões em Aberto -->
+            <div style="margin-top: var(--space-6);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3);">
+                <h3 style="font-size: 1rem; font-weight: 800; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 8px;">
+                  <span>📋 Mural de Ideias & Sugestões Registradas</span>
+                  <span class="badge badge-primary" id="sugTotalCountBadge">0</span>
+                </h3>
+                <span class="text-sm" style="color: var(--text-tertiary);">Salvas localmente para consulta e desenvolvimento</span>
+              </div>
+
+              <div id="suggestionsListContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;">
+                <!-- Renderizado dinamicamente via JS -->
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
         <!-- ================================================================
@@ -852,12 +2043,13 @@
       <span>Relatórios</span>
     </div>
 
-    <div class="bottom-nav-item" data-nav-view="configuracoes">
+    <div class="bottom-nav-item" id="btnBottomNavMenu" data-action="toggle-sidebar" title="Menu e outras páginas">
       <svg class="bottom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"></circle>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        <line x1="4" y1="6" x2="20" y2="6"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="18" x2="20" y2="18"></line>
       </svg>
-      <span>Mais</span>
+      <span>Menu</span>
     </div>
   </nav>
 
@@ -953,10 +2145,324 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/mockData.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/app.js"></script>
+  <!-- ====================================================================
+       MODAL 2: ADICIONAR NOVO PRODUTO / EQUIPAMENTO AO ESTOQUE
+       ==================================================================== -->
+  <!-- ====================================================================
+       MODAL: ADICIONAR NOVO PRODUTO / EQUIPAMENTO AO ESTOQUE
+       ==================================================================== -->
+  <div class="modal-overlay" id="modalNewProduct">
+    <div class="modal-container" style="max-width: 540px;">
+      
+      <!-- Cabeçalho Limpo -->
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-title" style="margin: 0; font-size: 1.1rem; font-weight: 800;">Cadastrar Novo Equipamento</h3>
+            <p style="margin: 0; font-size: 0.75rem; color: var(--text-tertiary);">Adicione novos itens e controle custos no estoque</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" data-close-modal="modalNewProduct" title="Fechar (Esc)">&times;</button>
+      </div>
+
+      <form id="formNewProduct">
+        <div class="modal-body" style="max-height: 72vh; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: var(--space-4) var(--space-6);">
+          
+          <!-- Nome do Equipamento -->
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="prodNome">Nome do Equipamento / Modelo <span style="color: var(--danger);">*</span></label>
+            <input type="text" id="prodNome" class="form-input" placeholder="Ex: iPhone 14 Pro Max" required autocomplete="off">
+          </div>
+
+          <!-- Categoria e Quantidade -->
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="prodCategoria">Categoria <span style="color: var(--danger);">*</span></label>
+              <select id="prodCategoria" class="form-select" required>
+                <option value="Smartphones" selected>📱 Smartphones</option>
+                <option value="Smartwatches">⌚ Smartwatches</option>
+                <option value="Notebooks">💻 Notebooks / Laptops</option>
+                <option value="Tablets">📱 Tablets / iPads</option>
+                <option value="Acessórios">🎧 Acessórios</option>
+                <option value="Outros">📦 Outros</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="prodQuantidade">Qtd. Unidades <span style="color: var(--danger);">*</span></label>
+              <input type="number" id="prodQuantidade" class="form-input" value="1" min="1" required>
+            </div>
+          </div>
+
+          <!-- CONTAINER DO CARD DE IMAGEM DO EQUIPAMENTO (COM MINIATURA INTEGRADA) -->
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="margin-bottom: 6px; font-weight: 700; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span>Foto do Equipamento (Miniatura)</span>
+            </label>
+
+            <!-- Input de Arquivo com Acessibilidade Nativa -->
+            <input type="file" id="prodImageFile" accept="image/*" style="position: absolute; top: -9999px; left: -9999px; opacity: 0; width: 1px; height: 1px; overflow: hidden;" onclick="this.value=null;" onchange="window.handleProductImageChange(this);">
+            <input type="hidden" id="prodImagemInput" value="">
+
+            <!-- ESTADO 1: CARD DE CARREGAR IMAGEM (Label nativo com 100% de confiabilidade de clique) -->
+            <label for="prodImageFile" id="uploadPlaceholderCard" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(15, 23, 42, 0.6); border: 1.5px dashed rgba(139, 92, 246, 0.5); border-radius: 12px; padding: 12px 18px; cursor: pointer; transition: all 0.2s ease; user-select: none;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); display: flex; align-items: center; justify-content: center; color: #a78bfa; flex-shrink: 0;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-size: 0.85rem; font-weight: 700; color: #f8fafc;">Clique para carregar a foto</div>
+                  <div style="font-size: 0.72rem; color: var(--text-tertiary);">Formatos aceitos: PNG, JPG ou WebP</div>
+                </div>
+              </div>
+              <span style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; font-size: 0.8rem; font-weight: 700; box-shadow: 0 3px 10px rgba(124, 58, 237, 0.35);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <span>Escolher Foto</span>
+              </span>
+            </label>
+
+            <!-- ESTADO 2: CARD COM A MINIATURA DA IMAGEM CARREGADA (Aparece no lugar do card de upload) -->
+            <div id="uploadPreviewCard" style="display: none; align-items: center; justify-content: space-between; gap: 14px; background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 10px 16px;">
+              <div style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1;">
+                <!-- Miniatura Perfeita com Borda Verde -->
+                <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 10px; background: rgba(15, 23, 42, 0.9); border: 2px solid #10b981; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); flex-shrink: 0;">
+                  <img id="imgThumbPreview" src="" alt="Miniatura" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+                <div style="min-width: 0; flex: 1;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: #10b981;">Foto Carregada com Sucesso</span>
+                  </div>
+                  <div id="imageFileNameDisplay" style="font-size: 0.74rem; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">
+                    imagem.png
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Botões de Ação na Miniatura -->
+              <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                <label for="prodImageFile" style="display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 7px; background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.4); color: #c084fc; font-size: 0.76rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; user-select: none;" title="Trocar por outra imagem">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                  </svg>
+                  <span>Trocar</span>
+                </label>
+                <button type="button" id="btnResetProdImage" onclick="window.resetProductImageUpload(event);" style="display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 7px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #f87171; font-size: 0.76rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;" title="Remover imagem">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                  <span>Remover</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Especificações Rápidas (3 colunas) -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="prodGigas" style="font-size: 0.76rem;">Gigas / Memória</label>
+              <input type="text" id="prodGigas" class="form-input" placeholder="Ex: 128GB">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="prodCor" style="font-size: 0.76rem;">Cor</label>
+              <input type="text" id="prodCor" class="form-input" placeholder="Ex: Grafite">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="prodBateria" style="font-size: 0.76rem;">Bateria (%)</label>
+              <input type="number" id="prodBateria" class="form-input" min="1" max="100" placeholder="Ex: 95">
+            </div>
+          </div>
+
+          <!-- Valores & Precificação -->
+          <div style="background: var(--bg-card-inner); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 14px;">
+            <div style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; color: var(--primary-light); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              Valores & Precificação
+            </div>
+            <div class="form-row-2">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="prodInvestimento">Valor de Investimento (R$) <span style="color: var(--danger);">*</span></label>
+                <input type="number" id="prodInvestimento" class="form-input" step="0.01" min="0" placeholder="0,00" required style="font-weight: 700;">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="prodPrecoVenda">Preço de Venda (R$) <span style="color: var(--danger);">*</span></label>
+                <input type="number" id="prodPrecoVenda" class="form-input" step="0.01" min="0" placeholder="0,00" required style="font-weight: 700;">
+              </div>
+            </div>
+
+            <!-- Projeção Compacta -->
+            <div style="margin-top: 10px; background: rgba(10, 15, 29, 0.6); border: 1px dashed rgba(139, 92, 246, 0.3); border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span style="font-size: 0.66rem; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); display: block;">Lucro Projetado</span>
+                <span id="prodCalcLucro" style="font-size: 1.1rem; font-weight: 800; color: var(--success);">R$ 0,00</span>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 0.66rem; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); display: block;">Margem</span>
+                <span id="prodCalcMargem" class="badge badge-success" style="font-size: 0.78rem; padding: 3px 8px; font-weight: 700;">0.0%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer" style="padding: var(--space-4) var(--space-6); background: rgba(15, 23, 42, 0.7); border-top: 1px solid var(--border-subtle);">
+          <button type="button" class="btn btn-secondary" data-close-modal="modalNewProduct">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmitNewProduct" style="font-weight: 700; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Salvar e Adicionar ao Estoque</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL: REGISTRAR NOVA DESPESA (FIXA OU VARIÁVEL)
+       ==================================================================== -->
+  <div class="modal-overlay" id="modalNewExpense">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:#ec4899;">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+          Registrar Nova Despesa
+        </h3>
+        <button class="modal-close-btn" data-close-modal="modalNewExpense">&times;</button>
+      </div>
+
+      <form id="formNewExpense">
+        <div class="modal-body">
+          
+          <!-- Seletor de Tipo de Despesa (Fixa vs Variável) -->
+          <div class="form-group">
+            <label class="form-label">Tipo de Despesa</label>
+            <div class="expense-type-selector">
+              <button type="button" class="expense-type-btn active" data-type="fixa" id="btnTypeFixed">
+                <span class="expense-type-icon">🏢</span>
+                <div class="expense-type-text">
+                  <strong>Despesa Fixa</strong>
+                  <span>Aluguel, ferramentas, contas mensais</span>
+                </div>
+              </button>
+              <button type="button" class="expense-type-btn" data-type="variavel" id="btnTypeVar">
+                <span class="expense-type-icon">⚡</span>
+                <div class="expense-type-text">
+                  <strong>Despesa Variável</strong>
+                  <span>Gasolina, refeição, pedágio, frete</span>
+                </div>
+              </button>
+            </div>
+            <input type="hidden" id="newExpenseType" value="fixa">
+          </div>
+
+          <!-- Descrição / Nome da Despesa -->
+          <div class="form-group">
+            <label class="form-label" for="newExpenseDesc">Descrição / Nome da Despesa</label>
+            <input type="text" id="newExpenseDesc" class="form-input" placeholder="Ex: Gasolina Posto Shell ou Aluguel do Ponto" required>
+          </div>
+
+          <!-- Categoria & Valor -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="newExpenseCategory">Categoria</label>
+              <select id="newExpenseCategory" class="form-select" required>
+                <!-- Preenchido dinamicamente via JS -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="newExpenseValue">Valor da Despesa (R$)</label>
+              <div style="position: relative;">
+                <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--text-tertiary); font-size: 0.9rem;">R$</span>
+                <input type="number" step="0.01" min="0.01" id="newExpenseValue" class="form-input" placeholder="0,00" style="padding-left: 38px; font-weight: 700;" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data & Status -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="newExpenseDate">Data do Pagamento / Vencimento</label>
+              <input type="date" id="newExpenseDate" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="newExpenseStatus">Status de Pagamento</label>
+              <select id="newExpenseStatus" class="form-select">
+                <option value="pago" selected>✅ Pago (Quitado)</option>
+                <option value="avencer">⏳ A Vencer</option>
+                <option value="pendente">⚠️ Pendente / Atrasado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Forma de Pagamento & Observação -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="newExpensePaymentMethod">Forma de Pagamento</label>
+              <select id="newExpensePaymentMethod" class="form-select">
+                <option value="PIX" selected>PIX</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="Boleto Bancário">Boleto Bancário</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Transferência">Transferência Bancária</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="newExpenseObs">Observação / Comprovante (Opcional)</label>
+              <input type="text" id="newExpenseObs" class="form-input" placeholder="Ex: NF 104, KM 450, etc.">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer" style="padding: var(--space-4) var(--space-6); background: rgba(15, 23, 42, 0.7); border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-secondary" data-close-modal="modalNewExpense">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmitNewExpense" style="font-weight: 700; background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); border-color: rgba(236, 72, 153, 0.4); box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Salvar Despesa</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts (com versionamento anti-cache) -->
+  <script src="js/config.js?v=5.2"></script>
+  <script src="js/mockData.js?v=5.2"></script>
+  <script src="js/charts.js?v=5.2"></script>
+  <script src="js/navigation.js?v=5.2"></script>
+  <script src="js/auth.js?v=5.2"></script>
+  <script src="js/app.js?v=5.2"></script>
 </body>
 </html>

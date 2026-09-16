@@ -1,0 +1,42 @@
+# ==============================================================================
+# GARIMPRO - .gitignore
+# ==============================================================================
+
+# Arquivos de ambiente e credenciais sensíveis
+.env
+.env.local
+.env.production
+*.env
+
+# Logs e arquivos de execução temporários
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências (se adicionadas futuramente)
+node_modules/
+vendor/
+
+# Arquivos de sistema operacional
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Arquivos temporários e backups de editores
+*.tmp
+*.bak
+*.swp
+*~
+.idea/
+.vscode/
+
+# Diretórios internos e de desenvolvimento
+.agents/
+.system_generated/
+.gemini/

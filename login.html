@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="login-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="description" content="GarimPro - Acesso Restrito ao Painel de Controle">
+  <meta name="theme-color" content="#060812">
+  <title>GarimPro | Login</title>
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237c3aed'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+
+  <!-- Tipografia Moderna Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="css/variables.css?v=3.9">
+  <link rel="stylesheet" href="css/base.css?v=3.9">
+  <link rel="stylesheet" href="css/auth.css?v=3.9">
+</head>
+<body class="login-page">
+
+  <!-- Tela de Autenticação Fullscreen Gatekeeper -->
+  <div class="auth-screen" id="authScreen">
+    <!-- Orbes Decorativos Flutuantes Suaves -->
+    <div class="auth-orb auth-orb-1"></div>
+    <div class="auth-orb auth-orb-2"></div>
+
+    <div class="auth-card-container">
+      <div class="auth-card">
+        <!-- Topo / Identidade Visual Minimalista -->
+        <div class="auth-header">
+          <div class="auth-logo-badge" title="GarimPro">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.5 16.5L8.5 10.5L13.5 15L21.5 7" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.5 7H21.5V13" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="auth-title">Bem-vindo de volta</h1>
+          <p class="auth-subtitle">Acesse sua conta para gerenciar seu negócio</p>
+        </div>
+
+        <!-- Alerta Dinâmico de Erro / Sucesso -->
+        <div class="auth-alert-box" id="authAlertBox">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span id="authAlertText">Usuário ou senha incorretos.</span>
+        </div>
+
+        <!-- Formulário de Login com Espaçamento Amplo e Organizado -->
+        <form class="auth-form" id="authLoginForm" autocomplete="on">
+          <!-- Campo Usuário / E-mail -->
+          <div class="auth-field-group">
+            <label class="auth-label" for="authUsername">Usuário ou E-mail</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </span>
+              <input 
+                type="text" 
+                id="authUsername" 
+                class="auth-input" 
+                placeholder="Ex: admin ou seu e-mail" 
+                required 
+                autofocus
+                autocomplete="username"
+                value="admin"
+              >
+            </div>
+          </div>
+
+          <!-- Campo Senha -->
+          <div class="auth-field-group">
+            <div class="auth-label">
+              <span>Senha</span>
+              <a href="javascript:void(0)" class="auth-forgot-link" id="authForgotLink">Esqueceu a senha?</a>
+            </div>
+            <div class="auth-input-wrapper">
+              <span class="auth-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <input 
+                type="password" 
+                id="authPassword" 
+                class="auth-input" 
+                placeholder="••••••••" 
+                required
+                autocomplete="current-password"
+                value="admin"
+              >
+              <button type="button" class="auth-toggle-pwd-btn" id="authTogglePwd" aria-label="Mostrar ou ocultar senha" title="Mostrar senha">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="authEyeIcon">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <!-- Aviso de Caps Lock Ativado -->
+            <div class="auth-caps-warning" id="authCapsWarning">
+              <span>⚠️ Caps Lock (Fixa) está ativado</span>
+            </div>
+          </div>
+
+          <!-- Opções: Lembrar de Mim -->
+          <div class="auth-options-row">
+            <label class="auth-checkbox-label">
+              <input type="checkbox" id="authRemember" class="auth-checkbox" checked>
+              <span>Lembrar de mim neste dispositivo</span>
+            </label>
+          </div>
+
+          <!-- Barra de Progresso de Redirecionamento -->
+          <div class="auth-progress-bar-container" id="authProgressBarContainer">
+            <div class="auth-progress-bar" id="authProgressBar"></div>
+          </div>
+
+          <!-- Botão de Ação Principal (CTA) -->
+          <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
+            <span class="auth-btn-text">Entrar no Sistema</span>
+            <span class="auth-spinner"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </form>
+
+      </div>
+
+      <!-- Rodapé Discreto com Ícone de Segurança -->
+      <div class="auth-footer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>GarimPro • Ambiente seguro com criptografia de ponta a ponta</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js?v=5.2"></script>
+  <script src="js/auth.js?v=5.2"></script>
+</body>
+</html>

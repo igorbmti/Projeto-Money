@@ -84,6 +84,7 @@ CREATE TABLE `produtos` (
     `sku` VARCHAR(50) NULL,
     `codigo_barras` VARCHAR(50) NULL,
     `descricao` TEXT NULL,
+    `foto` LONGTEXT NULL,
     `unidade` VARCHAR(10) NOT NULL DEFAULT 'UN',
     `preco_venda` DECIMAL(12,2) NOT NULL DEFAULT 0.00,
     `margem_desejada` DECIMAL(5,2) NOT NULL DEFAULT 0.00,

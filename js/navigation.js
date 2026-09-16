@@ -19,20 +19,80 @@ const Navigation = {
      ========================================================================== */
   setupSidebarAndDrawer() {
     const btnMenuToggle = document.getElementById("btnMenuToggle");
+    const btnSidebarClose = document.getElementById("btnSidebarClose");
+    const btnBottomNavMenu = document.getElementById("btnBottomNavMenu");
     const sidebar = document.getElementById("appSidebar");
     const backdrop = document.getElementById("drawerBackdrop");
 
-    if (btnMenuToggle && sidebar && backdrop) {
-      btnMenuToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("open");
-        backdrop.classList.toggle("active");
-      });
+    const openDrawer = () => {
+      if (sidebar) sidebar.classList.add("open");
+      if (backdrop) backdrop.classList.add("active");
+      document.body.style.overflow = "hidden";
+    };
 
-      backdrop.addEventListener("click", () => {
-        sidebar.classList.remove("open");
-        backdrop.classList.remove("active");
+    const closeDrawer = () => {
+      if (sidebar) sidebar.classList.remove("open");
+      if (backdrop) backdrop.classList.remove("active");
+      document.body.style.overflow = "";
+    };
+
+    const toggleDrawer = () => {
+      if (sidebar && sidebar.classList.contains("open")) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    };
+
+    if (btnMenuToggle) {
+      btnMenuToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDrawer();
       });
     }
+
+    if (btnSidebarClose) {
+      btnSidebarClose.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeDrawer();
+      });
+    }
+
+    if (btnBottomNavMenu) {
+      btnBottomNavMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDrawer();
+      });
+    }
+
+    // Suporte a qualquer outro gatilho de abertura do drawer
+    document.querySelectorAll('[data-action="toggle-sidebar"]').forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDrawer();
+      });
+    });
+
+    if (backdrop) {
+      backdrop.addEventListener("click", () => {
+        closeDrawer();
+      });
+    }
+
+    // Fechar ao pressionar a tecla ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sidebar && sidebar.classList.contains("open")) {
+        closeDrawer();
+      }
+    });
+
+    this.openDrawer = openDrawer;
+    this.closeDrawer = closeDrawer;
+    this.toggleDrawer = toggleDrawer;
   },
 
   /* ==========================================================================
@@ -43,6 +103,7 @@ const Navigation = {
     const bottomNavItems = document.querySelectorAll(".bottom-nav-item");
 
     const switchView = (targetView) => {
+      if (!targetView) return;
       this.currentView = targetView;
 
       // Atualizar links na Sidebar
@@ -56,13 +117,25 @@ const Navigation = {
       });
 
       // Atualizar Bottom Nav
+      const primaryBottomViews = ["dashboard", "vendas", "relatorios"];
       bottomNavItems.forEach(item => {
-        if (item.getAttribute("data-nav-view") === targetView) {
+        const view = item.getAttribute("data-nav-view");
+        if (view && view === targetView) {
           item.classList.add("active");
-        } else {
+        } else if (!item.hasAttribute("data-action")) {
           item.classList.remove("active");
         }
       });
+
+      // Se for uma tela do menu (produtos, estoque, financeiro, despesas, configuracoes), ativa o indicador no Menu
+      const btnBottomNavMenu = document.getElementById("btnBottomNavMenu");
+      if (btnBottomNavMenu) {
+        if (!primaryBottomViews.includes(targetView)) {
+          btnBottomNavMenu.classList.add("active");
+        } else {
+          btnBottomNavMenu.classList.remove("active");
+        }
+      }
 
       // Alternar visualizações no DOM
       document.querySelectorAll(".page-view").forEach(view => {
@@ -74,18 +147,21 @@ const Navigation = {
       });
 
       // Fechar Drawer em mobile se estiver aberto
-      const sidebar = document.getElementById("appSidebar");
-      const backdrop = document.getElementById("drawerBackdrop");
-      if (sidebar && backdrop) {
-        sidebar.classList.remove("open");
-        backdrop.classList.remove("active");
+      if (typeof this.closeDrawer === "function") {
+        this.closeDrawer();
+      } else {
+        const sidebar = document.getElementById("appSidebar");
+        const backdrop = document.getElementById("drawerBackdrop");
+        if (sidebar) sidebar.classList.remove("open");
+        if (backdrop) backdrop.classList.remove("active");
+        document.body.style.overflow = "";
       }
 
       // Re-renderizar gráficos se for para a view do dashboard
-      if (targetView === "dashboard") {
+      if (targetView === "dashboard" && typeof ChartsEngine !== "undefined") {
         setTimeout(() => {
-          ChartsEngine.renderBarChart(1);
-          ChartsEngine.renderDonuts(1);
+          if (ChartsEngine.renderBarChart) ChartsEngine.renderBarChart(1);
+          if (ChartsEngine.renderDonuts) ChartsEngine.renderDonuts(1);
         }, 50);
       }
 
@@ -95,19 +171,26 @@ const Navigation = {
     navLinks.forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
+        link.blur();
+        if (window.getSelection) {
+          window.getSelection().removeAllRanges();
+        }
         const targetView = link.getAttribute("data-nav-view");
-        switchView(targetView);
+        if (targetView) switchView(targetView);
       });
     });
 
     bottomNavItems.forEach(item => {
-      item.addEventListener("click", () => {
+      item.addEventListener("click", (e) => {
         const targetView = item.getAttribute("data-nav-view");
         if (targetView) {
+          e.preventDefault();
           switchView(targetView);
         }
       });
     });
+
+    this.switchView = switchView;
   },
 
   /* ==========================================================================
@@ -191,11 +274,25 @@ const Navigation = {
   setupModals() {
     // Abertura de Nova Venda
     const btnNewSaleTriggers = document.querySelectorAll(".btn-trigger-new-sale");
-    const modalNewSale = document.getElementById("modalNewSale");
-
     btnNewSaleTriggers.forEach(btn => {
       btn.addEventListener("click", () => {
         this.openModal("modalNewSale");
+      });
+    });
+
+    // Abertura de Novo Produto
+    const btnNewProdTriggers = document.querySelectorAll(".btn-trigger-new-product");
+    btnNewProdTriggers.forEach(btn => {
+      btn.addEventListener("click", () => {
+        this.openModal("modalNewProduct");
+      });
+    });
+
+    // Abertura de Nova Despesa
+    const btnNewExpenseTriggers = document.querySelectorAll(".btn-trigger-new-expense");
+    btnNewExpenseTriggers.forEach(btn => {
+      btn.addEventListener("click", () => {
+        this.openModal("modalNewExpense");
       });
     });
 

@@ -18,13 +18,19 @@
 
   .sidebar {
     transform: translateX(-100%);
-    width: 280px;
-    max-width: 85vw;
-    box-shadow: var(--shadow-lg);
+    width: 290px;
+    max-width: 86vw;
+    z-index: 200;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .sidebar.open {
     transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: flex;
   }
 
   .main-wrapper {
@@ -36,69 +42,131 @@
     padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + var(--space-6));
   }
 
+  /* Header Superior Fixo no Mobile */
   .top-header {
-    padding: 0 var(--space-3);
+    padding: 0 12px;
     height: 60px;
+    min-height: 60px;
     width: 100%;
     max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background-color: var(--bg-header);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
   }
 
   .btn-menu-toggle {
     display: flex;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .header-title-block {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: center;
   }
 
   .header-greeting {
-    font-size: 0.95rem;
+    font-size: 0.90rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+    display: block;
   }
 
   .header-subtitle {
-    display: none;
+    display: none !important;
   }
 
-  .main-content {
-    padding: var(--space-3);
-    gap: var(--space-3);
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
-  }
-
-  .card {
-    padding: var(--space-4);
-    border-radius: var(--radius-card);
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  /* Bottom Navigation com suporte à Safe Area do iOS */
-  .bottom-nav {
+  .header-right {
     display: flex;
-    height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  /* Remove o badge de usuário e botão de sair do topo no mobile (conforme solicitado) */
+  .user-header-badge {
+    display: none !important;
   }
 
   /* Ocultar botão Nova Venda do header em mobile para dar espaço, pois fica no FAB central */
   .header-right .btn-primary-action {
-    display: none;
+    display: none !important;
   }
 
   .period-selector .btn-period-dropdown {
-    padding: 6px 8px;
-    font-size: 0.72rem;
+    padding: 6px 9px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    height: 36px;
+    min-height: 36px;
+    border-radius: 10px;
     gap: 4px;
+    max-width: 125px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    white-space: nowrap;
+    cursor: pointer;
   }
 
   .header-action-btn {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 10px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .header-action-btn svg {
+    width: 17px;
+    height: 17px;
   }
 
   /* KPI Grid Mobile (2 colunas perfeitas com min-width: 0) */
