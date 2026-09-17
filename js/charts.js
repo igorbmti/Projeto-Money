@@ -48,25 +48,106 @@ const ChartsEngine = {
   },
 
   setupTabListeners() {
-    const tabs = document.querySelectorAll(".chart-tab-group:not(#finChartTabs) .chart-tab-btn");
+    const tabs = document.querySelectorAll(".chart-header-tabs .chart-tab-btn, .chart-tab-group:not(#finChartTabs) .chart-tab-btn");
     tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+        const parent = tab.parentElement;
+        if (parent) {
+          parent.querySelectorAll(".chart-tab-btn").forEach(t => t.classList.remove("active"));
+        } else {
+          tabs.forEach(t => t.classList.remove("active"));
+        }
         tab.classList.add("active");
-        this.activeBarTab = tab.getAttribute("data-metric");
-        this.renderBarChart(1);
+        this.activeBarTab = tab.getAttribute("data-metric") || "faturamento";
+        this.updateBottomMetrics(this.activeBarTab);
+        this.animateSingleChart("bar");
       });
     });
+  },
+
+  updateBottomMetrics(metric = "faturamento") {
+    const dataValues = (MockData && MockData.graficoEvolucao && MockData.graficoEvolucao[metric]) 
+      ? MockData.graficoEvolucao[metric] 
+      : (MockData && MockData.graficoEvolucao ? MockData.graficoEvolucao.faturamento : []);
+    const dias = (MockData && MockData.graficoEvolucao && MockData.graficoEvolucao.dias) 
+      ? MockData.graficoEvolucao.dias 
+      : [];
+
+    if (!dataValues || dataValues.length === 0) return;
+
+    let maxVal = -Infinity;
+    let maxIdx = 0;
+    let sum = 0;
+    dataValues.forEach((val, idx) => {
+      sum += val;
+      if (val > maxVal) {
+        maxVal = val;
+        maxIdx = idx;
+      }
+    });
+
+    const avgVal = sum / dataValues.length;
+    const maxDia = dias[maxIdx] ? `${dias[maxIdx]}/2026` : "20/08/2026";
+
+    const elMaxDay = document.getElementById("dashboardChartMaxDay");
+    const elMaxDayDate = document.getElementById("dashboardChartMaxDayDate");
+    const elAvgDay = document.getElementById("dashboardChartAvgDay");
+    const elGrowth = document.getElementById("dashboardChartGrowth");
+
+    if (elMaxDay) elMaxDay.textContent = `R$ ${maxVal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (elMaxDayDate) elMaxDayDate.textContent = maxDia;
+    if (elAvgDay) elAvgDay.textContent = `R$ ${avgVal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    
+    if (elGrowth) {
+      if (metric === "despesas") {
+        elGrowth.textContent = "-12,4%";
+        elGrowth.style.color = "var(--danger, #f87171)";
+      } else if (metric === "lucro") {
+        elGrowth.textContent = "+28,4%";
+        elGrowth.style.color = "var(--success, #34d399)";
+      } else if (metric === "investimento") {
+        elGrowth.textContent = "+15,2%";
+        elGrowth.style.color = "var(--primary, #60a5fa)";
+      } else {
+        elGrowth.textContent = "+21,6%";
+        elGrowth.style.color = "var(--success, #34d399)";
+      }
+    }
+  },
+
+  animateSingleChart(chartType) {
+    const startTime = performance.now();
+    const duration = 400;
+
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      if (chartType === "bar") {
+        this.renderBarChart(eased);
+      } else if (chartType === "fin") {
+        this.renderFinancialEvolutionChart(eased);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
   },
 
   setupFinTabListeners() {
     const finTabs = document.querySelectorAll("#finChartTabs .fin-chart-tab");
     finTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
         finTabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         this.activeFinMetric = tab.getAttribute("data-fin-metric") || "faturamento";
-        this.renderFinancialEvolutionChart(1);
+        this.animateSingleChart("fin");
       });
     });
   },
@@ -135,17 +216,19 @@ const ChartsEngine = {
     if (chartW <= 0 || chartH <= 0) return;
 
     let gradientColors = {
-      top: "#a855f7",
-      bottom: "#6d28d9",
-      glow: "rgba(168, 85, 247, 0.4)"
+      top: "#c084fc",
+      bottom: "#7c3aed",
+      glow: "rgba(124, 58, 237, 0.45)"
     };
 
     if (this.activeBarTab === "faturamento") {
       gradientColors = { top: "#c084fc", bottom: "#7c3aed", glow: "rgba(124, 58, 237, 0.45)" };
+    } else if (this.activeBarTab === "lucro") {
+      gradientColors = { top: "#34d399", bottom: "#059669", glow: "rgba(16, 185, 129, 0.45)" };
     } else if (this.activeBarTab === "investimento") {
       gradientColors = { top: "#60a5fa", bottom: "#2563eb", glow: "rgba(37, 99, 235, 0.45)" };
     } else if (this.activeBarTab === "despesas") {
-      gradientColors = { top: "#f87171", bottom: "#dc2626", glow: "rgba(220, 38, 38, 0.45)" };
+      gradientColors = { top: "#f472b6", bottom: "#db2777", glow: "rgba(236, 72, 153, 0.45)" };
     }
 
     const steps = 4;
