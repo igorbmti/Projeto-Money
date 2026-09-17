@@ -35,13 +35,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Folhas de Estilo Modulares (com versionamento anti-cache) -->
-  <link rel="stylesheet" href="css/variables.css?v=3.8">
-  <link rel="stylesheet" href="css/base.css?v=3.8">
-  <link rel="stylesheet" href="css/layout.css?v=3.8">
-  <link rel="stylesheet" href="css/components.css?v=3.8">
-  <link rel="stylesheet" href="css/tables.css?v=3.8">
-  <link rel="stylesheet" href="css/responsive.css?v=3.8">
-  <link rel="stylesheet" href="css/auth.css?v=3.8">
+  <link rel="stylesheet" href="css/variables.css?v=12.0">
+  <link rel="stylesheet" href="css/base.css?v=12.0">
+  <link rel="stylesheet" href="css/layout.css?v=12.0">
+  <link rel="stylesheet" href="css/components.css?v=12.0">
+  <link rel="stylesheet" href="css/tables.css?v=12.0">
+  <link rel="stylesheet" href="css/responsive.css?v=12.0">
+  <link rel="stylesheet" href="css/auth.css?v=12.0">
 </head>
 <body>
 
@@ -153,19 +153,6 @@
                     </svg>
                   </span>
                   <span>Visão Financeira</span>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="javascript:void(0)" class="nav-link" data-nav-view="despesas">
-                <div class="nav-link-content">
-                  <span class="nav-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                      <line x1="2" y1="10" x2="22" y2="10"></line>
-                    </svg>
-                  </span>
-                  <span>Despesas</span>
                 </div>
               </a>
             </li>
@@ -317,13 +304,20 @@
             </div>
           </div>
 
-          <!-- Botão Nova Venda (Desktop) -->
-          <button class="btn-primary-action btn-trigger-new-sale">
+          <!-- Botão Ação Principal Header (Desktop) -->
+          <button class="btn-primary-action btn-trigger-new-sale" id="headerBtnNewSale">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
             <span>Nova Venda</span>
+          </button>
+          <button class="btn-primary-action btn-trigger-new-product" id="headerBtnNewProduct" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Novo Produto</span>
           </button>
         </div>
       </header>
@@ -522,9 +516,6 @@
                 <h3 class="card-title">Últimas vendas registradas</h3>
                 <span class="text-sm" id="salesTotalCount">Carregando vendas...</span>
               </div>
-              <button class="btn btn-secondary btn-trigger-new-sale" style="padding: 6px 12px; font-size: 0.8rem;">
-                + Registrar Venda
-              </button>
             </div>
 
             <!-- Barra de Ferramentas / Filtros Instantâneos -->
@@ -597,110 +588,42 @@
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-produtos" style="display: none;">
           
-          <!-- Header do Módulo -->
+          <!-- Header do Módulo com Total de Itens Integrado -->
           <div class="card">
             <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                      <line x1="3" y1="6" x2="21" y2="6"></line>
-                      <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Catálogo de Produtos & Estoque</h2>
-                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão de equipamentos, valor investido, especificações e projeção de lucro</p>
-                  </div>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Catálogo de Produtos & Estoque</h2>
+                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão de equipamentos, especificações e inventário disponível em tempo real</p>
                 </div>
               </div>
-              <button class="btn btn-primary btn-trigger-new-product" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>+ Adicionar Produto</span>
-              </button>
-            </div>
-          </div>
 
-          <!-- Indicadores de Estoque Padronizados (Grid 4 Cards SaaS) -->
-          <section class="kpi-grid">
-            <!-- Card 1: Quantidade em Estoque -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-purple">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Indicador de Volume Total em Estoque Integrado -->
+              <div style="display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.22) 100%); border: 1px solid rgba(139, 92, 246, 0.32); border-radius: 12px; padding: 8px 16px; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(139, 92, 246, 0.25); display: flex; align-items: center; justify-content: center; color: #c084fc;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                     <line x1="12" y1="22.08" x2="12" y2="12"></line>
                   </svg>
                 </div>
-                <span class="kpi-label">Volume em Estoque</span>
-              </div>
-              <div class="kpi-value" id="prodKpiTotalQtd">53 un</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill" id="prodKpiTotalModelos">8 modelos</span>
-                <span class="kpi-trend-context" id="prodKpiEstoqueContext">cadastrados</span>
-              </div>
-            </div>
-
-            <!-- Card 2: Maior Retorno Financeiro -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-emerald">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                    <polyline points="17 6 23 6 23 12"></polyline>
-                  </svg>
+                <div>
+                  <div style="font-size: 0.68rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">Itens em Estoque</div>
+                  <div style="display: flex; align-items: baseline; gap: 6px;">
+                    <span style="font-size: 1.15rem; font-weight: 800; color: #c084fc;" id="prodKpiTotalQtd">0 un</span>
+                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);" id="prodKpiTotalModelos">• 0 modelos</span>
+                  </div>
                 </div>
-                <span class="kpi-label">Maior Retorno</span>
-              </div>
-              <div class="kpi-value kpi-value-product" id="prodKpiTopRetornoNome" title="iPhone 14 Pro Max">iPhone 14 Pro Max</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill" id="prodKpiTopRetornoLucro">+R$ 1.290,00/un</span>
-                <span class="kpi-trend-context" id="prodKpiTopRetornoMargem">21.9% margem</span>
               </div>
             </div>
-
-            <!-- Card 3: Mais Tempo em Estoque (Demora na Saída) -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-amber">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                </div>
-                <span class="kpi-label" title="Maior Tempo em Estoque">Mais Tempo Estoque</span>
-              </div>
-              <div class="kpi-value kpi-value-product" id="prodKpiLentaSaidaNome" title="AirPods Pro 2ª Geração">AirPods Pro 2ª Geração</div>
-              <div class="kpi-trend warning">
-                <span class="kpi-trend-pill" id="prodKpiLentaSaidaDias">54 dias parado</span>
-                <span class="kpi-trend-context" id="prodKpiLentaSaidaQtd">14 un em estoque</span>
-              </div>
-            </div>
-
-            <!-- Card 4: Baixa Lucratividade -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-red">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                  </svg>
-                </div>
-                <span class="kpi-label">Baixa Lucratividade</span>
-              </div>
-              <div class="kpi-value kpi-value-product" id="prodKpiBaixaLucroNome" style="color: #f87171;" title="iPhone 14 Pro Max">iPhone 14 Pro Max</div>
-              <div class="kpi-trend negative">
-                <span class="kpi-trend-pill" id="prodKpiBaixaLucroMargem">21.9% margem</span>
-                <span class="kpi-trend-context" id="prodKpiBaixaLucroDica">revisar preço</span>
-              </div>
-            </div>
-          </section>
+          </div>
 
           <!-- Filtros & Tabela/Lista de Produtos em Estoque -->
           <div class="card">
@@ -750,109 +673,42 @@
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-vendas" style="display: none;">
           
-          <!-- Header do Módulo Vendas -->
-          <div class="card">
+          <!-- Header do Módulo Vendas com Volume de Vendas Integrado -->
+          <div class="card" style="margin-bottom: 0;">
             <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="9" cy="21" r="1"></circle>
-                      <circle cx="20" cy="21" r="1"></circle>
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Histórico de Vendas & Pedidos</h2>
-                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gerenciamento completo de pedidos realizados, faturamento por canal e status</p>
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-primary btn-trigger-new-sale" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-color: rgba(59, 130, 246, 0.3);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>+ Registrar Venda</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Indicadores de Vendas Padronizados (Grid 4 Cards SaaS) -->
-          <section class="kpi-grid">
-            <!-- Card 1: Vendas Realizadas -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-purple">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                   </svg>
                 </div>
-                <span class="kpi-label">Vendas Realizadas</span>
+                <div>
+                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Histórico de Vendas & Pedidos</h2>
+                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gerenciamento completo de pedidos realizados, faturamento por canal e status</p>
+                </div>
               </div>
-              <div class="kpi-value" id="salesHistoryKpiCount">21</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill">↑ 31,2%</span>
-                <span class="kpi-trend-context">vs Julho</span>
-              </div>
-            </div>
 
-            <!-- Card 2: Faturamento Total -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-blue">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              <!-- Indicador de Vendas Realizadas Integrado -->
+              <div style="display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(29, 78, 216, 0.22) 100%); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 12px; padding: 8px 16px; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.12);">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(59, 130, 246, 0.25); display: flex; align-items: center; justify-content: center; color: #60a5fa;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                   </svg>
                 </div>
-                <span class="kpi-label">Faturamento Total</span>
-              </div>
-              <div class="kpi-value" id="salesHistoryKpiFaturamento">R$ 20.180,00</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill">↑ 21,6%</span>
-                <span class="kpi-trend-context">vs Julho</span>
-              </div>
-            </div>
-
-            <!-- Card 3: Lucro Líquido Real -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-green">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                    <polyline points="17 6 23 6 23 12"></polyline>
-                  </svg>
+                <div>
+                  <div style="font-size: 0.68rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">Vendas Realizadas</div>
+                  <div style="display: flex; align-items: baseline; gap: 6px;">
+                    <span style="font-size: 1.15rem; font-weight: 800; color: #60a5fa;" id="salesHistoryKpiCount">0</span>
+                    <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-secondary);" id="salesHistoryKpiTrendContext">• pedidos</span>
+                  </div>
                 </div>
-                <span class="kpi-label">Lucro Líquido Real</span>
-              </div>
-              <div class="kpi-value" style="color: #34d399;" id="salesHistoryKpiLucro">R$ 2.879,50</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill">↑ 14,3%</span>
-                <span class="kpi-trend-context">vs Julho</span>
               </div>
             </div>
-
-            <!-- Card 4: Ticket Médio -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-orange">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
-                  </svg>
-                </div>
-                <span class="kpi-label">Ticket Médio</span>
-              </div>
-              <div class="kpi-value" id="salesHistoryKpiTicket">R$ 960,95</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill">Meta R$ 900</span>
-                <span class="kpi-trend-context">por venda</span>
-              </div>
-            </div>
-          </section>
+          </div>
 
           <!-- Tabela Responsiva e Adaptativa (Histórico de Vendas Registradas) -->
           <section class="card">
@@ -861,9 +717,6 @@
                 <h3 class="card-title">Últimas vendas registradas</h3>
                 <span class="text-sm" id="salesHistoryTotalCount">Carregando vendas...</span>
               </div>
-              <button class="btn btn-secondary btn-trigger-new-sale" style="padding: 6px 12px; font-size: 0.8rem;">
-                + Registrar Venda
-              </button>
             </div>
 
             <!-- Barra de Ferramentas / Filtros Instantâneos -->
@@ -961,60 +814,47 @@
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-financeiro" style="display: none;">
           
-          <!-- Header do Painel Financeiro -->
+          <!-- Header do Painel Financeiro Executivo -->
           <div class="card">
             <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
               <div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                       <line x1="12" y1="1" x2="12" y2="23"></line>
                       <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
                   </div>
                   <div>
-                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Painel Financeiro, Investimentos & Lucratividade</h2>
-                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Visão detalhada de capital investido, faturamento, lucratividade real obtida, DRE e projeções</p>
+                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Painel Financeiro, Movimentações & Despesas</h2>
+                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Controle integrado de estoque investido, lucros, despesas operacionais e rentabilidade média</p>
                   </div>
                 </div>
-              </div>
-              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                <button type="button" class="btn btn-secondary" onclick="App.showToast('📄 Demonstrativo DRE exportado com sucesso!')" style="padding: 9px 16px; font-weight: 600; font-size: 0.82rem;">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                  </svg>
-                  <span>Exportar Relatório</span>
-                </button>
-                <button type="button" class="btn btn-primary btn-trigger-new-sale" style="padding: 9px 16px; font-weight: 700; font-size: 0.82rem;">
-                  <span>+ Nova Venda</span>
-                </button>
               </div>
             </div>
             
             <!-- 4 Cards de Indicadores Financeiros Executivos (KPIs Principais) -->
             <section class="kpi-grid" style="margin-top: var(--space-4);">
-              <!-- Card 1: Valor Total Investido -->
-              <div class="kpi-card">
+              <!-- Card 1: Capital Investido -->
+              <div class="kpi-card" style="background: rgba(99, 102, 241, 0.04); border-color: rgba(99, 102, 241, 0.22);">
                 <div class="kpi-top-row">
-                  <div class="kpi-icon-badge kpi-icon-blue">
+                  <div class="kpi-icon-badge kpi-icon-indigo">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                     </svg>
                   </div>
-                  <span class="kpi-label">Capital Total</span>
+                  <span class="kpi-label">Capital Investido</span>
                 </div>
-                <div class="kpi-value" id="finKpiTotalInvested">R$ 107.420,00</div>
+                <div class="kpi-value" id="finKpiTotalInvested">R$ 0,00</div>
                 <div class="kpi-trend positive">
-                  <span class="kpi-trend-pill" id="finKpiInvestedSub">Estoque + Operação</span>
-                  <span class="kpi-trend-context">alocado</span>
+                  <span class="kpi-trend-pill" id="finKpiInvestedSub">0 unidades</span>
+                  <span class="kpi-trend-context" id="finKpiInvestedContext">em estoque disponível</span>
                 </div>
               </div>
 
-              <!-- Card 2: Lucro Líquido Real Obtido -->
-              <div class="kpi-card">
+              <!-- Card 2: Lucro Total Realizado -->
+              <div class="kpi-card" style="background: rgba(16, 185, 129, 0.04); border-color: rgba(16, 185, 129, 0.22);">
                 <div class="kpi-top-row">
                   <div class="kpi-icon-badge kpi-icon-green">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1022,51 +862,194 @@
                       <polyline points="17 6 23 6 23 12"></polyline>
                     </svg>
                   </div>
-                  <span class="kpi-label">Lucro Líquido</span>
+                  <span class="kpi-label">Lucro Total Realizado</span>
                 </div>
-                <div class="kpi-value" style="color: #34d399;" id="finKpiNetProfit">R$ 2.879,50</div>
+                <div class="kpi-value" style="color: #34d399;" id="finKpiTotalLucro">R$ 0,00</div>
                 <div class="kpi-trend positive">
-                  <span class="kpi-trend-pill" id="finKpiMarginSub">14.3% margem real</span>
-                  <span class="kpi-trend-context">no caixa</span>
+                  <span class="kpi-trend-pill" id="finKpiLucroMarginSub">Margem: 0%</span>
+                  <span class="kpi-trend-context" id="finKpiLucroContext">em vendas concluídas</span>
                 </div>
               </div>
 
-              <!-- Card 3: Retorno sobre Investimento (ROI Médio) -->
-              <div class="kpi-card">
+              <!-- Card 3: Despesas Operacionais -->
+              <div class="kpi-card" style="background: rgba(236, 72, 153, 0.04); border-color: rgba(236, 72, 153, 0.22);">
                 <div class="kpi-top-row">
-                  <div class="kpi-icon-badge kpi-icon-purple">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                      <polyline points="16 7 22 7 22 13"></polyline>
+                  <div class="kpi-icon-badge kpi-icon-pink">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <line x1="2" y1="10" x2="22" y2="10"></line>
                     </svg>
                   </div>
-                  <span class="kpi-label">Retorno Médio (ROI)</span>
+                  <span class="kpi-label">Despesas Operacionais</span>
                 </div>
-                <div class="kpi-value" style="color: #c084fc;" id="finKpiRoiVal">34.8%</div>
+                <div class="kpi-value" style="color: #f472b6;" id="finKpiTotalExpenses">R$ 0,00</div>
                 <div class="kpi-trend positive">
-                  <span class="kpi-trend-pill">Markup 1.35x</span>
-                  <span class="kpi-trend-context">giro 16d</span>
+                  <span class="kpi-trend-pill" id="finKpiExpenseCount">0 lançamentos</span>
+                  <span class="kpi-trend-context" id="finKpiExpensePctImpact">custos fixos e variáveis</span>
                 </div>
               </div>
 
-              <!-- Card 4: Lucro Projetado em Estoque -->
-              <div class="kpi-card">
+              <!-- Card 4: Preço Médio por Produto -->
+              <div class="kpi-card" style="background: rgba(245, 158, 11, 0.04); border-color: rgba(245, 158, 11, 0.22);">
                 <div class="kpi-top-row">
-                  <div class="kpi-icon-badge kpi-icon-amber">
+                  <div class="kpi-icon-badge kpi-icon-orange">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                      <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
                   </div>
-                  <span class="kpi-label">Lucro Projetado</span>
+                  <span class="kpi-label">Preço Médio por Produto</span>
                 </div>
-                <div class="kpi-value" style="color: #fbbf24;" id="finKpiProjectedProfit">R$ 30.880,00</div>
+                <div class="kpi-value" style="color: #fbbf24;" id="finKpiMediaProduto">R$ 0,00</div>
                 <div class="kpi-trend positive">
-                  <span class="kpi-trend-pill" id="finKpiStockPotentialSub">148 unidades</span>
-                  <span class="kpi-trend-context">potencial</span>
+                  <span class="kpi-trend-pill" id="finKpiMediaProdutoPill">Lucro Médio: R$ 0,00</span>
+                  <span class="kpi-trend-context" id="finKpiMediaProdutoContext">por unidade vendida</span>
                 </div>
               </div>
             </section>
+          </div>
+
+          <!-- ================================================================
+               GRÁFICOS EXECUTIVOS & ANÁLISE DE MOVIMENTAÇÕES (2 COLUNAS LADO A LADO)
+               ================================================================ -->
+          <div class="financial-charts-grid">
+            
+            <!-- Gráfico 1: Movimentação Financeira & Fluxo de Caixa Diário -->
+            <div class="card chart-card">
+              <div class="card-header chart-header-row" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 10px #3b82f6;"></span>
+                    <h3 class="card-title" style="font-size: 1.05rem; font-weight: 800;">Movimentação Financeira</h3>
+                  </div>
+                  <span class="text-xs" style="color: var(--text-tertiary);">Acompanhamento diário de entradas, custos e saídas</span>
+                </div>
+
+                <!-- Abas Seletoras de Métrica Financeira -->
+                <div class="chart-tab-group" id="finChartTabs">
+                  <button type="button" class="chart-tab-btn fin-chart-tab active" data-fin-metric="faturamento">Faturamento</button>
+                  <button type="button" class="chart-tab-btn fin-chart-tab" data-fin-metric="lucro">Lucro</button>
+                  <button type="button" class="chart-tab-btn fin-chart-tab" data-fin-metric="despesas">Despesas</button>
+                  <button type="button" class="chart-tab-btn fin-chart-tab" data-fin-metric="cmv">Custos (CMV)</button>
+                </div>
+              </div>
+
+              <!-- Container Canvas para o Gráfico de Barras Financeiro -->
+              <div class="chart-canvas-container" style="height: 240px; min-height: 240px; position: relative;">
+                <canvas id="canvasFinancialEvolution"></canvas>
+              </div>
+
+              <!-- Resumo do Gráfico / Badges de Apoio -->
+              <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.07); padding-top: 12px; margin-top: 8px; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 8px; height: 8px; border-radius: 2px; background: #c084fc;"></span>
+                    <span class="text-xs" style="color: var(--text-secondary);">Faturamento: <strong style="color: var(--text-primary);" id="finChartSummaryFat">R$ 20.180,00</strong></span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 8px; height: 8px; border-radius: 2px; background: #f87171;"></span>
+                    <span class="text-xs" style="color: var(--text-secondary);">Despesas: <strong style="color: #f87171;" id="finChartSummaryDesp">R$ 1.840,00</strong></span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 8px; height: 8px; border-radius: 2px; background: #34d399;"></span>
+                    <span class="text-xs" style="color: var(--text-secondary);">Lucro Real: <strong style="color: #34d399;" id="finChartSummaryLucro">R$ 2.879,50</strong></span>
+                  </div>
+                </div>
+                <span class="badge badge-success" style="font-size: 0.72rem;">Fluxo Positivo</span>
+              </div>
+            </div>
+
+            <!-- Gráfico 2: Composição & Centros de Custo das Despesas (Donut) -->
+            <div class="card donut-card">
+              <div class="card-header" style="flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ec4899; box-shadow: 0 0 10px #ec4899;"></span>
+                    <h3 class="card-title" style="font-size: 1.05rem; font-weight: 800;">Composição de Despesas</h3>
+                  </div>
+                  <span class="text-xs" style="color: var(--text-tertiary);">Distribuição por categoria e centro de custo</span>
+                </div>
+                <div class="badge" style="background: rgba(236, 72, 153, 0.18); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); font-size: 0.75rem;" id="finExpenseDonutTotalBadge">
+                  R$ 1.840,00 Total
+                </div>
+              </div>
+
+              <!-- Canvas Donut e Legenda Integrada -->
+              <div class="expense-donut-layout">
+                <div style="width: 140px; height: 140px; min-width: 140px; position: relative; margin: 0 auto;">
+                  <canvas id="canvasExpensesDonut"></canvas>
+                  <!-- Centro do Donut -->
+                  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+                    <span style="font-size: 0.65rem; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase; display: block;">Despesas</span>
+                    <strong style="font-size: 0.88rem; color: var(--text-primary); font-weight: 800;" id="donutCenterExpenseVal">R$ 1.84k</strong>
+                  </div>
+                </div>
+
+                <!-- Lista de Categorias Dinâmica -->
+                <div class="expense-donut-legend" id="expenseDonutLegendList">
+                  <!-- Renderizado via JS -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Seção de Diagnóstico Comercial & Margens Unitárias (3 Cards Estratégicos) -->
+          <div class="kpi-grid-3">
+            <!-- Card 1: Retorno sobre Investimento (ROI Médio) -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-purple">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                    <polyline points="16 7 22 7 22 13"></polyline>
+                  </svg>
+                </div>
+                <span class="kpi-label">Retorno Médio (ROI)</span>
+              </div>
+              <div class="kpi-value" style="color: #c084fc;" id="finKpiRoiVal">34.8%</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill">Markup 1.35x</span>
+                <span class="kpi-trend-context">giro 16d</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Lucro Projetado em Estoque -->
+            <div class="kpi-card">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-amber">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                  </svg>
+                </div>
+                <span class="kpi-label">Lucro Projetado</span>
+              </div>
+              <div class="kpi-value" style="color: #fbbf24;" id="finKpiProjectedProfit">R$ 30.880,00</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="finKpiStockPotentialSub">148 unidades</span>
+                <span class="kpi-trend-context">potencial</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Ticket Médio & Eficiência -->
+            <div class="kpi-card" style="background: rgba(245, 158, 11, 0.04); border-color: rgba(245, 158, 11, 0.22);">
+              <div class="kpi-top-row">
+                <div class="kpi-icon-badge kpi-icon-orange">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                  </svg>
+                </div>
+                <span class="kpi-label">Ticket Médio</span>
+              </div>
+              <div class="kpi-value" id="salesHistoryKpiTicket">R$ 960,95</div>
+              <div class="kpi-trend positive">
+                <span class="kpi-trend-pill" id="salesKpiTicketPill">Meta R$ 900</span>
+                <span class="kpi-trend-context" id="salesKpiTicketContext">por venda</span>
+              </div>
+            </div>
           </div>
 
           <!-- Grade Estratégica: DRE Gerencial Cascata + Alocação de Capital -->
@@ -1076,8 +1059,12 @@
             <div class="card expense-column-card">
               <div class="card-header expense-column-header">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.3) 100%); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">
-                    📊
+                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.3) 100%); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); color: #34d399;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
                   </div>
                   <div>
                     <h3 class="card-title" style="font-size: 1.05rem;">Demonstrativo DRE (Mês Atual)</h3>
@@ -1189,14 +1176,14 @@
                       <span class="dre-symbol">(-)</span>
                       <span class="dre-title">Despesas Fixas Estruturais</span>
                     </div>
-                    <span class="dre-value text-danger" id="dreRowDespesasFixas">- R$ 2.070,00</span>
+                    <span class="dre-value text-danger" id="dreRowDespesasFixas">- R$ 1.150,00</span>
                   </div>
                   <div class="dre-progress-bar-bg">
-                    <div class="dre-progress-bar-fill" id="dreBarDespesasFixas" style="width: 10.3%; background: #f472b6;"></div>
+                    <div class="dre-progress-bar-fill" id="dreBarDespesasFixas" style="width: 5.7%; background: #f472b6;"></div>
                   </div>
                   <div class="dre-row-meta">
                     <span id="dreRowFixedMeta">Aluguel, ferramentas SaaS, internet e energia</span>
-                    <span class="dre-meta-pct" id="dreRowFixedPct">10.3% da Receita</span>
+                    <span class="dre-meta-pct" id="dreRowFixedPct">5.7% da Receita</span>
                   </div>
                 </div>
 
@@ -1207,14 +1194,14 @@
                       <span class="dre-symbol">(-)</span>
                       <span class="dre-title">Despesas Variáveis Operacionais</span>
                     </div>
-                    <span class="dre-value text-danger" id="dreRowDespesasVar">- R$ 995,30</span>
+                    <span class="dre-value text-danger" id="dreRowDespesasVar">- R$ 690,00</span>
                   </div>
                   <div class="dre-progress-bar-bg">
-                    <div class="dre-progress-bar-fill" id="dreBarDespesasVar" style="width: 4.9%; background: #fb923c;"></div>
+                    <div class="dre-progress-bar-fill" id="dreBarDespesasVar" style="width: 3.4%; background: #fb923c;"></div>
                   </div>
                   <div class="dre-row-meta">
                     <span id="dreRowVarMeta">Gasolina, alimentação, fretes e anúncios</span>
-                    <span class="dre-meta-pct" id="dreRowVarPct">4.9% da Receita</span>
+                    <span class="dre-meta-pct" id="dreRowVarPct">3.4% da Receita</span>
                   </div>
                 </div>
 
@@ -1243,8 +1230,11 @@
             <div class="card expense-column-card" style="display: flex; flex-direction: column; gap: var(--space-4);">
               <div class="card-header expense-column-header">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%); border: 1px solid rgba(59, 130, 246, 0.4); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);">
-                    💼
+                  <div class="expense-col-icon" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.3) 100%); border: 1px solid rgba(59, 130, 246, 0.4); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); color: #60a5fa;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
                   </div>
                   <div>
                     <h3 class="card-title" style="font-size: 1.05rem;">Alocação de Capital & Saúde</h3>
@@ -1351,6 +1341,131 @@
 
           </div>
 
+          <!-- ================================================================
+               SEÇÃO DE CONTROLE INTEGRADO DE DESPESAS (FIXAS E VARIÁVEIS)
+               ================================================================ -->
+          <div class="card" style="padding: var(--space-6); background: linear-gradient(180deg, rgba(24, 30, 52, 0.6) 0%, rgba(15, 19, 36, 0.9) 100%);">
+            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: var(--space-4);">
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="expense-col-icon fixed-icon" style="width: 38px; height: 38px; border-radius: 10px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <line x1="2" y1="10" x2="22" y2="10"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="card-title" style="font-size: 1.15rem; font-weight: 800; margin: 0;">Gestão e Lançamentos de Despesas</h3>
+                    <span class="text-sm" style="color: var(--text-tertiary);">Controle de custos fixos estruturais e despesas variáveis com quitação e filtros</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Botão Adicionar Despesa -->
+              <button type="button" class="btn btn-primary btn-trigger-new-expense" style="padding: 9px 16px; font-weight: 700; background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); border-color: rgba(236, 72, 153, 0.4); box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Adicionar Despesa</span>
+              </button>
+            </div>
+
+            <!-- Barra de Segmentação & Filtros Rápidos -->
+            <div class="expense-segment-wrapper" style="margin-bottom: var(--space-4);">
+              <div class="expense-segment-tabs" id="expenseSegmentTabs">
+                <button type="button" class="expense-segment-tab active" data-expense-tab="all">
+                  <span class="segment-tab-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                  </span>
+                  <span class="segment-tab-text">Todas as Despesas</span>
+                  <span class="segment-tab-badge" id="tabExpenseTotalCount">0</span>
+                </button>
+                <button type="button" class="expense-segment-tab" data-expense-tab="fixa">
+                  <span class="segment-tab-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                      <line x1="9" y1="22" x2="9" y2="22.01"></line>
+                      <line x1="15" y1="22" x2="15" y2="22.01"></line>
+                    </svg>
+                  </span>
+                  <span class="segment-tab-text">Despesas Fixas</span>
+                  <span class="segment-tab-badge" id="tabExpenseFixedCount">0</span>
+                </button>
+                <button type="button" class="expense-segment-tab" data-expense-tab="variavel">
+                  <span class="segment-tab-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </span>
+                  <span class="segment-tab-text">Despesas Variáveis</span>
+                  <span class="segment-tab-badge" id="tabExpenseVarCount">0</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Grade Principal com 2 Cards Grandes: Fixas e Variáveis -->
+            <div class="expenses-two-column-grid" id="expensesGridContainer">
+              <!-- Card 1: Despesas Fixas -->
+              <div class="card expense-column-card expense-fixed-col" id="colFixedExpensesCard">
+                <div class="card-header expense-column-header">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="expense-col-icon fixed-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                        <path d="M10 6h4"></path>
+                        <path d="M10 10h4"></path>
+                        <path d="M10 14h4"></path>
+                        <path d="M10 18h4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700;">
+                        Despesas Fixas
+                        <span class="expense-count-pill" id="badgeFixedCount">0</span>
+                      </h3>
+                      <span class="text-sm" style="color: var(--text-tertiary);">Aluguel, ferramentas SaaS, internet, luz</span>
+                    </div>
+                  </div>
+                  <div class="expense-col-total" id="colFixedTotal">R$ 0,00</div>
+                </div>
+                <div class="expense-list-container" id="listFixedExpenses">
+                  <!-- Lista de despesas fixas renderizada via JS -->
+                </div>
+              </div>
+
+              <!-- Card 2: Despesas Variáveis -->
+              <div class="card expense-column-card expense-var-col" id="colVariableExpensesCard">
+                <div class="card-header expense-column-header">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="expense-col-icon variable-icon">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700;">
+                        Despesas Variáveis
+                        <span class="expense-count-pill" id="badgeVarCount">0</span>
+                      </h3>
+                      <span class="text-sm" style="color: var(--text-tertiary);">Gasolina, refeição, pedágio, fretes</span>
+                    </div>
+                  </div>
+                  <div class="expense-col-total" id="colVarTotal">R$ 0,00</div>
+                </div>
+                <div class="expense-list-container" id="listVariableExpenses">
+                  <!-- Lista de despesas variáveis renderizada via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Tabela Financeira: Histórico de Vendas com Análise de Custo Investido e Lucro Real -->
           <div class="card">
             <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
@@ -1389,185 +1504,6 @@
             </div>
           </div>
 
-        </div>
-
-        <!-- ================================================================
-             VIEW 6: DESPESAS (FIXAS E VARIÁVEIS)
-             ================================================================ -->
-        <div class="page-view flex flex-col gap-6" id="view-despesas" style="display: none;">
-          <div class="card">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                      <line x1="2" y1="10" x2="22" y2="10"></line>
-                    </svg>
-                  </div>
-                  <div>
-                    <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Controle de Despesas & Contas</h2>
-                    <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão segmentada de despesas fixas estruturais e variáveis operacionais</p>
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-primary btn-trigger-new-expense" style="padding: 10px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4); background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); border-color: rgba(236, 72, 153, 0.3);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>+ Nova Despesa</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Indicadores Rápidos de Despesas Padronizados (Grid 4 Cards SaaS) -->
-          <section class="kpi-grid">
-            <!-- Card 1: Total Geral de Despesas -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-pink">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                  </svg>
-                </div>
-                <span class="kpi-label">Total de Despesas</span>
-              </div>
-              <div class="kpi-value" style="color: #f472b6;" id="kpiExpenseTotal">R$ 0,00</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill" id="kpiExpenseCount">0 despesas</span>
-                <span class="kpi-trend-context">no mês</span>
-              </div>
-            </div>
-
-            <!-- Card 2: Total Despesas Fixas -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-blue">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                  </svg>
-                </div>
-                <span class="kpi-label">Despesas Fixas</span>
-              </div>
-              <div class="kpi-value" id="kpiExpenseFixedTotal">R$ 0,00</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill" id="kpiExpenseFixedCount">0 contas</span>
-                <span class="kpi-trend-context">recorrentes</span>
-              </div>
-            </div>
-
-            <!-- Card 3: Total Despesas Variáveis -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-orange">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                  </svg>
-                </div>
-                <span class="kpi-label">Despesas Variáveis</span>
-              </div>
-              <div class="kpi-value" id="kpiExpenseVarTotal">R$ 0,00</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill" id="kpiExpenseVarCount">0 gastos</span>
-                <span class="kpi-trend-context">operacionais</span>
-              </div>
-            </div>
-
-            <!-- Card 4: % da Receita -->
-            <div class="kpi-card">
-              <div class="kpi-top-row">
-                <div class="kpi-icon-badge kpi-icon-emerald">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="5" x2="5" y2="19"></line>
-                    <circle cx="6.5" cy="6.5" r="2.5"></circle>
-                    <circle cx="17.5" cy="17.5" r="2.5"></circle>
-                  </svg>
-                </div>
-                <span class="kpi-label">% sobre Receita</span>
-              </div>
-              <div class="kpi-value" id="kpiExpensePctFaturamento">15.2%</div>
-              <div class="kpi-trend positive">
-                <span class="kpi-trend-pill">Saudável</span>
-                <span class="kpi-trend-context">impacto DRE</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- Barra de Segmentação & Filtros Rápidos (Ultra-Moderna / Mobile First) -->
-          <div class="expense-segment-wrapper">
-            <div class="expense-segment-tabs" id="expenseSegmentTabs">
-              <button type="button" class="expense-segment-tab active" data-expense-tab="all">
-                <span class="segment-tab-icon">📊</span>
-                <span class="segment-tab-text">Todas as Despesas</span>
-                <span class="segment-tab-badge" id="tabExpenseTotalCount">0</span>
-              </button>
-              <button type="button" class="expense-segment-tab" data-expense-tab="fixa">
-                <span class="segment-tab-icon">🏢</span>
-                <span class="segment-tab-text">Despesas Fixas</span>
-                <span class="segment-tab-badge" id="tabExpenseFixedCount">0</span>
-              </button>
-              <button type="button" class="expense-segment-tab" data-expense-tab="variavel">
-                <span class="segment-tab-icon">⚡</span>
-                <span class="segment-tab-text">Despesas Variáveis</span>
-                <span class="segment-tab-badge" id="tabExpenseVarCount">0</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Grade Principal com 2 Cards Grandes: Fixas e Variáveis -->
-          <div class="expenses-two-column-grid" id="expensesGridContainer">
-            
-            <!-- Card 1: Despesas Fixas -->
-            <div class="card expense-column-card expense-fixed-col" id="colFixedExpensesCard">
-              <div class="card-header expense-column-header">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="expense-col-icon fixed-icon">
-                    🏢
-                  </div>
-                  <div>
-                    <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem;">
-                      Despesas Fixas
-                      <span class="expense-count-pill" id="badgeFixedCount">0</span>
-                    </h3>
-                    <span class="text-sm" style="color: var(--text-tertiary);">Aluguel, ferramentas SaaS, internet, luz</span>
-                  </div>
-                </div>
-                <div class="expense-col-total" id="colFixedTotal">R$ 0,00</div>
-              </div>
-
-              <div class="expense-list-container" id="listFixedExpenses">
-                <!-- Lista de despesas fixas renderizada via JS -->
-              </div>
-            </div>
-
-            <!-- Card 2: Despesas Variáveis -->
-            <div class="card expense-column-card expense-var-col" id="colVariableExpensesCard">
-              <div class="card-header expense-column-header">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="expense-col-icon variable-icon">
-                    ⚡
-                  </div>
-                  <div>
-                    <h3 class="card-title" style="display: flex; align-items: center; gap: 8px; font-size: 1.05rem;">
-                      Despesas Variáveis
-                      <span class="expense-count-pill" id="badgeVarCount">0</span>
-                    </h3>
-                    <span class="text-sm" style="color: var(--text-tertiary);">Gasolina, refeição, pedágio, fretes</span>
-                  </div>
-                </div>
-                <div class="expense-col-total" id="colVarTotal">R$ 0,00</div>
-              </div>
-
-              <div class="expense-list-container" id="listVariableExpenses">
-                <!-- Lista de despesas variáveis renderizada via JS -->
-              </div>
-            </div>
-
-          </div>
         </div>
 
         <!-- ================================================================
@@ -2351,14 +2287,26 @@
             <label class="form-label">Tipo de Despesa</label>
             <div class="expense-type-selector">
               <button type="button" class="expense-type-btn active" data-type="fixa" id="btnTypeFixed">
-                <span class="expense-type-icon">🏢</span>
+                <span class="expense-type-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                    <line x1="9" y1="22" x2="9" y2="22.01"></line>
+                    <line x1="15" y1="22" x2="15" y2="22.01"></line>
+                    <line x1="9" y1="6" x2="9" y2="6.01"></line>
+                    <line x1="15" y1="6" x2="15" y2="6.01"></line>
+                  </svg>
+                </span>
                 <div class="expense-type-text">
                   <strong>Despesa Fixa</strong>
                   <span>Aluguel, ferramentas, contas mensais</span>
                 </div>
               </button>
               <button type="button" class="expense-type-btn" data-type="variavel" id="btnTypeVar">
-                <span class="expense-type-icon">⚡</span>
+                <span class="expense-type-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </span>
                 <div class="expense-type-text">
                   <strong>Despesa Variável</strong>
                   <span>Gasolina, refeição, pedágio, frete</span>
@@ -2445,11 +2393,11 @@
   </div>
 
   <!-- Scripts (com versionamento anti-cache) -->
-  <script src="js/config.js?v=5.2"></script>
-  <script src="js/mockData.js?v=5.2"></script>
-  <script src="js/charts.js?v=5.2"></script>
-  <script src="js/navigation.js?v=5.2"></script>
-  <script src="js/auth.js?v=5.2"></script>
-  <script src="js/app.js?v=5.2"></script>
+  <script src="js/config.js?v=12.0"></script>
+  <script src="js/mockData.js?v=12.0"></script>
+  <script src="js/charts.js?v=12.0"></script>
+  <script src="js/navigation.js?v=12.0"></script>
+  <script src="js/auth.js?v=12.0"></script>
+  <script src="js/app.js?v=12.0"></script>
 </body>
 </html>

@@ -15,6 +15,7 @@ const App = {
     this.renderKPIs();
     this.renderRanking();
     this.renderSalesTable(this.salesList);
+    this.renderSalesKpis();
     this.renderPaymentPills();
     this.renderPlatformLegends();
     this.renderNotifications();
@@ -569,15 +570,41 @@ const App = {
   },
 
   /* ==========================================================================
+     MÓDULO DE VENDAS & PERFORMANCE COMERCIAL
+     ========================================================================== */
+
+  // Atualiza indicadores de volume de vendas (Header) e performance comercial (Visão Financeira)
+  renderSalesKpis() {
+    const totalVendas = this.salesList.length;
+    const faturamentoTotal = this.salesList.reduce((acc, s) => acc + Number(s.valorTotal || 0), 0);
+    const lucroTotal = this.salesList.reduce((acc, s) => acc + Number(s.lucro || 0), 0);
+    const ticketMedio = totalVendas > 0 ? (faturamentoTotal / totalVendas) : 0;
+    const margemMedia = faturamentoTotal > 0 ? ((lucroTotal / faturamentoTotal) * 100) : 0;
+
+    // 1. Badge Integrado no Header do Histórico de Vendas
+    const elSalesCount = document.getElementById("salesHistoryKpiCount");
+    const elSalesContext = document.getElementById("salesHistoryKpiTrendContext");
+    if (elSalesCount) elSalesCount.textContent = `${totalVendas}`;
+    if (elSalesContext) elSalesContext.textContent = `• ${totalVendas === 1 ? 'pedido' : 'pedidos'}`;
+
+    // 2. Cards de Desempenho Comercial (Visão Financeira)
+    const elFat = document.getElementById("salesHistoryKpiFaturamento");
+    const elLucro = document.getElementById("salesHistoryKpiLucro");
+    const elTicket = document.getElementById("salesHistoryKpiTicket");
+    const elLucroContext = document.getElementById("salesKpiLucroContext");
+
+    if (elFat) elFat.textContent = `R$ ${faturamentoTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elLucro) elLucro.textContent = `R$ ${lucroTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elTicket) elTicket.textContent = `R$ ${ticketMedio.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elLucroContext) elLucroContext.textContent = `${margemMedia.toFixed(1)}% margem`;
+  },
+
+  /* ==========================================================================
      MÓDULO DE PRODUTOS & ESTOQUE (VIEW 2)
      ========================================================================== */
 
-  // Renderiza a lista de produtos em estoque (com paginação de 5 itens e KPIs)
-  renderProductsView() {
-    const container = document.getElementById("productsStockList");
-    if (!container) return;
-
-    // 1. Atualizar KPIs de Estoque
+  // Atualiza indicadores de volume de estoque (Header) e inteligência de produtos (Visão Financeira)
+  renderProductKpis() {
     let totalQtd = 0;
     let totalInvest = 0;
     let totalVendaPrevista = 0;
@@ -606,13 +633,13 @@ const App = {
       return defaults[idx % defaults.length] || 15;
     };
 
-    // Card 1: Quantidade em Estoque
+    // 1. Indicador Integrado no Header de Catálogo de Produtos
     const elQtd = document.getElementById("prodKpiTotalQtd");
     const elModelos = document.getElementById("prodKpiTotalModelos");
     const elEstoqueContext = document.getElementById("prodKpiEstoqueContext");
 
     if (elQtd) elQtd.textContent = `${totalQtd} un`;
-    if (elModelos) elModelos.textContent = `${this.productsList.length} modelos`;
+    if (elModelos) elModelos.textContent = `• ${this.productsList.length} modelos`;
     if (elEstoqueContext) elEstoqueContext.textContent = "cadastrados";
 
     // Helper para extrair apenas o primeiro nome/modelo principal do equipamento (sem capacidade, cor ou ruídos)
@@ -620,24 +647,20 @@ const App = {
       if (!fullName) return "--";
       let name = String(fullName).trim();
 
-      // 1. Remove delimitadores com traço, barra ou pipe
       if (name.includes(" - ")) name = name.split(" - ")[0].trim();
       else if (name.includes(" | ")) name = name.split(" | ")[0].trim();
       else if (name.includes(" / ")) name = name.split(" / ")[0].trim();
 
-      // 2. Remove indicação de capacidade e tudo que vem após (ex: "256GB", "128gb", "64 GB", "512 GB", "1TB", "2TB")
       name = name.replace(/[\s\-_,]*(16|32|64|128|256|512)\s*(GB|gb|Gb|gB).*$/i, '');
       name = name.replace(/[\s\-_,]*(1|2)\s*(TB|tb|Tb|tB).*$/i, '');
       name = name.replace(/\b(16|32|64|128|256|512)\s*(GB|gb)\b.*$/i, '');
-
-      // 3. Remove cores comuns e sufixos extras
       name = name.replace(/[\s\-_,]*(Preto|Branco|Grafite|Azul|Verde|Dourado|Prateado|Roxo|Vermelho|Space Gray|Deep Purple|Midnight|Starlight|Meia-noite|Estelar|Branco Glacial|Phantom Black|Cinza|Gold|Silver).*$/i, '');
       name = name.replace(/[\s\-_,]*MagSafe.*$/i, '');
 
       return name.trim() || fullName;
     };
 
-    // Card 2: Equipamento com Maior Retorno Financeiro
+    // 2. Card: Equipamento com Maior Retorno Financeiro (Visão Financeira)
     let topRetornoProd = null;
     let maxLucroUnit = -Infinity;
 
@@ -671,11 +694,11 @@ const App = {
       if (elTopMargem) elTopMargem.textContent = `${margem}% margem`;
     } else {
       if (elTopNome) elTopNome.textContent = "--";
-      if (elTopLucro) elTopLucro.textContent = "+R$ 0,00";
-      if (elTopMargem) elTopMargem.textContent = "0% margem";
+      if (elTopLucro) elTopLucro.textContent = "+R$ 0,00/un";
+      if (elTopMargem) elTopMargem.textContent = "0.0% margem";
     }
 
-    // Card 3: Equipamento Demorando Mais para Saída (Maior Tempo em Estoque)
+    // 3. Card: Equipamento com Maior Tempo em Estoque (Giro Lento) (Visão Financeira)
     let slowestProd = null;
     let maxDias = -1;
 
@@ -700,11 +723,11 @@ const App = {
       if (elSlowQtd) elSlowQtd.textContent = `${slowestProd.quantidade || 1} un em estoque`;
     } else {
       if (elSlowNome) elSlowNome.textContent = "--";
-      if (elSlowDias) elSlowDias.textContent = "0 dias";
-      if (elSlowQtd) elSlowQtd.textContent = "0 un";
+      if (elSlowDias) elSlowDias.textContent = "0 dias parado";
+      if (elSlowQtd) elSlowQtd.textContent = "0 un em estoque";
     }
 
-    // Card 4: Equipamento com Baixa Lucratividade (Menor Margem Projetada)
+    // 4. Card: Equipamento com Baixa Lucratividade / Atenção (Visão Financeira)
     let lowestProfitProd = null;
     let minMargem = Infinity;
 
@@ -742,9 +765,18 @@ const App = {
       if (elLowDica) elLowDica.textContent = "revisar preço";
     } else {
       if (elLowNome) elLowNome.textContent = "--";
-      if (elLowMargem) elLowMargem.textContent = "0% margem";
+      if (elLowMargem) elLowMargem.textContent = "0.0% margem";
       if (elLowDica) elLowDica.textContent = "sem dados";
     }
+  },
+
+  // Renderiza a lista de produtos em estoque (com paginação de 5 itens e KPIs)
+  renderProductsView() {
+    const container = document.getElementById("productsStockList");
+    if (!container) return;
+
+    // Atualiza badges de estoque e cards de inteligência
+    this.renderProductKpis();
 
     // 2. Filtrar lista por Categoria e Busca
     let filtered = this.productsList.filter(p => {
@@ -1225,18 +1257,19 @@ const App = {
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
           this.salesList = json.data.map(v => ({
             id: v.codigo || `VEN-${v.id}`,
-            cliente: v.cliente,
-            plataforma: v.plataforma,
+            cliente: v.cliente || 'Cliente Avulso',
+            plataforma: v.plataforma || 'WhatsApp / Direto',
             itens: v.produto || 'Equipamento',
             qtdItens: 1,
             pagamento: v.formaPagamento || 'PIX',
-            valorTotal: v.faturamento,
-            lucro: v.lucro,
+            valorTotal: Number(v.faturamento || 0),
+            lucro: Number(v.lucro || 0),
             status: v.status === 'CONCLUIDA' ? 'Concluído' : (v.status === 'PENDENTE' ? 'Pendente' : 'Cancelado'),
             statusClass: v.status === 'CONCLUIDA' ? 'badge-success' : (v.status === 'PENDENTE' ? 'badge-warning' : 'badge-danger'),
             data: v.dataVenda ? new Date(v.dataVenda).toLocaleDateString('pt-BR') : 'Hoje'
           }));
           this.renderSalesTable(this.salesList);
+          this.renderSalesKpis();
         }
       }
     } catch (e) {
@@ -1253,17 +1286,46 @@ const App = {
       if (res.ok) {
         const json = await res.json();
         if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-          this.expensesList = json.data.map(d => ({
-            id: d.id,
-            descricao: d.descricao,
-            tipo: d.tipo ? d.tipo.toLowerCase() : 'fixa',
-            valor: d.valor,
-            categoria: d.categoria,
-            status: d.status === 'PAGA' ? 'PAGO' : 'PENDENTE',
-            dataVencimento: d.dataVencimento,
-            data: d.dataCompetencia || d.dataVencimento,
-            recorrente: d.recorrente == 1
-          }));
+          this.expensesList = json.data.map(d => {
+            const isRecorrente = d.recorrente == 1 || d.recorrente === true;
+            const descLower = (d.descricao || '').toLowerCase();
+            const catLower = (d.categoria || '').toLowerCase();
+
+            // Determina se é despesa fixa ou variável
+            let tipoCalculado = 'fixa';
+            if (d.tipo) {
+              tipoCalculado = d.tipo.toLowerCase();
+            } else if (descLower.includes('ads') || descLower.includes('marketing') || descLower.includes('gasolina') || descLower.includes('refeição') || descLower.includes('frete') || descLower.includes('pedágio')) {
+              tipoCalculado = 'variavel';
+            } else if (isRecorrente) {
+              tipoCalculado = 'fixa';
+            } else {
+              tipoCalculado = 'variavel';
+            }
+
+            // Normaliza texto caso venha com mojibake do banco
+            let descFormatada = d.descricao || '';
+            descFormatada = descFormatada
+              .replace(/An├║ncios/g, 'Anúncios')
+              .replace(/F├¡sica/g, 'Física')
+              .replace(/Anncios/g, 'Anúncios')
+              .replace(/Fsica/g, 'Física')
+              .replace(/Trfego/g, 'Tráfego')
+              .replace(/Pedgio/g, 'Pedágio')
+              .replace(/Refeio/g, 'Refeição');
+
+            return {
+              id: d.id,
+              descricao: descFormatada,
+              tipo: tipoCalculado,
+              valor: Number(d.valor || 0),
+              categoria: d.categoria,
+              status: ((d.status || '').toUpperCase() === 'PAGA' || (d.status || '').toLowerCase() === 'pago') ? 'pago' : 'pendente',
+              dataVencimento: d.dataVencimento,
+              data: d.dataCompetencia || d.dataVencimento,
+              recorrente: isRecorrente && tipoCalculado === 'fixa'
+            };
+          });
           this.renderExpenses();
         }
       }
@@ -1427,7 +1489,10 @@ const App = {
       if (fixas.length === 0) {
         listFixedEl.innerHTML = `
           <div class="expense-empty-state">
-            <span>🏢 Nenhuma despesa fixa cadastrada.</span>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-tertiary); margin-bottom: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line></svg>
+              <span>Nenhuma despesa fixa cadastrada.</span>
+            </div>
             <button type="button" class="btn btn-secondary btn-trigger-new-expense" style="font-size: 0.8rem; padding: 6px 14px;">+ Adicionar Despesa Fixa</button>
           </div>
         `;
@@ -1441,7 +1506,10 @@ const App = {
       if (variaveis.length === 0) {
         listVarEl.innerHTML = `
           <div class="expense-empty-state">
-            <span>⚡ Nenhuma despesa variável cadastrada.</span>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-tertiary); margin-bottom: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              <span>Nenhuma despesa variável cadastrada.</span>
+            </div>
             <button type="button" class="btn btn-secondary btn-trigger-new-expense" style="font-size: 0.8rem; padding: 6px 14px;">+ Adicionar Despesa Variável</button>
           </div>
         `;
@@ -1455,23 +1523,33 @@ const App = {
   },
 
   createExpenseItemHTML(item) {
-    const isPago = item.status === 'pago';
+    const isPago = item.status === 'pago' || (item.status || '').toLowerCase() === 'pago';
     const isAVencer = item.status === 'avencer';
     const statusLabel = isPago ? 'Pago' : isAVencer ? 'A Vencer' : 'Pendente';
     const statusBadgeClass = isPago ? 'badge-success' : isAVencer ? 'badge-warning' : 'badge-danger';
     const isFixa = item.tipo === 'fixa';
-    const iconBoxClass = isFixa ? 'fixed-badge' : 'var-badge';
-    const icon = item.icone || this.getExpenseDefaultIcon(item.categoria, item.tipo);
+
+    // Normaliza texto caso haja mojibake
+    let cleanDesc = (item.descricao || '')
+      .replace(/An├║ncios/g, 'Anúncios')
+      .replace(/F├¡sica/g, 'Física')
+      .replace(/Anncios/g, 'Anúncios')
+      .replace(/Fsica/g, 'Física')
+      .replace(/Trfego/g, 'Tráfego')
+      .replace(/Pedgio/g, 'Pedágio')
+      .replace(/Refeio/g, 'Refeição');
+
+    const meta = this.getExpenseMeta(item.categoria, item.tipo, cleanDesc);
 
     return `
       <div class="expense-item-card" data-expense-id="${item.id}" data-type="${item.tipo}">
         <div class="expense-item-main">
-          <div class="expense-icon-box ${iconBoxClass}">
-            ${icon}
+          <div class="expense-icon-box ${meta.badgeClass}">
+            ${meta.iconSvg}
           </div>
           <div class="expense-info">
             <div class="expense-name-row">
-              <span class="expense-title" title="${item.descricao}">${item.descricao}</span>
+              <span class="expense-title" title="${cleanDesc}">${cleanDesc}</span>
               ${item.recorrente ? '<span class="expense-recur-tag">Recorrente</span>' : '<span class="expense-routine-tag">Variável</span>'}
             </div>
             <div class="expense-meta-row">
@@ -1508,24 +1586,120 @@ const App = {
     `;
   },
 
-  getExpenseDefaultIcon(categoria, tipo) {
-    if (!categoria) return tipo === 'fixa' ? '🏢' : '⚡';
-    const cat = categoria.toLowerCase();
-    if (cat.includes('aluguel') || cat.includes('ponto')) return '🏢';
-    if (cat.includes('internet') || cat.includes('tel')) return '🌐';
-    if (cat.includes('software') || cat.includes('saas') || cat.includes('sistema')) return '💻';
-    if (cat.includes('luz') || cat.includes('energia')) return '⚡';
-    if (cat.includes('água') || cat.includes('saneamento')) return '💧';
-    if (cat.includes('conta') || cat.includes('juríd')) return '📑';
-    if (cat.includes('salário') || cat.includes('pró-labore')) return '👥';
-    if (cat.includes('gasolina') || cat.includes('combust')) return '⛽';
-    if (cat.includes('refeição') || cat.includes('almoço') || cat.includes('alimen')) return '🍽️';
-    if (cat.includes('pedágio') || cat.includes('estaciona')) return '🛣️';
-    if (cat.includes('embalag') || cat.includes('caixa')) return '📦';
-    if (cat.includes('frete') || cat.includes('correio') || cat.includes('entrega')) return '🚚';
-    if (cat.includes('manuten') || cat.includes('peça')) return '🔧';
-    if (cat.includes('market') || cat.includes('ads') || cat.includes('anúncio')) return '📢';
-    return tipo === 'fixa' ? '🏢' : '⚡';
+  getExpenseMeta(categoria, tipo, descricao) {
+    const text = ((categoria || '') + ' ' + (descricao || '')).toLowerCase();
+
+    // 1. Marketing, Tráfego Pago, Anúncios, Meta Ads, Instagram, Google
+    if (text.includes('market') || text.includes('ads') || text.includes('anúncio') || text.includes('anuncio') || text.includes('meta') || text.includes('instagram') || text.includes('tráfego') || text.includes('trafego')) {
+      return {
+        badgeClass: 'badge-pink',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>`
+      };
+    }
+
+    // 2. Energia Elétrica, Luz, Enel
+    if (text.includes('luz') || text.includes('energia') || text.includes('enel') || text.includes('elétr') || text.includes('eletri') || text.includes('cpfl')) {
+      return {
+        badgeClass: 'badge-amber',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
+      };
+    }
+
+    // 3. Aluguel, Ponto Comercial, Loja Física, Imóvel
+    if (text.includes('aluguel') || text.includes('ponto') || text.includes('imóvel') || text.includes('imovel') || text.includes('loja') || text.includes('condomínio') || text.includes('condominio')) {
+      return {
+        badgeClass: 'badge-blue',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>`
+      };
+    }
+
+    // 4. Internet, Fibra, Telefonia, Vivo, Claro
+    if (text.includes('internet') || text.includes('fibra') || text.includes('vivo') || text.includes('claro') || text.includes('tim') || text.includes('tel')) {
+      return {
+        badgeClass: 'badge-cyan',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+      };
+    }
+
+    // 5. Software & SaaS, Bling, Shopify, Ferramentas
+    if (text.includes('software') || text.includes('saas') || text.includes('sistema') || text.includes('bling') || text.includes('shopify') || text.includes('ferramenta') || text.includes('app')) {
+      return {
+        badgeClass: 'badge-purple',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`
+      };
+    }
+
+    // 6. Contabilidade, Impostos, Taxas, Honorários, Jurídico
+    if (text.includes('contab') || text.includes('honorár') || text.includes('honorari') || text.includes('fiscal') || text.includes('imposto') || text.includes('tributo') || text.includes('das') || text.includes('juríd') || text.includes('jurid')) {
+      return {
+        badgeClass: 'badge-blue',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`
+      };
+    }
+
+    // 7. Gasolina, Combustível, Shell, Posto
+    if (text.includes('gasolina') || text.includes('combust') || text.includes('posto') || text.includes('shell') || text.includes('ipiranga') || text.includes('abastecimento')) {
+      return {
+        badgeClass: 'badge-amber',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6V2H3zM3 13v6h6v-6H3zM14 2v17a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2V9l-4-4h-3z"></path><line x1="14" y1="13" x2="21" y2="13"></line></svg>`
+      };
+    }
+
+    // 8. Refeição, Alimentação, Almoço
+    if (text.includes('refeição') || text.includes('refeicao') || text.includes('almoço') || text.includes('almoco') || text.includes('alimen') || text.includes('lanche') || text.includes('restaurante')) {
+      return {
+        badgeClass: 'badge-orange',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>`
+      };
+    }
+
+    // 9. Pedágio, Estacionamento, Sem Parar
+    if (text.includes('pedágio') || text.includes('pedagio') || text.includes('estaciona') || text.includes('sem parar') || text.includes('rodovia')) {
+      return {
+        badgeClass: 'badge-purple',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>`
+      };
+    }
+
+    // 10. Embalagens, Caixas, Plástico Bolha
+    if (text.includes('embalag') || text.includes('caixa') || text.includes('plástico') || text.includes('plastico') || text.includes('fita')) {
+      return {
+        badgeClass: 'badge-orange',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`
+      };
+    }
+
+    // 11. Fretes, Entregas, Motoboy, Sedex
+    if (text.includes('frete') || text.includes('correio') || text.includes('entrega') || text.includes('motoboy') || text.includes('sedex') || text.includes('jadlog') || text.includes('loggi')) {
+      return {
+        badgeClass: 'badge-cyan',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>`
+      };
+    }
+
+    // 12. Salários, Pró-Labore, Equipe
+    if (text.includes('salário') || text.includes('salario') || text.includes('pró-labore') || text.includes('pro-labore') || text.includes('equipe') || text.includes('rh')) {
+      return {
+        badgeClass: 'badge-green',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
+      };
+    }
+
+    // Fallbacks
+    if (tipo === 'fixa') {
+      return {
+        badgeClass: 'badge-blue',
+        iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line></svg>`
+      };
+    }
+    return {
+      badgeClass: 'badge-amber',
+      iconSvg: `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
+    };
+  },
+
+  getExpenseSvgIcon(categoria, tipo, descricao) {
+    return this.getExpenseMeta(categoria, tipo, descricao).iconSvg;
   },
 
   setupNewExpenseModal() {
@@ -1541,34 +1715,34 @@ const App = {
     }
 
     const categoriesFixed = [
-      { label: "Aluguel & Ponto Comercial", icon: "🏢" },
-      { label: "Internet Fibra & Telefonia", icon: "🌐" },
-      { label: "Ferramentas & Softwares SaaS", icon: "💻" },
-      { label: "Energia Elétrica", icon: "⚡" },
-      { label: "Água & Saneamento", icon: "💧" },
-      { label: "Contabilidade & Jurídico", icon: "📑" },
-      { label: "Salários & Encargos", icon: "👥" },
-      { label: "Segurança & Monitoramento", icon: "🛡️" },
-      { label: "Outras Despesas Fixas", icon: "📌" }
+      "Aluguel & Ponto Comercial",
+      "Internet Fibra & Telefonia",
+      "Ferramentas & Softwares SaaS",
+      "Energia Elétrica",
+      "Água & Saneamento",
+      "Contabilidade & Jurídico",
+      "Salários & Encargos",
+      "Segurança & Monitoramento",
+      "Outras Despesas Fixas"
     ];
 
     const categoriesVar = [
-      { label: "Gasolina & Combustível", icon: "⛽" },
-      { label: "Refeição & Alimentação", icon: "🍽️" },
-      { label: "Pedágio & Estacionamento", icon: "🛣️" },
-      { label: "Embalagens & Logística", icon: "📦" },
-      { label: "Fretes & Entregas Expressas", icon: "🚚" },
-      { label: "Marketing, Tráfego & Ads", icon: "📢" },
-      { label: "Manutenção & Consertos", icon: "🔧" },
-      { label: "Taxas & Imprevistos", icon: "⚠️" },
-      { label: "Outras Despesas Variáveis", icon: "🏷️" }
+      "Gasolina & Combustível",
+      "Refeição & Alimentação",
+      "Pedágio & Estacionamento",
+      "Embalagens & Logística",
+      "Fretes & Entregas Expressas",
+      "Marketing, Tráfego & Ads",
+      "Manutenção & Consertos",
+      "Taxas & Imprevistos",
+      "Outras Despesas Variáveis"
     ];
 
     const populateCategories = (type) => {
       if (!catSelect) return;
       const list = type === 'fixa' ? categoriesFixed : categoriesVar;
       catSelect.innerHTML = list.map(c => `
-        <option value="${c.label}">${c.icon} ${c.label}</option>
+        <option value="${c}">${c}</option>
       `).join('');
     };
 
@@ -1674,6 +1848,9 @@ const App = {
     const totalVendas = this.salesList.length;
     const faturamentoBruto = this.salesList.reduce((acc, s) => acc + Number(s.valorTotal || 0), 0);
     const lucroBrutoVendas = this.salesList.reduce((acc, s) => acc + Number(s.lucro || 0), 0);
+    const totalItensVendidos = this.salesList.reduce((acc, s) => acc + (Number(s.qtdItens) || 1), 0);
+    const mediaPorProdutoVendido = totalItensVendidos > 0 ? (faturamentoBruto / totalItensVendidos) : (totalVendas > 0 ? faturamentoBruto / totalVendas : 0);
+    const lucroMedioPorProduto = totalItensVendidos > 0 ? (lucroBrutoVendas / totalItensVendidos) : (totalVendas > 0 ? lucroBrutoVendas / totalVendas : 0);
     const cmvTotal = Math.max(0, faturamentoBruto - lucroBrutoVendas);
     const taxasPlataforma = faturamentoBruto * 0.03865; // ~3.8% taxas médias
     const receitaLiquida = Math.max(0, faturamentoBruto - taxasPlataforma);
@@ -1697,8 +1874,8 @@ const App = {
     const totalUnidadesEstoque = this.productsList.reduce((acc, p) => acc + Number(p.quantidade || 0), 0);
     const lucroProjetadoEstoque = Math.max(0, potencialVendaEstoque - capitalEstoque);
     
-    // Capital Total Investido = Capital em Estoque + CMV Realizado + Despesas
-    const capitalTotalInvestido = capitalEstoque + cmvTotal + totalDespesas;
+    // Capital Total Investido
+    const capitalTotalInvestido = capitalEstoque;
     const custoOperacionalTotal = cmvTotal + totalDespesas;
     
     // ROI Geral (%) = Retorno sobre o investimento
@@ -1713,22 +1890,60 @@ const App = {
     const pctReceber = capitalTotalDistribuido > 0 ? ((contasAReceber / capitalTotalDistribuido) * 100) : 6.2;
     const pctCaixa = capitalTotalDistribuido > 0 ? ((saldoCaixa / capitalTotalDistribuido) * 100) : 15.3;
 
-    // 6. Atualizar Top KPIs
+    // 6. Atualizar Top 4 KPIs Executivos da Visão Financeira
+    // Card 1: Capital Investido
     const elTotalInvested = document.getElementById("finKpiTotalInvested");
     const elInvestedSub = document.getElementById("finKpiInvestedSub");
-    const elNetProfit = document.getElementById("finKpiNetProfit");
-    const elMarginSub = document.getElementById("finKpiMarginSub");
+    const elInvestedContext = document.getElementById("finKpiInvestedContext");
+    if (elTotalInvested) elTotalInvested.textContent = `R$ ${capitalEstoque.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elInvestedSub) elInvestedSub.textContent = `${totalUnidadesEstoque} unidades`;
+    if (elInvestedContext) elInvestedContext.textContent = `em estoque disponível`;
+
+    // Card 2: Lucro Total Realizado
+    const elTotalLucro = document.getElementById("finKpiTotalLucro") || document.getElementById("finKpiNetProfit");
+    const elLucroMarginSub = document.getElementById("finKpiLucroMarginSub") || document.getElementById("finKpiMarginSub");
+    const elLucroContext = document.getElementById("finKpiLucroContext");
+    if (elTotalLucro) elTotalLucro.textContent = `R$ ${lucroBrutoVendas.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elLucroMarginSub) elLucroMarginSub.textContent = `Margem: ${margemBrutaPct.toFixed(1)}%`;
+    if (elLucroContext) elLucroContext.textContent = `em vendas concluídas`;
+
+    // Card 3: Despesas Operacionais
+    const elTotalExpenses = document.getElementById("finKpiTotalExpenses");
+    const elExpenseCount = document.getElementById("finKpiExpenseCount");
+    const elExpensePctImpact = document.getElementById("finKpiExpensePctImpact");
+    if (elTotalExpenses) elTotalExpenses.textContent = `R$ ${totalDespesas.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elExpenseCount) elExpenseCount.textContent = `${this.expensesList.length} lançamentos`;
+    if (elExpensePctImpact) elExpensePctImpact.textContent = `custos fixos e variáveis`;
+
+    // Card 4: Preço Médio por Produto
+    const elMediaProduto = document.getElementById("finKpiMediaProduto");
+    const elMediaProdutoPill = document.getElementById("finKpiMediaProdutoPill");
+    const elMediaProdutoContext = document.getElementById("finKpiMediaProdutoContext");
+    if (elMediaProduto) elMediaProduto.textContent = `R$ ${mediaPorProdutoVendido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elMediaProdutoPill) elMediaProdutoPill.textContent = `Lucro Médio: R$ ${lucroMedioPorProduto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (elMediaProdutoContext) elMediaProdutoContext.textContent = `por unidade vendida`;
+
+    // Indicadores Auxiliares
     const elRoiVal = document.getElementById("finKpiRoiVal");
     const elProjectedProfit = document.getElementById("finKpiProjectedProfit");
     const elStockPotentialSub = document.getElementById("finKpiStockPotentialSub");
 
-    if (elTotalInvested) elTotalInvested.textContent = `R$ ${capitalTotalInvestido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    if (elInvestedSub) elInvestedSub.textContent = `Estoque R$ ${Math.round(capitalEstoque).toLocaleString('pt-BR')} + Op. R$ ${Math.round(custoOperacionalTotal).toLocaleString('pt-BR')}`;
-    if (elNetProfit) elNetProfit.textContent = `R$ ${lucroLiquidoReal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    if (elMarginSub) elMarginSub.textContent = `Margem Líquida Real: ${margemLiquidaPct.toFixed(1)}%`;
     if (elRoiVal) elRoiVal.textContent = `${roiGeral.toFixed(1)}%`;
     if (elProjectedProfit) elProjectedProfit.textContent = `R$ ${lucroProjetadoEstoque.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    if (elStockPotentialSub) elStockPotentialSub.textContent = `Potencial: R$ ${potencialVendaEstoque.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (elStockPotentialSub) elStockPotentialSub.textContent = `${totalUnidadesEstoque} unidades`;
+
+    // Atualizar Resumo dos Gráficos
+    const elChartFat = document.getElementById("finChartSummaryFat");
+    const elChartDesp = document.getElementById("finChartSummaryDesp");
+    const elChartLucro = document.getElementById("finChartSummaryLucro");
+    const elDonutBadge = document.getElementById("finExpenseDonutTotalBadge");
+    const elDonutCenter = document.getElementById("donutCenterExpenseVal");
+
+    if (elChartFat) elChartFat.textContent = `R$ ${faturamentoBruto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (elChartDesp) elChartDesp.textContent = `R$ ${totalDespesas.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (elChartLucro) elChartLucro.textContent = `R$ ${lucroLiquidoReal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (elDonutBadge) elDonutBadge.textContent = `R$ ${totalDespesas.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} Total`;
+    if (elDonutCenter) elDonutCenter.textContent = totalDespesas >= 1000 ? `R$ ${(totalDespesas / 1000).toFixed(2)}k` : `R$ ${totalDespesas.toFixed(0)}`;
 
     // 7. Atualizar Linhas da DRE
     const elDreReceita = document.getElementById("dreRowReceitaBruta");
@@ -1830,6 +2045,15 @@ const App = {
 
     // 10. Renderizar Tabela de Rentabilidade por Venda
     this.renderFinancialSalesTable();
+
+    // 11. Atualizar Cards de Desempenho Comercial e Diagnóstico de Produtos
+    this.renderSalesKpis();
+    this.renderProductKpis();
+
+    // 12. Re-renderizar Gráficos Financeiros
+    if (typeof ChartsEngine !== "undefined" && ChartsEngine.renderFinancialCharts) {
+      ChartsEngine.renderFinancialCharts(1);
+    }
   },
 
   renderFinancialSalesTable() {

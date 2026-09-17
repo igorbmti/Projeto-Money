@@ -146,6 +146,19 @@ const Navigation = {
         }
       });
 
+      // Alternar botão de ação do header (Novo Produto na tela de Estoque, Nova Venda nas demais)
+      const headerBtnNewSale = document.getElementById("headerBtnNewSale");
+      const headerBtnNewProduct = document.getElementById("headerBtnNewProduct");
+      if (headerBtnNewSale && headerBtnNewProduct) {
+        if (targetView === "produtos") {
+          headerBtnNewSale.style.display = "none";
+          headerBtnNewProduct.style.display = "flex";
+        } else {
+          headerBtnNewSale.style.display = "flex";
+          headerBtnNewProduct.style.display = "none";
+        }
+      }
+
       // Fechar Drawer em mobile se estiver aberto
       if (typeof this.closeDrawer === "function") {
         this.closeDrawer();
@@ -157,12 +170,21 @@ const Navigation = {
         document.body.style.overflow = "";
       }
 
-      // Re-renderizar gráficos se for para a view do dashboard
+      // Re-renderizar gráficos conforme a view aberta
       if (targetView === "dashboard" && typeof ChartsEngine !== "undefined") {
         setTimeout(() => {
           if (ChartsEngine.renderBarChart) ChartsEngine.renderBarChart(1);
           if (ChartsEngine.renderDonuts) ChartsEngine.renderDonuts(1);
         }, 50);
+      } else if (targetView === "financeiro") {
+        if (typeof App !== "undefined" && App.renderFinancialView) {
+          App.renderFinancialView();
+        }
+        if (typeof ChartsEngine !== "undefined") {
+          setTimeout(() => {
+            if (ChartsEngine.renderFinancialCharts) ChartsEngine.renderFinancialCharts(1);
+          }, 50);
+        }
       }
 
       window.scrollTo({ top: 0, behavior: "smooth" });
