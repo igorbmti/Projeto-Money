@@ -1,6 +1,6 @@
 /**
  * Garimpa - Mock Data Store
- * Dados alinhados ao banco MySQL e à versão em execução no XAMPP Local
+ * Dados alinhados visualmente à experiência de alta performance do GarimPro
  */
 
 const MockData = {
@@ -23,7 +23,7 @@ const MockData = {
     { id: "ano", label: "Ano 2026" }
   ],
 
-  // Indicadores Principais (KPIs) - Sincronizados com o Banco MySQL
+  // Indicadores Principais (KPIs)
   kpis: {
     faturamento: {
       valor: 4130.00,
@@ -36,7 +36,7 @@ const MockData = {
     lucro: {
       valor: 960.20,
       formatado: "R$ 960,20",
-      margem: 23.3,
+      margem: 14.3,
       crescimento: 14.3,
       periodoComp: "vs Julho",
       positivo: true
@@ -53,7 +53,7 @@ const MockData = {
       valor: 0.00,
       formatado: "R$ 0,00",
       pendentes: 0,
-      crescimento: 0.0,
+      crescimento: 8.7,
       periodoComp: "vs Julho",
       positivo: true
     },
@@ -75,34 +75,36 @@ const MockData = {
     }
   },
 
-  // Dados diários para evolução no gráfico de barras
+  // Dados diários para evolução no gráfico de barras (12 pontos de referência)
   graficoEvolucao: {
-    dias: ["01/08", "05/08", "10/08", "12/08", "15/08", "20/08", "25/08", "31/08"],
-    faturamento: [0, 0, 190, 3530, 600, 0, 0, 0],
-    lucro: [0, 0, 25, 560, 400, 0, 0, 0],
-    investimento: [0, 0, 60, 2400, 200, 0, 0, 0],
-    despesas: [0, 0, 105, 75, 35, 0, 0, 0],
+    dias: ["01/08", "03/08", "06/08", "09/08", "12/08", "15/08", "18/08", "20/08", "22/08", "25/08", "28/08", "31/08"],
+    faturamento: [1100, 1450, 950, 1800, 2200, 1600, 2900, 4680, 2100, 1500, 1800, 2700],
+    lucro: [220, 310, 180, 420, 560, 340, 680, 1150, 480, 320, 390, 620],
+    investimento: [880, 1140, 770, 1380, 1640, 1260, 2220, 3530, 1620, 1180, 1410, 2080],
+    despesas: [150, 80, 200, 120, 300, 140, 220, 180, 90, 160, 110, 90],
     stats: {
-      maiorDia: { valor: "R$ 3.530,00", data: "12/08/2026" },
-      mediaDiaria: { valor: "R$ 133,23", base: "31 dias" },
+      maiorDia: { valor: "R$ 4.680,00", data: "20/08/2026" },
+      mediaDiaria: { valor: "R$ 651,00", base: "31 dias" },
       crescimentoGeral: { valor: "+21,6%", ref: "vs Julho" }
     }
   },
 
   // Faturamento por Plataforma
   plataformas: [
-    { id: "meli", nome: "Mercado Livre", percentual: 82, valor: 3530.00, cor: "#f59e0b", icone: "assets/icons/mercadolivre-badge.png", vendasQtd: 1 },
-    { id: "outros", nome: "Venda presencial", percentual: 18, valor: 600.00, cor: "#8b5cf6", icone: "assets/icons/balcao.svg", vendasQtd: 2 },
-    { id: "shopee", nome: "Shopee", percentual: 0, valor: 0.00, cor: "#ee4d2d", icone: "assets/icons/Shopee.png", vendasQtd: 0 },
-    { id: "wpp", nome: "WhatsApp", percentual: 0, valor: 0.00, cor: "#22c55e", icone: "assets/icons/Whatsapp.png", vendasQtd: 0 },
-    { id: "insta", nome: "Instagram", percentual: 0, valor: 0.00, cor: "#e1306c", icone: "assets/icons/Instagram.png", vendasQtd: 0 }
+    { id: "meli", nome: "Mercado Livre", percentual: 42, valor: 3530.00, cor: "#f59e0b", icone: "assets/icons/mercadolivre-badge.png", vendasQtd: 1 },
+    { id: "shopee", nome: "Shopee", percentual: 28, valor: 1400.00, cor: "#ee4d2d", icone: "assets/icons/Shopee.png", vendasQtd: 0 },
+    { id: "wpp", nome: "WhatsApp", percentual: 18, valor: 800.00, cor: "#22c55e", icone: "assets/icons/Whatsapp.png", vendasQtd: 0 },
+    { id: "insta", nome: "Instagram", percentual: 8, valor: 400.00, cor: "#e1306c", icone: "assets/icons/Instagram.png", vendasQtd: 0 },
+    { id: "outros", nome: "Balcão / Loja", percentual: 4, valor: 600.00, cor: "#8b5cf6", icone: "assets/icons/balcao.svg", vendasQtd: 1 }
   ],
 
   // Formas de Pagamento
   formasPagamento: [
-    { id: "cartao_credito", nome: "Cartão de Crédito", percentual: 82, valor: 3530.00, transacoes: 1, cor: "#7c3aed" },
-    { id: "pix", nome: "PIX", percentual: 14, valor: 590.00, transacoes: 2, cor: "#06b6d4" },
-    { id: "dinheiro", nome: "Dinheiro", percentual: 4, valor: 200.00, transacoes: 1, cor: "#10b981" }
+    { id: "pix", nome: "PIX", percentual: 45, valor: 590.00, transacoes: 2, cor: "#06b6d4" },
+    { id: "cartao_credito", nome: "Cartão de Crédito", percentual: 35, valor: 3530.00, transacoes: 1, cor: "#7c3aed" },
+    { id: "dinheiro", nome: "Dinheiro", percentual: 12, valor: 200.00, transacoes: 1, cor: "#10b981" },
+    { id: "cartao_debito", nome: "Cartão de Débito", percentual: 5, valor: 0.00, transacoes: 0, cor: "#3b82f6" },
+    { id: "outros", nome: "Outros", percentual: 3, valor: 0.00, transacoes: 0, cor: "#ec4899" }
   ],
 
   // Top Produtos Mais Vendidos
@@ -159,7 +161,7 @@ const MockData = {
     }
   ],
 
-  // Catálogo de Produtos para Venda & Gestão de Estoque (Sincronizado com MySQL)
+  // Catálogo de Produtos para Venda & Gestão de Estoque
   produtosCatalogo: [
     {
       id: 6,
@@ -243,7 +245,7 @@ const MockData = {
     }
   ],
 
-  // Histórico de Vendas (Sincronizado com MySQL)
+  // Histórico de Vendas
   vendasRecentes: [
     {
       id: "VEN-0003",
@@ -334,9 +336,8 @@ const MockData = {
     { id: 3, titulo: "Meta Atingida", desc: "Parabéns! Faturamento superou R$ 4.000 no mês.", tempo: "Há 3h", unread: false }
   ],
 
-  // Despesas Cadastradas (Fixas, Variáveis e Vinculadas a Vendas)
+  // Despesas Cadastradas
   despesas: [
-    // --- DESPESAS FIXAS ---
     {
       id: 1,
       tipo: "fixa",
@@ -402,8 +403,6 @@ const MockData = {
       recorrente: true,
       observacao: "Consumo Loja"
     },
-
-    // --- DESPESAS VINCULADAS A VENDAS (CUSTOS DIRETOS) ---
     {
       id: 12,
       tipo: "variavel",

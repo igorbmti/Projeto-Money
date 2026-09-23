@@ -353,7 +353,7 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  height: 270px;
+  height: clamp(220px, 26vh, 255px);
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
