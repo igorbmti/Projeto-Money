@@ -1,6 +1,6 @@
 /**
  * Garimpa - Mock Data Store
- * Dados alinhados ao modelo DER e à referência visual
+ * Dados alinhados ao banco MySQL e à versão em execução no XAMPP Local
  */
 
 const MockData = {
@@ -23,528 +23,293 @@ const MockData = {
     { id: "ano", label: "Ano 2026" }
   ],
 
-  // Indicadores Principais (KPIs)
+  // Indicadores Principais (KPIs) - Sincronizados com o Banco MySQL
   kpis: {
     faturamento: {
-      valor: 20180.00,
-      formatado: "R$ 20.180,00",
-      vendasCount: 21,
+      valor: 4130.00,
+      formatado: "R$ 4.130,00",
+      vendasCount: 2,
       crescimento: 21.6,
       periodoComp: "vs Julho",
       positivo: true
     },
     lucro: {
-      valor: 2879.50,
-      formatado: "R$ 2.879,50",
-      margem: 14.3,
+      valor: 960.20,
+      formatado: "R$ 960,20",
+      margem: 23.3,
       crescimento: 14.3,
       periodoComp: "vs Julho",
       positivo: true
     },
     vendas: {
-      valor: 21,
-      formatado: "21",
-      ticketMedio: "R$ 960,95",
+      valor: 2,
+      formatado: "2",
+      ticketMedio: "R$ 2.065,00",
       crescimento: 31.2,
       periodoComp: "vs Julho",
       positivo: true
     },
     aReceber: {
-      valor: 4250.00,
-      formatado: "R$ 4.250,00",
-      pendentes: 3,
-      crescimento: 8.7,
+      valor: 0.00,
+      formatado: "R$ 0,00",
+      pendentes: 0,
+      crescimento: 0.0,
       periodoComp: "vs Julho",
       positivo: true
     },
     investimento: {
-      valor: 17300.50,
-      formatado: "R$ 17.300,50",
-      estoqueValor: "R$ 64.800,00",
+      valor: 2600.00,
+      formatado: "R$ 2.600,00",
+      estoqueValor: "R$ 15.680,00",
       crescimento: 5.2,
       periodoComp: "vs Julho",
       positivo: true
     },
     despesas: {
-      valor: 1840.00,
-      formatado: "R$ 1.840,00",
-      qtdContas: 5,
+      valor: 110.00,
+      formatado: "R$ 110,00",
+      qtdContas: 2,
       crescimento: -3.4,
       periodoComp: "vs Julho",
-      positivo: true // redução de despesas é positivo
+      positivo: true
     }
   },
 
-  // Dados diários para evolução no gráfico de barras (31 dias)
+  // Dados diários para evolução no gráfico de barras
   graficoEvolucao: {
-    dias: ["01/08", "03/08", "06/08", "09/08", "12/08", "15/08", "18/08", "20/08", "22/08", "25/08", "28/08", "31/08"],
-    faturamento: [1100, 1450, 950, 1800, 2200, 1600, 2900, 4680, 2100, 1500, 1800, 2700],
-    lucro: [220, 310, 180, 420, 560, 340, 680, 1150, 480, 320, 390, 620],
-    investimento: [880, 1140, 770, 1380, 1640, 1260, 2220, 3530, 1620, 1180, 1410, 2080],
-    despesas: [150, 80, 200, 120, 300, 140, 220, 180, 90, 160, 110, 90],
+    dias: ["01/08", "05/08", "10/08", "12/08", "15/08", "20/08", "25/08", "31/08"],
+    faturamento: [0, 0, 190, 3530, 600, 0, 0, 0],
+    lucro: [0, 0, 25, 560, 400, 0, 0, 0],
+    investimento: [0, 0, 60, 2400, 200, 0, 0, 0],
+    despesas: [0, 0, 105, 75, 35, 0, 0, 0],
     stats: {
-      maiorDia: { valor: "R$ 4.680,00", data: "20/08/2026" },
-      mediaDiaria: { valor: "R$ 651,00", base: "31 dias" },
+      maiorDia: { valor: "R$ 3.530,00", data: "12/08/2026" },
+      mediaDiaria: { valor: "R$ 133,23", base: "31 dias" },
       crescimentoGeral: { valor: "+21,6%", ref: "vs Julho" }
     }
   },
 
   // Faturamento por Plataforma
   plataformas: [
-    { id: "meli", nome: "Mercado Livre", percentual: 42, valor: 8475.60, cor: "#f59e0b", icone: "assets/icons/mercadolivre-badge.png", vendasQtd: 9 },
-    { id: "shopee", nome: "Shopee", percentual: 28, valor: 5650.40, cor: "#ee4d2d", icone: "assets/icons/Shopee.png", vendasQtd: 6 },
-    { id: "wpp", nome: "WhatsApp", percentual: 18, valor: 3632.40, cor: "#22c55e", icone: "assets/icons/Whatsapp.png", vendasQtd: 4 },
-    { id: "insta", nome: "Instagram", percentual: 8, valor: 1614.40, cor: "#e1306c", icone: "assets/icons/Instagram.png", vendasQtd: 1 },
-    { id: "outros", nome: "Outros / Balcão", percentual: 4, valor: 807.20, cor: "#8b5cf6", icone: "assets/icons/balcao.svg", vendasQtd: 1 }
+    { id: "meli", nome: "Mercado Livre", percentual: 82, valor: 3530.00, cor: "#f59e0b", icone: "assets/icons/mercadolivre-badge.png", vendasQtd: 1 },
+    { id: "outros", nome: "Venda presencial", percentual: 18, valor: 600.00, cor: "#8b5cf6", icone: "assets/icons/balcao.svg", vendasQtd: 2 },
+    { id: "shopee", nome: "Shopee", percentual: 0, valor: 0.00, cor: "#ee4d2d", icone: "assets/icons/Shopee.png", vendasQtd: 0 },
+    { id: "wpp", nome: "WhatsApp", percentual: 0, valor: 0.00, cor: "#22c55e", icone: "assets/icons/Whatsapp.png", vendasQtd: 0 },
+    { id: "insta", nome: "Instagram", percentual: 0, valor: 0.00, cor: "#e1306c", icone: "assets/icons/Instagram.png", vendasQtd: 0 }
   ],
 
   // Formas de Pagamento
   formasPagamento: [
-    { id: "pix", nome: "PIX", percentual: 45, valor: 9081.00, transacoes: 9, cor: "#06b6d4" },
-    { id: "cartao_credito", nome: "Cartão de Crédito", percentual: 32, valor: 6457.60, transacoes: 7, cor: "#7c3aed" },
-    { id: "cartao_debito", nome: "Cartão de Débito", percentual: 15, valor: 3027.00, transacoes: 3, cor: "#3b82f6" },
-    { id: "dinheiro", nome: "Dinheiro", percentual: 6, valor: 1210.80, transacoes: 1, cor: "#10b981" },
-    { id: "outros", nome: "Outros", percentual: 2, valor: 403.60, transacoes: 1, cor: "#ec4899" }
+    { id: "cartao_credito", nome: "Cartão de Crédito", percentual: 82, valor: 3530.00, transacoes: 1, cor: "#7c3aed" },
+    { id: "pix", nome: "PIX", percentual: 14, valor: 590.00, transacoes: 2, cor: "#06b6d4" },
+    { id: "dinheiro", nome: "Dinheiro", percentual: 4, valor: 200.00, transacoes: 1, cor: "#10b981" }
   ],
 
   // Top Produtos Mais Vendidos
   topProdutos: [
     {
-      id: 1,
-      nome: "iPhone 13 128GB Grafite",
-      detalhe: "Bateria 92% | Impecável",
-      vendas: 6,
-      faturamento: 5460.00,
-      share: "27% do faturamento",
+      id: 2,
+      nome: "Cabo USB-C Lightning 1m Original",
+      detalhe: "Original Apple | 1 metro",
+      vendas: 2,
+      faturamento: 710.00,
+      share: "17.2% do faturamento",
       imagem: "assets/products/iphone13.png",
-      icone: "📱"
+      icone: "🔌"
     },
     {
-      id: 2,
-      nome: "iPhone 12 128GB Preto",
-      detalhe: "Bateria 88% | Caixa original",
-      vendas: 5,
-      faturamento: 4250.00,
-      share: "21% do faturamento",
+      id: 1,
+      nome: "iPhone 13 128GB Meia-Noite",
+      detalhe: "Bateria 100% | Novo",
+      vendas: 1,
+      faturamento: 3500.00,
+      share: "84.7% do faturamento",
       imagem: "assets/products/iphone13.png",
       icone: "📱"
     },
     {
       id: 3,
-      nome: "iPhone 11 128GB Branco",
-      detalhe: "Bateria 85% | Cabo incluso",
-      vendas: 4,
-      faturamento: 3240.00,
-      share: "16% do faturamento",
+      nome: "Capinha Silicone iPhone 13",
+      detalhe: "Silicone Premium",
+      vendas: 1,
+      faturamento: 80.00,
+      share: "1.9% do faturamento",
       imagem: "assets/products/iphone13.png",
-      icone: "📱"
+      icone: "🛡️"
     },
     {
-      id: 4,
-      nome: "Apple Watch Series 7 45mm",
-      detalhe: "Midnight | Saúde 100%",
-      vendas: 3,
-      faturamento: 2380.00,
-      share: "12% do faturamento",
-      imagem: "assets/products/apple_watch.jpg",
-      icone: "⌚"
+      id: 5,
+      nome: "Fone de Ouvido Bluetooth Teste",
+      detalhe: "Cor: Preto | Armazenamento: N/A",
+      vendas: 0,
+      faturamento: 0.00,
+      share: "0% do faturamento",
+      imagem: "assets/products/iphone13.png",
+      icone: "🎧"
+    },
+    {
+      id: 6,
+      nome: "Fone 22",
+      detalhe: "Cor: preto | Armazenamento: N/A",
+      vendas: 0,
+      faturamento: 0.00,
+      share: "0% do faturamento",
+      imagem: "assets/products/upload_1788825430_3604.jpg",
+      icone: "🎧"
     }
   ],
 
-  // Catálogo de Produtos para Venda & Gestão de Estoque
+  // Catálogo de Produtos para Venda & Gestão de Estoque (Sincronizado com MySQL)
   produtosCatalogo: [
     {
-      id: 101,
-      nome: "iPhone 14 Pro Max 256GB Deep Purple",
-      sku: "IP14PM-256-DP",
-      investimento: 4600.00,
-      precoVenda: 5890.00,
-      lucroProjetado: 1290.00,
-      margemProjetada: 21.9,
-      gigas: "256GB",
-      cor: "Deep Purple",
-      bateria: 96,
-      quantidade: 4,
-      diasEstoque: 12,
-      categoria: "Smartphones",
-      imagem: "assets/products/iphone13.png"
-    },
-    {
-      id: 102,
-      nome: "iPhone 13 128GB Grafite",
-      sku: "IP13-128-GR",
-      investimento: 2450.00,
-      precoVenda: 3190.00,
-      lucroProjetado: 740.00,
-      margemProjetada: 23.2,
-      gigas: "128GB",
-      cor: "Grafite",
-      bateria: 92,
-      quantidade: 8,
-      diasEstoque: 18,
-      categoria: "Smartphones",
-      imagem: "assets/products/iphone13.png"
-    },
-    {
-      id: 103,
-      nome: "iPhone 12 128GB Preto",
-      sku: "IP12-128-PR",
-      investimento: 1980.00,
-      precoVenda: 2550.00,
-      lucroProjetado: 570.00,
-      margemProjetada: 22.4,
-      gigas: "128GB",
+      id: 6,
+      nome: "Fone 22",
+      sku: "FONE-STD-596",
+      investimento: 500.00,
+      precoVenda: 800.00,
+      lucroProjetado: 300.00,
+      margemProjetada: 37.5,
+      gigas: null,
       cor: "Preto",
-      bateria: 88,
-      quantidade: 6,
-      diasEstoque: 28,
-      categoria: "Smartphones",
-      imagem: "assets/products/iphone13.png"
-    },
-    {
-      id: 104,
-      nome: "Apple Watch Series 8 45mm",
-      sku: "AW-S8-45-MN",
-      investimento: 1750.00,
-      precoVenda: 2390.00,
-      lucroProjetado: 640.00,
-      margemProjetada: 26.8,
-      gigas: null, // Sem armazenamento específico
-      cor: "Midnight",
-      bateria: 100,
-      quantidade: 5,
-      diasEstoque: 22,
-      categoria: "Smartwatches",
-      imagem: "assets/products/apple_watch.jpg"
-    },
-    {
-      id: 105,
-      nome: "iPhone 11 64GB Branco",
-      sku: "IP11-64-BR",
-      investimento: 1420.00,
-      precoVenda: 1890.00,
-      lucroProjetado: 470.00,
-      margemProjetada: 24.9,
-      gigas: "64GB",
-      cor: "Branco",
-      bateria: 85,
-      quantidade: 11,
-      diasEstoque: 42,
-      categoria: "Smartphones",
-      imagem: "assets/products/iphone13.png"
-    },
-    {
-      id: 106,
-      nome: "MacBook Air M1 256GB Space Gray",
-      sku: "MBA-M1-SG",
-      investimento: 3800.00,
-      precoVenda: 4890.00,
-      lucroProjetado: 1090.00,
-      margemProjetada: 22.3,
-      gigas: "256GB",
-      cor: "Space Gray",
-      bateria: 94,
-      quantidade: 2,
+      bateria: null,
+      quantidade: 1,
       diasEstoque: 15,
-      categoria: "Notebooks",
-      imagem: "assets/products/iphone13.png"
+      categoria: "Acessórios",
+      imagem: "assets/products/upload_1788825430_3604.jpg"
     },
     {
-      id: 107,
-      nome: "AirPods Pro 2ª Geração MagSafe",
-      sku: "APP-GEN2-MAG",
-      investimento: 980.00,
-      precoVenda: 1450.00,
-      lucroProjetado: 470.00,
-      margemProjetada: 32.4,
-      gigas: null, // Não se aplica
-      cor: "Branco Glacial",
-      bateria: null, // Sem medição individual de % bateria
-      quantidade: 14,
-      diasEstoque: 54,
+      id: 5,
+      nome: "Fone de Ouvido Bluetooth Teste",
+      sku: "FONE-STD-600",
+      investimento: 600.00,
+      precoVenda: 800.00,
+      lucroProjetado: 200.00,
+      margemProjetada: 25.0,
+      gigas: null,
+      cor: "Preto",
+      bateria: null,
+      quantidade: 1,
+      diasEstoque: 15,
       categoria: "Acessórios",
       imagem: "assets/products/iphone13.png"
     },
     {
-      id: 108,
-      nome: "Samsung Galaxy S23 Ultra 512GB",
-      sku: "S23U-512-PH",
-      investimento: 3950.00,
-      precoVenda: 5190.00,
-      lucroProjetado: 1240.00,
-      margemProjetada: 23.9,
-      gigas: "512GB",
-      cor: "Phantom Black",
-      bateria: 97,
-      quantidade: 3,
-      diasEstoque: 9,
+      id: 3,
+      nome: "Capinha Silicone iPhone 13",
+      sku: "CAP-SIL-IPH13",
+      investimento: 20.00,
+      precoVenda: 80.00,
+      lucroProjetado: 60.00,
+      margemProjetada: 75.0,
+      gigas: null,
+      cor: "Transparente",
+      bateria: null,
+      quantidade: 30,
+      diasEstoque: 20,
+      categoria: "Acessórios",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 2,
+      nome: "Cabo USB-C Lightning 1m Original",
+      sku: "CAB-USBC-LG-1M",
+      investimento: 43.57,
+      precoVenda: 120.00,
+      lucroProjetado: 76.43,
+      margemProjetada: 63.7,
+      gigas: null,
+      cor: "Branco",
+      bateria: null,
+      quantidade: 65,
+      diasEstoque: 20,
+      categoria: "Acessórios",
+      imagem: "assets/products/iphone13.png"
+    },
+    {
+      id: 1,
+      nome: "iPhone 13 128GB Meia-Noite",
+      sku: "IPH13-128-BLK",
+      investimento: 2400.00,
+      precoVenda: 3500.00,
+      lucroProjetado: 1100.00,
+      margemProjetada: 31.4,
+      gigas: "128GB",
+      cor: "Meia-Noite",
+      bateria: 100,
+      quantidade: 4,
+      diasEstoque: 20,
       categoria: "Smartphones",
       imagem: "assets/products/iphone13.png"
     }
   ],
 
-  // Lista de Vendas Recentes do Ciclo Mensal (com despesas operacionais vinculadas)
+  // Histórico de Vendas (Sincronizado com MySQL)
   vendasRecentes: [
     {
-      id: "VND-8492",
-      vendaNumero: 1,
-      cliente: "Marcos Vinicius",
+      id: "VEN-0003",
+      vendaNumero: 3,
+      cliente: "João da Silva",
+      plataforma: "Venda presencial",
+      plataformaId: "outros",
+      itens: "Cabo USB-C Lightning 1m Original (x5)",
+      qtdItens: 5,
+      pagamento: "PIX",
+      valorTotal: 600.00,
+      custoCMV: 200.00,
+      despesasTotal: 35.00,
+      despesasExtras: [
+        { id_tipo: 5, nome: "Taxa Motoboy Express", categoria: "Logística", icone: "truck", valor: 20.00 },
+        { id_tipo: 6, nome: "Embalagem Especial Presente", categoria: "Insumos", icone: "box", valor: 15.00 }
+      ],
+      lucro: 365.00,
+      status: "Concluído",
+      statusClass: "badge-success",
+      data: "15/08, 16:00",
+      mesCiclo: "Agosto/2026"
+    },
+    {
+      id: "VEN-0002",
+      vendaNumero: 2,
+      cliente: "Maria Souza",
       plataforma: "Mercado Livre",
       plataformaId: "meli",
-      itens: "iPhone 13 128GB Grafite",
+      itens: "iPhone 13 128GB Meia-Noite (x1)",
       qtdItens: 1,
+      pagamento: "Cartão de Crédito",
+      valorTotal: 3530.00,
+      custoCMV: 2400.00,
+      despesasTotal: 75.00,
+      despesasExtras: [
+        { id_tipo: 2, nome: "Gasolina / Uber Entrega", categoria: "Transporte", icone: "car", valor: 30.00 },
+        { id_tipo: 8, nome: "Refeição em Trânsito", categoria: "Alimentação", icone: "coffee", valor: 45.00 }
+      ],
+      lucro: 485.20,
+      status: "Concluído",
+      statusClass: "badge-success",
+      data: "12/08, 14:15",
+      mesCiclo: "Agosto/2026"
+    },
+    {
+      id: "VEN-0001",
+      vendaNumero: 1,
+      cliente: "João da Silva",
+      plataforma: "Venda presencial",
+      plataformaId: "outros",
+      itens: "Cabo USB-C Lightning (x1), Capinha Silicone (x1)",
+      qtdItens: 2,
       pagamento: "PIX",
-      valorTotal: 3190.00,
-      custoCMV: 2450.00,
+      valorTotal: 190.00,
+      custoCMV: 60.00,
       despesasTotal: 105.00,
       despesasExtras: [
         { id_tipo: 2, nome: "Gasolina / Uber Entrega", categoria: "Transporte", icone: "car", valor: 30.00 },
         { id_tipo: 4, nome: "Película 3D & Aplicação", categoria: "Acessórios", icone: "shield", valor: 25.00 },
         { id_tipo: 1, nome: "Facebook Ads", categoria: "Marketing", icone: "megaphone", valor: 50.00 }
       ],
-      lucro: 635.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "Hoje, 16:42",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8491",
-      vendaNumero: 2,
-      cliente: "Camila Rodrigues",
-      plataforma: "WhatsApp",
-      plataformaId: "wpp",
-      itens: "iPhone 12 128GB + AirPods",
-      qtdItens: 2,
-      pagamento: "Cartão (3x)",
-      valorTotal: 4000.00,
-      custoCMV: 2960.00,
-      despesasTotal: 75.00,
-      despesasExtras: [
-        { id_tipo: 2, nome: "Gasolina / Uber Entrega", categoria: "Transporte", icone: "car", valor: 30.00 },
-        { id_tipo: 8, nome: "Refeição em Trânsito", categoria: "Alimentação", icone: "coffee", valor: 45.00 }
-      ],
-      lucro: 965.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "Hoje, 14:15",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8490",
-      vendaNumero: 3,
-      cliente: "Lucas Santana",
-      plataforma: "Shopee",
-      plataformaId: "shopee",
-      itens: "Apple Watch Series 7 45mm",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 2380.00,
-      custoCMV: 1750.00,
-      despesasTotal: 35.00,
-      despesasExtras: [
-        { id_tipo: 5, nome: "Taxa Motoboy Express", categoria: "Logística", icone: "truck", valor: 20.00 },
-        { id_tipo: 6, nome: "Embalagem Especial Presente", categoria: "Insumos", icone: "box", valor: 15.00 }
-      ],
-      lucro: 595.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "Hoje, 11:20",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8489",
-      vendaNumero: 4,
-      cliente: "Beatriz Nogueira",
-      plataforma: "Instagram",
-      plataformaId: "insta",
-      itens: "iPhone 11 128GB Branco",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 2150.00,
-      custoCMV: 1420.00,
-      despesasTotal: 95.00,
-      despesasExtras: [
-        { id_tipo: 1, nome: "Instagram Ads", categoria: "Marketing", icone: "megaphone", valor: 60.00 },
-        { id_tipo: 2, nome: "Uber Retirada Fornecedor", categoria: "Transporte", icone: "car", valor: 35.00 }
-      ],
-      lucro: 635.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "Ontem, 19:30",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8488",
-      vendaNumero: 5,
-      cliente: "Renato Albuquerque",
-      plataforma: "Loja Física",
-      plataformaId: "outros",
-      itens: "iPhone 14 Pro Max 256GB",
-      qtdItens: 1,
-      pagamento: "Dinheiro + PIX",
-      valorTotal: 5890.00,
-      custoCMV: 4600.00,
-      despesasTotal: 155.00,
-      despesasExtras: [
-        { id_tipo: 1, nome: "Facebook Ads Campanha", categoria: "Marketing", icone: "megaphone", valor: 80.00 },
-        { id_tipo: 4, nome: "Película 3D Cerâmica", categoria: "Acessórios", icone: "shield", valor: 40.00 },
-        { id_tipo: 8, nome: "Refeição em Negociação", categoria: "Alimentação", icone: "coffee", valor: 35.00 }
-      ],
-      lucro: 1135.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "Ontem, 16:05",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8487",
-      vendaNumero: 6,
-      cliente: "Juliana Mendes",
-      plataforma: "Mercado Livre",
-      plataformaId: "meli",
-      itens: "AirPods Pro 2ª Geração",
-      qtdItens: 1,
-      pagamento: "Cartão (1x)",
-      valorTotal: 1450.00,
-      custoCMV: 980.00,
-      despesasTotal: 25.00,
-      despesasExtras: [
-        { id_tipo: 5, nome: "Motoboy Ponto de Coleta", categoria: "Logística", icone: "truck", valor: 25.00 }
-      ],
-      lucro: 445.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "28/08, 15:40",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8486",
-      vendaNumero: 7,
-      cliente: "Felipe Guedes",
-      plataforma: "WhatsApp",
-      plataformaId: "wpp",
-      itens: "MacBook Air M1 256GB",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 4890.00,
-      custoCMV: 3800.00,
-      despesasTotal: 90.00,
-      despesasExtras: [
-        { id_tipo: 5, nome: "Sedex com Seguro", categoria: "Logística", icone: "truck", valor: 65.00 },
-        { id_tipo: 6, nome: "Caixa Reforçada e Bolha", categoria: "Insumos", icone: "box", valor: 25.00 }
-      ],
-      lucro: 1000.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "27/08, 11:15",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8485",
-      vendaNumero: 8,
-      cliente: "Larissa Rezende",
-      plataforma: "Shopee",
-      plataformaId: "shopee",
-      itens: "Samsung Galaxy S23 Ultra",
-      qtdItens: 1,
-      pagamento: "Cartão (6x)",
-      valorTotal: 5190.00,
-      custoCMV: 3950.00,
-      despesasTotal: 110.00,
-      despesasExtras: [
-        { id_tipo: 1, nome: "Facebook Ads Conversão", categoria: "Marketing", icone: "megaphone", valor: 75.00 },
-        { id_tipo: 2, nome: "Uber Coleta Lote", categoria: "Transporte", icone: "car", valor: 35.00 }
-      ],
-      lucro: 1130.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "26/08, 18:30",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8484",
-      vendaNumero: 9,
-      cliente: "Gabriel Arantes",
-      plataforma: "Mercado Livre",
-      plataformaId: "meli",
-      itens: "iPhone 12 64GB Azul",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 2400.00,
-      custoCMV: 1850.00,
-      despesasTotal: 110.00,
-      despesasExtras: [
-        { id_tipo: 3, nome: "Revisão e Troca Selo", categoria: "Manutenção", icone: "tool", valor: 85.00 },
-        { id_tipo: 4, nome: "Película 3D", categoria: "Acessórios", icone: "shield", valor: 25.00 }
-      ],
-      lucro: 440.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "25/08, 14:00",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8483",
-      vendaNumero: 10,
-      cliente: "Thiago Moreira",
-      plataforma: "WhatsApp",
-      plataformaId: "wpp",
-      itens: "Apple Watch SE 40mm",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 1650.00,
-      custoCMV: 1200.00,
-      despesasTotal: 0.00,
-      despesasExtras: [],
-      lucro: 450.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "24/08, 10:20",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8482",
-      vendaNumero: 11,
-      cliente: "Patricia Cunha",
-      plataforma: "Instagram",
-      plataformaId: "insta",
-      itens: "iPhone 13 Pro 128GB Sierra Blue",
-      qtdItens: 1,
-      pagamento: "Cartão (2x)",
-      valorTotal: 4100.00,
-      custoCMV: 3200.00,
-      despesasTotal: 85.00,
-      despesasExtras: [
-        { id_tipo: 1, nome: "Meta Ads Story", categoria: "Marketing", icone: "megaphone", valor: 55.00 },
-        { id_tipo: 4, nome: "Cabo Turbo Brinde", categoria: "Acessórios", icone: "shield", valor: 30.00 }
-      ],
-      lucro: 815.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "23/08, 16:50",
-      mesCiclo: "Agosto/2026"
-    },
-    {
-      id: "VND-8481",
-      vendaNumero: 12,
-      cliente: "Rodrigo Fagundes",
-      plataforma: "Loja Física",
-      plataformaId: "outros",
-      itens: "iPhone 11 64GB Preto",
-      qtdItens: 1,
-      pagamento: "PIX",
-      valorTotal: 1890.00,
-      custoCMV: 1420.00,
-      despesasTotal: 50.00,
-      despesasExtras: [
-        { id_tipo: 4, nome: "Película 3D Cerâmica", categoria: "Acessórios", icone: "shield", valor: 25.00 },
-        { id_tipo: 8, nome: "Almoço Equipe Balcão", categoria: "Alimentação", icone: "coffee", valor: 25.00 }
-      ],
-      lucro: 420.00,
-      status: "Concluído",
-      statusClass: "badge-success",
-      data: "22/08, 15:10",
+      lucro: 25.00,
+      status: "Cancelada",
+      statusClass: "badge-danger",
+      data: "10/08, 10:30",
       mesCiclo: "Agosto/2026"
     }
   ],
@@ -564,9 +329,9 @@ const MockData = {
 
   // Notificações do Sistema
   notificacoes: [
-    { id: 1, titulo: "Estoque Baixo", desc: "MacBook Air M1 possui apenas 2 unidades.", tempo: "Há 25 min", unread: true },
-    { id: 2, titulo: "Venda Aprovada", desc: "Venda #VND-8492 no Mercado Livre foi paga via PIX.", tempo: "Há 1h", unread: true },
-    { id: 3, titulo: "Meta Atingida", desc: "Parabéns! Faturamento superou R$ 20.000 no mês.", tempo: "Há 3h", unread: false }
+    { id: 1, titulo: "Estoque Baixo", desc: "iPhone 13 possui apenas 4 unidades.", tempo: "Há 25 min", unread: true },
+    { id: 2, titulo: "Venda Aprovada", desc: "Venda #VEN-0002 no Mercado Livre foi paga via Cartão de Crédito.", tempo: "Há 1h", unread: true },
+    { id: 3, titulo: "Meta Atingida", desc: "Parabéns! Faturamento superou R$ 4.000 no mês.", tempo: "Há 3h", unread: false }
   ],
 
   // Despesas Cadastradas (Fixas, Variáveis e Vinculadas a Vendas)
@@ -642,127 +407,62 @@ const MockData = {
     {
       id: 12,
       tipo: "variavel",
-      descricao: "Facebook Ads (Venda #VND-8492 • iPhone 13 128GB)",
-      categoria: "Marketing & Ads",
-      valor: 50.00,
-      data: "Hoje, 16:42",
-      dataVencimento: "2026-08-31",
+      descricao: "Gasolina / Uber Entrega (Venda #VEN-0002 • iPhone 13)",
+      categoria: "Transporte & Logística",
+      valor: 30.00,
+      data: "12/08, 14:15",
+      dataVencimento: "2026-08-12",
       status: "pago",
-      formaPagamento: "Cartão de Crédito",
+      formaPagamento: "PIX",
       recorrente: false,
-      idVenda: "VND-8492",
-      produtoVendido: "iPhone 13 128GB Grafite",
-      observacao: "Anúncio direcionado Instagram"
+      idVenda: "VEN-0002",
+      produtoVendido: "iPhone 13 128GB Meia-Noite",
+      observacao: "Deslocamento entrega"
     },
     {
       id: 13,
       tipo: "variavel",
-      descricao: "Película 3D & Aplicação (Venda #VND-8492 • iPhone 13 128GB)",
-      categoria: "Acessórios & Brindes",
-      valor: 25.00,
-      data: "Hoje, 16:42",
-      dataVencimento: "2026-08-31",
+      descricao: "Refeição em Trânsito (Venda #VEN-0002 • iPhone 13)",
+      categoria: "Refeição & Alimentação",
+      valor: 45.00,
+      data: "12/08, 14:15",
+      dataVencimento: "2026-08-12",
       status: "pago",
       formaPagamento: "PIX",
       recorrente: false,
-      idVenda: "VND-8492",
-      produtoVendido: "iPhone 13 128GB Grafite",
-      observacao: "Película cerâmica cortesia"
+      idVenda: "VEN-0002",
+      produtoVendido: "iPhone 13 128GB Meia-Noite",
+      observacao: "Alimentação entrega"
     },
     {
       id: 14,
       tipo: "variavel",
-      descricao: "Gasolina / Uber Entrega (Venda #VND-8491 • iPhone 12)",
-      categoria: "Transporte & Logística",
-      valor: 30.00,
-      data: "Hoje, 14:15",
-      dataVencimento: "2026-08-31",
-      status: "pago",
-      formaPagamento: "PIX",
-      recorrente: false,
-      idVenda: "VND-8491",
-      produtoVendido: "iPhone 12 128GB + AirPods",
-      observacao: "Deslocamento até o cliente"
-    },
-
-    // --- DESPESAS VARIÁVEIS GERAIS ---
-    {
-      id: 6,
-      tipo: "variavel",
-      descricao: "Gasolina (Abastecimento Retirada Lote)",
-      categoria: "Gasolina & Combustível",
-      valor: 220.00,
-      data: "04/08/2026",
-      dataVencimento: "2026-08-04",
-      status: "pago",
-      formaPagamento: "Cartão de Débito",
-      recorrente: false,
-      observacao: "Posto Shell - Viagem busca fornecedor"
-    },
-    {
-      id: 7,
-      tipo: "variavel",
-      descricao: "Refeição & Alimentação em Trânsito",
-      categoria: "Refeição & Alimentação",
-      valor: 85.50,
-      data: "03/08/2026",
-      dataVencimento: "2026-08-03",
-      status: "pago",
-      formaPagamento: "PIX",
-      recorrente: false,
-      observacao: "Almoço na Santa Ifigênia"
-    },
-    {
-      id: 8,
-      tipo: "variavel",
-      descricao: "Pedágio Rodovia dos Bandeirantes",
-      categoria: "Pedágio & Estacionamento",
-      valor: 34.80,
-      data: "02/08/2026",
-      dataVencimento: "2026-08-02",
-      status: "pago",
-      formaPagamento: "Sem Parar",
-      recorrente: false,
-      observacao: "2 praças de pedágio ida e volta"
-    },
-    {
-      id: 9,
-      tipo: "variavel",
-      descricao: "Embalagens & Plástico Bolha 100m",
-      categoria: "Embalagens & Logística",
-      valor: 160.00,
-      data: "01/08/2026",
-      dataVencimento: "2026-08-01",
-      status: "pago",
-      formaPagamento: "PIX",
-      recorrente: false,
-      observacao: "Caixas correios + fita lacre"
-    },
-    {
-      id: 10,
-      tipo: "variavel",
-      descricao: "Meta Ads (Anúncios Tráfego Pago Instagram)",
-      categoria: "Marketing & Ads",
-      valor: 450.00,
-      data: "28/07/2026",
-      dataVencimento: "2026-07-28",
-      status: "pago",
-      formaPagamento: "Cartão de Crédito",
-      recorrente: false,
-      observacao: "Campanha iPhone 13 & Watch"
-    },
-    {
-      id: 11,
-      tipo: "variavel",
-      descricao: "Entrega Expressa Motoboy (Cliente VIP)",
+      descricao: "Taxa Motoboy Express (Venda #VEN-0003 • Cabos USB-C)",
       categoria: "Fretes & Entregas",
-      valor: 45.00,
-      data: "27/07/2026",
-      dataVencimento: "2026-07-27",
+      valor: 20.00,
+      data: "15/08, 16:00",
+      dataVencimento: "2026-08-15",
       status: "pago",
       formaPagamento: "PIX",
       recorrente: false,
-      observacao: "Entrega direta na Av. Paulista"
+      idVenda: "VEN-0003",
+      produtoVendido: "Cabo USB-C Lightning 1m Original",
+      observacao: "Entrega expressa"
+    },
+    {
+      id: 15,
+      tipo: "variavel",
+      descricao: "Embalagem Especial Presente (Venda #VEN-0003 • Cabos USB-C)",
+      categoria: "Embalagens & Logística",
+      valor: 15.00,
+      data: "15/08, 16:00",
+      dataVencimento: "2026-08-15",
+      status: "pago",
+      formaPagamento: "PIX",
+      recorrente: false,
+      idVenda: "VEN-0003",
+      produtoVendido: "Cabo USB-C Lightning 1m Original",
+      observacao: "Caixa presente"
     }
   ]
 };
