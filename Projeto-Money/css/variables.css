@@ -1,0 +1,141 @@
+/**
+ * Garimpa Design System - Tokens & Variáveis
+ * Suporte completo a Dark Mode (padrão) e Light Mode
+ */
+
+:root {
+  /* ==========================================================================
+     PALETA DE CORES - DARK THEME (PADRÃO FINTECH PREMIUM)
+     ========================================================================== */
+  --bg-app: #090c14;
+  --bg-sidebar: #0f1422;
+  --bg-header: rgba(15, 20, 34, 0.85);
+  --bg-card: #141a29;
+  --bg-card-hover: #192134;
+  --bg-card-inner: #0d121e;
+  --bg-input: #0e1320;
+  --bg-dropdown: #171e30;
+  --bg-overlay: rgba(5, 8, 15, 0.75);
+  
+  /* Bordas e Divisores */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(124, 58, 237, 0.6);
+  --border-highlight: rgba(139, 92, 246, 0.3);
+
+  /* Cores de Destaque / Acentos Primários */
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-light: #8b5cf6;
+  --primary-glow: rgba(124, 58, 237, 0.35);
+  --primary-surface: rgba(124, 58, 237, 0.12);
+
+  /* Status e Semântica Financeira */
+  --success: #10b981;
+  --success-surface: rgba(16, 185, 129, 0.12);
+  --success-glow: rgba(16, 185, 129, 0.25);
+
+  --info: #3b82f6;
+  --info-surface: rgba(59, 130, 246, 0.12);
+  --info-glow: rgba(59, 130, 246, 0.25);
+
+  --warning: #f59e0b;
+  --warning-surface: rgba(245, 158, 11, 0.12);
+  --warning-glow: rgba(245, 158, 11, 0.25);
+
+  --danger: #ef4444;
+  --danger-surface: rgba(239, 68, 68, 0.12);
+  --danger-glow: rgba(239, 68, 68, 0.25);
+
+  --purple-accent: #a855f7;
+  --cyan-accent: #06b6d4;
+  --orange-accent: #f97316;
+  --pink-accent: #ec4899;
+
+  /* Tipografia & Textos */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-muted: #475569;
+  --text-inverse: #090c14;
+
+  /* ==========================================================================
+     ESPAÇAMENTO PADRONIZADO (4, 8, 12, 16, 20, 24, 32, 40, 48px)
+     ========================================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ==========================================================================
+     BORDAS E ARREDONDAMENTOS (16px a 20px em cards)
+     ========================================================================== */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-card: 18px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     SOMBRAS E ELEVAÇÕES
+     ========================================================================== */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px -3px var(--primary-glow);
+
+  /* ==========================================================================
+     LAYOUT & DIMENSÕES
+     ========================================================================== */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 76px;
+  --header-height: 72px;
+  --bottom-nav-height: 68px;
+  --max-content-width: 1560px;
+
+  /* ==========================================================================
+     TRANSIÇÕES & ANIMAÇÕES
+     ========================================================================== */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   TEMA LIGHT (ATIVÁVEL VIA CLASSE .light-theme)
+   ========================================================================== */
+body.light-theme {
+  --bg-app: #f1f5f9;
+  --bg-sidebar: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.88);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-card-inner: #f8fafc;
+  --bg-input: #f1f5f9;
+  --bg-dropdown: #ffffff;
+  --bg-overlay: rgba(15, 23, 42, 0.5);
+
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-card: rgba(0, 0, 0, 0.08);
+  --border-focus: rgba(124, 58, 237, 0.5);
+  --border-highlight: rgba(124, 58, 237, 0.2);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-muted: #94a3b8;
+  --text-inverse: #f8fafc;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
