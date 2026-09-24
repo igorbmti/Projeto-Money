@@ -383,3 +383,99 @@
   color: #ffffff;
   border-color: var(--primary);
 }
+
+/* ==========================================================================
+   TEMA LIGHT (LIGHT THEME) - TABELAS & FILTROS
+   ========================================================================== */
+body.light-theme .table-search-box {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .table-search-box input {
+  color: #0f172a;
+}
+
+body.light-theme .table-search-box input::placeholder {
+  color: #94a3b8;
+}
+
+body.light-theme .table-filter-select {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+body.light-theme .desktop-table-view th {
+  background-color: #f8fafc;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.light-theme .desktop-table-view td {
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+body.light-theme .desktop-table-view tr:hover td {
+  background-color: #f8fafc;
+}
+
+body.light-theme .desktop-table-view .col-main {
+  color: #0f172a;
+}
+
+body.light-theme .desktop-table-view .col-value {
+  color: #0f172a;
+}
+
+body.light-theme .platform-pill {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .adaptive-data-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .adaptive-card-id {
+  color: #0f172a;
+}
+
+body.light-theme .adaptive-client-name {
+  color: #0f172a;
+}
+
+body.light-theme .adaptive-total-val {
+  color: #0f172a;
+}
+
+body.light-theme .adaptive-card-footer {
+  border-top: 1px dashed #e2e8f0;
+}
+
+body.light-theme .table-pagination {
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+body.light-theme .pagination-btn {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .pagination-btn:hover {
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+body.light-theme .pagination-btn.active {
+  background-color: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+}
+

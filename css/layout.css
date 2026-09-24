@@ -795,6 +795,207 @@
 }
 
 /* ==========================================================================
+   TEMA LIGHT (LIGHT THEME) - LAYOUT & NAVEGAÇÃO
+   ========================================================================== */
+body.light-theme .sidebar {
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+}
+
+body.light-theme .sidebar-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.light-theme .brand-name {
+  color: #0f172a;
+}
+
+body.light-theme .brand-tag {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+body.light-theme .brand-subtitle {
+  color: #64748b;
+}
+
+body.light-theme .sidebar-close-btn {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .sidebar-close-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+body.light-theme .nav-section-title {
+  color: #64748b;
+}
+
+body.light-theme .nav-link {
+  color: #475569;
+}
+
+body.light-theme .nav-icon {
+  color: #64748b;
+}
+
+body.light-theme .nav-link:hover {
+  background-color: #f1f5f9;
+  color: #7c3aed;
+}
+
+body.light-theme .nav-link:hover .nav-icon {
+  color: #7c3aed;
+}
+
+body.light-theme .nav-item.active .nav-link {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.14) 0%, rgba(99, 102, 241, 0.08) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  color: #7c3aed;
+  font-weight: 700;
+  box-shadow: 0 4px 12px -2px rgba(124, 58, 237, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .nav-item.active .nav-link .nav-icon {
+  color: #7c3aed;
+  filter: drop-shadow(0 0 4px rgba(124, 58, 237, 0.3));
+}
+
+body.light-theme .nav-badge {
+  background-color: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  color: #7c3aed;
+}
+
+body.light-theme .sidebar-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+body.light-theme .user-profile-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .user-profile-card:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .user-name {
+  color: #0f172a;
+}
+
+body.light-theme .user-role {
+  color: #64748b;
+}
+
+body.light-theme .user-status-dot {
+  border-color: #ffffff;
+}
+
+body.light-theme .btn-logout {
+  color: #64748b;
+}
+
+body.light-theme .btn-logout:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+body.light-theme .top-header {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.light-theme .btn-menu-toggle {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+body.light-theme .user-header-badge {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .user-header-badge .user-name {
+  color: #0f172a;
+}
+
+body.light-theme .btn-period-dropdown {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+body.light-theme .btn-period-dropdown:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+body.light-theme .period-dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .period-option {
+  color: #475569;
+}
+
+body.light-theme .period-option:hover,
+body.light-theme .period-option.active {
+  background-color: rgba(124, 58, 237, 0.08);
+  color: #7c3aed;
+}
+
+body.light-theme .header-action-btn {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .header-action-btn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+body.light-theme .notification-panel {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .notification-header {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.light-theme .bottom-nav {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid #e2e8f0;
+}
+
+body.light-theme .bottom-nav-item {
+  color: #64748b;
+}
+
+body.light-theme .bottom-nav-item.active {
+  color: #7c3aed;
+}
+
+body.light-theme .bottom-fab-btn {
+  border: 3px solid #f1f5f9;
+}
+
+/* ==========================================================================
    ESTILOS DE IMPRESSÃO / EXPORTAÇÃO EM PDF
    ========================================================================== */
 @media print {

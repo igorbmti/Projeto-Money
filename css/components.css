@@ -58,6 +58,22 @@
   line-height: 1.2;
 }
 
+.module-hero-badge-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(99, 102, 241, 0.2) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.32);
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.export-actions-card {
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border: 1px solid var(--border-subtle);
+}
+
 .module-hero-subtitle {
   font-size: clamp(0.72rem, 0.68rem + 0.1vw, 0.78rem);
   color: var(--text-tertiary);
@@ -4838,3 +4854,611 @@ body.light-theme .sale-item-val.val-custo {
   font-size: 0.7rem;
   color: var(--text-tertiary);
 }
+
+/* ==========================================================================
+   TEMA LIGHT (LIGHT THEME) - COMPONENTES GERAIS DA APLICAÇÃO
+   ========================================================================== */
+
+/* 1. Hero Headers & Badges Padronizados */
+body.light-theme .module-hero-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .module-hero-title {
+  color: #0f172a !important;
+}
+
+body.light-theme .module-hero-subtitle {
+  color: #64748b !important;
+}
+
+body.light-theme .module-hero-badge-box {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* 2. Base Cards & KPIs */
+body.light-theme .card {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+
+body.light-theme .card:hover {
+  border-color: #cbd5e1;
+}
+
+body.light-theme .card-title {
+  color: #0f172a;
+}
+
+body.light-theme .kpi-card {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .kpi-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .kpi-value {
+  color: #0f172a;
+}
+
+body.light-theme .kpi-label {
+  color: #64748b;
+}
+
+/* 3. Gráficos & Abas */
+body.light-theme .chart-header-tabs {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .chart-tab-btn {
+  color: #64748b;
+}
+
+body.light-theme .chart-tab-btn:hover {
+  color: #0f172a;
+}
+
+body.light-theme .chart-tab-btn.active {
+  background-color: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+}
+
+body.light-theme .chart-bottom-metrics {
+  border-top: 1px solid #e2e8f0;
+}
+
+body.light-theme .metric-stat-value {
+  color: #0f172a;
+}
+
+body.light-theme .metric-stat-label {
+  color: #64748b;
+}
+
+body.light-theme .growth-badge-circle {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+/* 4. Ranking & Produtos */
+body.light-theme .ranking-thumb {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .ranking-item:hover .ranking-thumb {
+  background: #f1f5f9;
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+body.light-theme .ranking-pos-2 {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+body.light-theme .ranking-pos-4 {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+body.light-theme .products-stock-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .products-stock-item:hover {
+  background: #f8fafc;
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .stock-thumb-box {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .stock-tag-pill {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .stock-tag-battery {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+body.light-theme .stock-tag-color {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .prod-filter-pill {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .prod-filter-pill:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+body.light-theme .prod-filter-pill.active {
+  background: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+}
+
+body.light-theme .clean-thumb-preview-box {
+  background: #f1f5f9;
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+/* 5. Visão Financeira (Bento Grid, Subtabs, DRE & Capital) */
+body.light-theme .fin-bento-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .fin-bento-card:hover {
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .fin-bento-card.highlight-profit {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, #ffffff 60%, #ffffff 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.08) !important;
+}
+
+body.light-theme .fin-bento-main-val {
+  color: #0f172a;
+}
+
+body.light-theme .fin-bento-meta-row {
+  border-top: 1px solid #f1f5f9;
+}
+
+body.light-theme .fin-subtab-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .fin-subtab-btn {
+  color: #64748b;
+}
+
+body.light-theme .fin-subtab-btn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light-theme .fin-subtab-btn.active {
+  background: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+body.light-theme .dre-cascade-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .dre-cascade-row:hover {
+  background: #f1f5f9;
+}
+
+body.light-theme .dre-row-total-highlight {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border: 1.5px solid #10b981;
+}
+
+body.light-theme .dre-progress-bar-bg {
+  background: #e2e8f0;
+}
+
+body.light-theme .capital-allocation-box {
+  border-top-color: #e2e8f0;
+}
+
+body.light-theme .capital-multi-bar {
+  background: #e2e8f0;
+}
+
+body.light-theme .capital-item-row {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .capital-item-title {
+  color: #0f172a;
+}
+
+body.light-theme .capital-item-val {
+  color: #0f172a;
+}
+
+body.light-theme .capital-item-pct {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+body.light-theme .fin-metric-tile {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .fin-tile-val {
+  color: #0f172a;
+}
+
+body.light-theme .fin-tile-label {
+  color: #64748b;
+}
+
+/* 6. Central de Despesas */
+body.light-theme .expense-donut-hero-card,
+body.light-theme .expense-pillars-hero-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-pillar-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-pillar-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .expense-pillar-title {
+  color: #0f172a;
+}
+
+body.light-theme .expense-pillar-val {
+  color: #0f172a;
+}
+
+body.light-theme .expense-pillar-bar-track {
+  background: #e2e8f0;
+}
+
+body.light-theme .expense-legend-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-legend-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .expense-legend-name {
+  color: #475569;
+}
+
+body.light-theme .expense-quick-chip {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .expense-quick-chip:hover {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+body.light-theme .expense-filter-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-filter-tab-btn {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+body.light-theme .expense-filter-tab-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light-theme .expense-filter-tab-btn.active {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.35);
+  color: #7c3aed;
+}
+
+body.light-theme .expense-filter-tab-btn .badge-num {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+body.light-theme .expense-filter-tab-btn.active .badge-num {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+body.light-theme .expense-view-mode-toggle {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-view-btn {
+  color: #64748b;
+}
+
+body.light-theme .expense-view-btn.active {
+  background: #ffffff;
+  color: #7c3aed;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .expense-simulator-box {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-ledger-table-wrap {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-ledger-table th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .expense-ledger-table td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+body.light-theme .expense-ledger-table tr:hover td {
+  background: #f8fafc !important;
+}
+
+/* 7. Central de Exportação & Relatórios */
+body.light-theme .export-actions-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .export-module-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .export-module-card:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .export-module-card.selected {
+  background: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+}
+
+body.light-theme .export-module-title {
+  color: #0f172a;
+}
+
+body.light-theme .export-module-desc {
+  color: #64748b;
+}
+
+body.light-theme .export-module-footer {
+  border-top: 1px solid #f1f5f9;
+}
+
+body.light-theme .export-action-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+body.light-theme .export-action-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .export-action-btn-title {
+  color: #0f172a;
+}
+
+body.light-theme .export-action-btn-subtitle {
+  color: #64748b;
+}
+
+body.light-theme #reportCustomDateRow {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+/* 8. Sugestões & Formulários */
+body.light-theme #formNewSuggestion {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .suggestion-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .suggestion-card-title {
+  color: #0f172a;
+}
+
+/* 9. Modais & Entradas de Dados */
+body.light-theme .modal-container {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .modal-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+body.light-theme .modal-title {
+  color: #0f172a;
+}
+
+body.light-theme .modal-close-btn {
+  color: #64748b;
+}
+
+body.light-theme .modal-close-btn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+body.light-theme .modal-footer {
+  background-color: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .form-input,
+body.light-theme .form-select,
+body.light-theme textarea.form-input {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+body.light-theme .form-input:focus,
+body.light-theme .form-select:focus,
+body.light-theme textarea.form-input:focus {
+  background-color: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+body.light-theme .form-label {
+  color: #334155;
+}
+
+body.light-theme #uploadPlaceholderCard {
+  background: #f8fafc !important;
+  border: 1.5px dashed rgba(124, 58, 237, 0.4) !important;
+}
+
+body.light-theme #uploadPlaceholderCard div div {
+  color: #0f172a !important;
+}
+
+body.light-theme #uploadPreviewCard {
+  background: rgba(16, 185, 129, 0.06) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.4) !important;
+}
+
+body.light-theme #uploadPreviewCard #imageFileNameDisplay {
+  color: #334155 !important;
+}
+
+body.light-theme .sale-expenses-section {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.04) 0%, rgba(124, 58, 237, 0.04) 100%);
+  border: 1px solid rgba(236, 72, 153, 0.25);
+}
+
+body.light-theme .sale-expense-row {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .sale-expense-row:hover {
+  border-color: rgba(236, 72, 153, 0.4) !important;
+}
+
+body.light-theme .expense-type-item-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .expense-type-item-card:hover {
+  background: #f8fafc !important;
+  border-color: rgba(236, 72, 153, 0.4) !important;
+}
+
+body.light-theme .expense-type-item-name {
+  color: #0f172a !important;
+}
+
+body.light-theme #formNewExpenseType {
+  background: #f8fafc !important;
+  border: 1px dashed rgba(124, 58, 237, 0.3) !important;
+}
+
+body.light-theme .expense-type-btn {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+body.light-theme .expense-type-btn:hover {
+  background: #f1f5f9;
+}
+
+body.light-theme .expense-type-btn.active {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: #7c3aed;
+}
+
+body.light-theme .expense-type-text strong {
+  color: #0f172a;
+}
+
+body.light-theme .sale-calc-preview-box {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+body.light-theme .prod-calc-preview-box {
+  background: #f1f5f9 !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+}
+
