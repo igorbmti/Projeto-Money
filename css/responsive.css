@@ -540,14 +540,20 @@
    BREAKPOINT: NOTEBOOKS & MONITORES COMPACTOS (1024px – 1399px - 13" A 15.6" HD)
    ========================================================================== */
 @media (min-width: 1024px) and (max-width: 1399px) {
+  .main-content {
+    padding: 16px 20px;
+    gap: 16px;
+    max-width: 100%;
+  }
+
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-4);
+    gap: 12px;
   }
 
   .kpi-card {
-    padding: 16px 18px;
-    min-height: 120px;
+    padding: 14px 16px;
+    min-height: 112px;
   }
 
   .kpi-label {
@@ -555,41 +561,41 @@
   }
 
   .kpi-value {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
   }
 
   .kpi-icon-badge {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .fin-hero-bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-  }
-
-  .fin-bento-card {
-    padding: 16px 18px;
     gap: 12px;
   }
 
+  .fin-bento-card {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
   .fin-bento-main-val {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
   }
 
   .chart-canvas-container {
-    height: 240px;
+    height: 215px;
   }
 
   .distribution-grid,
   .expense-main-analytics-grid {
     grid-template-columns: 1.10fr 0.90fr;
-    gap: var(--space-4);
+    gap: 14px;
   }
 
   .donut-canvas-wrapper {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
   }
 }
 
@@ -597,9 +603,24 @@
    BREAKPOINT: MONITORES FULL HD PADRÃO (1400px – 1899px - 21.5" A 27" FHD)
    ========================================================================== */
 @media (min-width: 1400px) and (max-width: 1899px) {
+  .main-content {
+    max-width: 100%;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-5);
+    gap: 16px;
+  }
+
+  .kpi-card {
+    padding: 16px 20px;
+    min-height: 120px;
+  }
+
+  .kpi-value {
+    font-size: 1.50rem;
   }
 
   .fin-hero-bento {
@@ -607,58 +628,164 @@
     gap: 16px;
   }
 
+  .fin-bento-card {
+    padding: 18px 20px;
+  }
+
+  .fin-bento-main-val {
+    font-size: 1.60rem;
+  }
+
+  .chart-canvas-container {
+    height: 235px;
+  }
+
   .distribution-grid,
   .expense-main-analytics-grid {
     grid-template-columns: 1.15fr 0.85fr;
-    gap: var(--space-5);
+    gap: 18px;
   }
 }
 
 /* ==========================================================================
-   BREAKPOINT: MONITORES GRANDES, 2K & 4K (≥ 1900px - 27", 32" & ULTRAWIDE)
+   BREAKPOINT: MONITORES 2K QHD, GRANDES & ULTRAWIDE (1900px – 2560px+)
+   Suporte perfeito para 2560x1080 (21:9), 2560x1440 (16:9), 3440x1440 (21:9) e 4K
    ========================================================================== */
 @media (min-width: 1900px) {
   .main-content {
-    max-width: 1720px;
-    margin: 0 auto;
-    padding: 28px 36px;
-    gap: 26px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 22px 32px;
+    gap: 22px;
   }
 
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    gap: 18px;
   }
 
   .kpi-card {
-    padding: 20px 24px;
-    min-height: 136px;
+    padding: 18px 22px;
+    min-height: 124px;
   }
 
   .kpi-value {
-    font-size: 1.65rem;
+    font-size: 1.60rem;
   }
 
   .fin-hero-bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 18px;
   }
 
   .fin-bento-card {
-    padding: 20px 24px;
+    padding: 18px 22px;
   }
 
   .fin-bento-main-val {
-    font-size: 1.75rem;
+    font-size: 1.68rem;
   }
 
   .chart-canvas-container {
-    height: 275px;
+    height: 250px;
   }
 
   .distribution-grid,
   .expense-main-analytics-grid {
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.18fr 0.82fr;
+    gap: 20px;
+  }
+
+  .expense-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px;
+  }
+
+  .export-modules-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .desktop-table-view .col-items {
+    max-width: 360px;
+  }
+
+  .table-search-box {
+    max-width: 420px;
+  }
+}
+
+/* ==========================================================================
+   OTIMIZAÇÃO VERTICAL ESPECÍFICA PARA ULTRAWIDE 21:9 DE ALTURA 1080p (2560x1080)
+   Equilíbrio para telas muito largas com altura vertical padrão
+   ========================================================================== */
+@media (min-width: 2000px) and (max-height: 1100px) {
+  .top-header {
+    height: 64px;
+    padding: 0 24px;
+  }
+
+  .main-content {
+    padding: 16px 26px;
+    gap: 16px;
+  }
+
+  .module-hero-header {
+    padding: 12px 18px !important;
+  }
+
+  .kpi-card {
+    padding: 14px 18px;
+    min-height: 108px;
+    gap: 8px;
+  }
+
+  .kpi-value {
+    font-size: 1.48rem;
+  }
+
+  .fin-bento-card {
+    padding: 14px 18px;
+    gap: 8px;
+  }
+
+  .fin-bento-main-val {
+    font-size: 1.55rem;
+  }
+
+  .chart-canvas-container {
+    height: 220px;
+  }
+
+  .distribution-grid,
+  .expense-main-analytics-grid {
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   OTIMIZAÇÃO PARA MONITORES SUPER ULTRAWIDE 32:9 (≥ 3400px, 5120x1440)
+   ========================================================================== */
+@media (min-width: 3400px) {
+  .main-content {
+    max-width: 3200px;
+    margin: 0 auto;
+    padding: 26px 40px;
     gap: 24px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .fin-hero-bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .expense-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
   }
 }

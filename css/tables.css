@@ -161,7 +161,7 @@
 }
 
 .desktop-table-view .col-items {
-  max-width: 190px;
+  max-width: clamp(190px, 18vw, 420px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
