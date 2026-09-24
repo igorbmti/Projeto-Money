@@ -95,10 +95,10 @@
   /* ==========================================================================
      LAYOUT & DIMENSÕES MULTI-MONITOR
      ========================================================================== */
-  --sidebar-width: clamp(240px, 16vw, 260px);
+  --sidebar-width: clamp(230px, 15vw, 255px);
   --sidebar-collapsed-width: 72px;
-  --header-height: 72px;
-  --bottom-nav-height: 68px;
+  --header-height: clamp(62px, 6vh + 10px, 72px);
+  --bottom-nav-height: 66px;
   --max-content-width: 2560px;
 
   /* ==========================================================================

@@ -17,6 +17,7 @@ const ChartsEngine = {
     this.barCanvas = document.getElementById("canvasEvolution");
     this.platformCanvas = document.getElementById("canvasPlatformDonut");
     this.paymentCanvas = document.getElementById("canvasPaymentDonut");
+    this.finPaymentCanvas = document.getElementById("canvasFinPaymentDonut");
     this.finEvolutionCanvas = document.getElementById("canvasFinancialEvolution");
     this.expensesDonutCanvas = document.getElementById("canvasExpensesDonut");
 
@@ -309,9 +310,11 @@ const ChartsEngine = {
   renderDonuts(progress = 1) {
     if (!this.platformCanvas) this.platformCanvas = document.getElementById("canvasPlatformDonut");
     if (!this.paymentCanvas) this.paymentCanvas = document.getElementById("canvasPaymentDonut");
+    if (!this.finPaymentCanvas) this.finPaymentCanvas = document.getElementById("canvasFinPaymentDonut");
 
     this.drawDonutChart(this.platformCanvas, MockData.plataformas, progress);
     this.drawDonutChart(this.paymentCanvas, MockData.formasPagamento, progress);
+    this.drawDonutChart(this.finPaymentCanvas, MockData.formasPagamento, progress);
   },
 
   drawDonutChart(canvas, dataList, progress = 1) {
