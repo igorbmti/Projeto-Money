@@ -95,9 +95,9 @@
   /* ==========================================================================
      LAYOUT & DIMENSÕES MULTI-MONITOR
      ========================================================================== */
-  --sidebar-width: clamp(232px, 16.5vw, 260px);
-  --sidebar-collapsed-width: 76px;
-  --header-height: clamp(62px, 6.5vh + 10px, 72px);
+  --sidebar-width: clamp(240px, 16vw, 260px);
+  --sidebar-collapsed-width: 72px;
+  --header-height: 72px;
   --bottom-nav-height: 68px;
   --max-content-width: 1720px;
 
