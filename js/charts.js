@@ -28,23 +28,25 @@ const ChartsEngine = {
 
   setupResizeListener() {
     let resizeTimer;
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         this.renderBarChart(1);
         this.renderDonuts(1);
         this.renderFinancialCharts(1);
-      }, 50);
-    });
+      }, 30);
+    };
 
-    // Evento de orientação do celular
-    window.addEventListener("orientationchange", () => {
-      setTimeout(() => {
-        this.renderBarChart(1);
-        this.renderDonuts(1);
-        this.renderFinancialCharts(1);
-      }, 150);
-    });
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", () => setTimeout(handleResize, 100));
+
+    // ResizeObserver nos containers dos gráficos para adaptação instantânea a qualquer monitor
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(() => handleResize());
+      document.querySelectorAll(".chart-canvas-container, .donut-canvas-wrapper, .donut-canvas-container").forEach(el => {
+        observer.observe(el);
+      });
+    }
   },
 
   setupTabListeners() {
