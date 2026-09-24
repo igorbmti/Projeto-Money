@@ -35,13 +35,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Folhas de Estilo Modulares (com versionamento anti-cache) -->
-  <link rel="stylesheet" href="css/variables.css?v=20260923_04">
-  <link rel="stylesheet" href="css/base.css?v=20260923_04">
-  <link rel="stylesheet" href="css/layout.css?v=20260923_04">
-  <link rel="stylesheet" href="css/components.css?v=20260923_04">
-  <link rel="stylesheet" href="css/tables.css?v=20260923_04">
-  <link rel="stylesheet" href="css/responsive.css?v=20260923_04">
-  <link rel="stylesheet" href="css/auth.css?v=20260923_04">
+  <link rel="stylesheet" href="css/variables.css?v=20260924_02">
+  <link rel="stylesheet" href="css/base.css?v=20260924_02">
+  <link rel="stylesheet" href="css/layout.css?v=20260924_02">
+  <link rel="stylesheet" href="css/components.css?v=20260924_02">
+  <link rel="stylesheet" href="css/tables.css?v=20260924_02">
+  <link rel="stylesheet" href="css/responsive.css?v=20260924_02">
+  <link rel="stylesheet" href="css/auth.css?v=20260924_02">
 </head>
 <body>
 
@@ -604,19 +604,19 @@
         <div class="page-view flex flex-col gap-6" id="view-produtos" style="display: none;">
           
           <!-- Header do Módulo com Total de Itens Integrado -->
-          <div class="card">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="card module-hero-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                   </svg>
                 </div>
                 <div>
-                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Catálogo de Produtos & Estoque</h2>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gestão de equipamentos, especificações e inventário disponível em tempo real</p>
+                  <h2 class="module-hero-title">Catálogo de Produtos & Estoque</h2>
+                  <p class="module-hero-subtitle">Gestão de equipamentos, especificações e inventário disponível em tempo real</p>
                 </div>
               </div>
 
@@ -689,10 +689,10 @@
         <div class="page-view flex flex-col gap-6" id="view-vendas" style="display: none;">
           
           <!-- Header do Módulo Vendas com Volume de Vendas Integrado -->
-          <div class="card" style="margin-bottom: 0;">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);">
+          <div class="card module-hero-header" style="margin-bottom: 0;">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
@@ -700,8 +700,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Histórico de Vendas & Pedidos</h2>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Gerenciamento completo de pedidos realizados, faturamento por canal e status</p>
+                  <h2 class="module-hero-title">Histórico de Vendas & Pedidos</h2>
+                  <p class="module-hero-subtitle">Gerenciamento completo de pedidos realizados, faturamento por canal e status</p>
                 </div>
               </div>
 
@@ -830,21 +830,21 @@
         <div class="page-view flex flex-col gap-6" id="view-financeiro" style="display: none;">
           
           <!-- Header Executivo da Visão Financeira -->
-          <div class="card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(20, 26, 41, 0.95) 100%); border: 1px solid rgba(16, 185, 129, 0.25); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="width: 46px; height: 46px; border-radius: 14px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="card module-hero-header" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(20, 26, 41, 0.95) 100%); border: 1px solid rgba(16, 185, 129, 0.25);">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="1" x2="12" y2="23"></line>
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                   </svg>
                 </div>
                 <div>
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <h2 class="h2" style="font-size: 1.3rem; font-weight: 800; color: var(--text-primary); margin: 0;">Cockpit de Gestão Financeira & Rentabilidade</h2>
-                    <span class="badge badge-success" style="font-size: 0.72rem; font-weight: 700;">Alta Performance</span>
+                    <h2 class="module-hero-title">Cockpit de Gestão Financeira & Rentabilidade</h2>
+                    <span class="badge badge-success" style="font-size: 0.68rem; font-weight: 700; padding: 2px 6px;">Alta Performance</span>
                   </div>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin: 2px 0 0 0;">Inteligência analítica de margens, fluxo de caixa, demonstrativo DRE e retorno de capital investido</p>
+                  <p class="module-hero-subtitle">Inteligência analítica de margens, fluxo de caixa, demonstrativo DRE e retorno de capital investido</p>
                 </div>
               </div>
 
@@ -1036,7 +1036,7 @@
                 </div>
 
                 <!-- Canvas do Gráfico de Barras Financeiro -->
-                <div class="chart-canvas-container" style="height: 250px; min-height: 250px; position: relative;">
+                <div class="chart-canvas-container">
                   <canvas id="canvasFinancialEvolution"></canvas>
                 </div>
 
@@ -1421,18 +1421,18 @@
         <div class="page-view flex flex-col gap-6" id="view-despesas" style="display: none;">
           
           <!-- Header do Módulo -->
-          <div class="card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(124, 58, 237, 0.25); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="card module-hero-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                     <line x1="2" y1="10" x2="22" y2="10"></line>
                   </svg>
                 </div>
                 <div>
-                  <h2 class="h2" style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Central de Despesas & Custos</h2>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin-top: 2px; margin-bottom: 0;">Controle e rateio de custos operacionais e despesas da loja.</p>
+                  <h2 class="module-hero-title">Central de Despesas & Custos</h2>
+                  <p class="module-hero-subtitle">Controle e rateio de custos operacionais e despesas da loja.</p>
                 </div>
               </div>
 
@@ -1861,11 +1861,11 @@
         <div class="page-view flex flex-col gap-6" id="view-relatorios" style="display: none;">
           
           <!-- Card de Cabeçalho: Central de Exportação & Relatórios -->
-          <div class="card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(124, 58, 237, 0.25); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="card module-hero-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -1873,10 +1873,10 @@
                 </div>
                 <div>
                   <div style="display: flex; align-items: center; gap: 8px;">
-                    <h2 class="h2" style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Central de Exportação & Relatórios</h2>
-                    <span class="badge" style="background: rgba(124, 58, 237, 0.2); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35); font-size: 0.72rem; font-weight: 700;">Hub Executivo</span>
+                    <h2 class="module-hero-title">Central de Exportação & Relatórios</h2>
+                    <span class="badge" style="background: rgba(124, 58, 237, 0.2); color: #c4b5fd; border: 1px solid rgba(124, 58, 237, 0.35); font-size: 0.68rem; font-weight: 700; padding: 2px 6px;">Hub Executivo</span>
                   </div>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin-top: 2px; margin-bottom: 0;">Configure o período e selecione exatamente os módulos que deseja exportar em Excel (CSV), PDF ou texto consolidado.</p>
+                  <p class="module-hero-subtitle">Configure o período e selecione exatamente os módulos que deseja exportar em Excel (CSV), PDF ou texto consolidado.</p>
                 </div>
               </div>
               
@@ -2144,22 +2144,22 @@
              ================================================================ -->
         <div class="page-view flex flex-col gap-6" id="view-sugestoes" style="display: none;">
           
-          <div class="card">
-            <div class="card-header" style="flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="card module-hero-header">
+            <div class="card-header" style="flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="module-hero-icon" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); box-shadow: 0 4px 14px rgba(168, 85, 247, 0.4);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 18h6"></path>
                     <path d="M10 22h4"></path>
                     <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"></path>
                   </svg>
                 </div>
                 <div>
-                  <h2 class="h2" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0;">Central de Sugestões & Novas Ideias</h2>
-                  <p class="text-sm" style="color: var(--text-tertiary); margin: 0;">Espaço reservado para elaborar, registrar e planejar novas funcionalidades e melhorias para o sistema</p>
+                  <h2 class="module-hero-title">Central de Sugestões & Novas Ideias</h2>
+                  <p class="module-hero-subtitle">Espaço reservado para planejar e registrar melhorias para o sistema</p>
                 </div>
               </div>
-              <span class="badge badge-primary" style="padding: 6px 12px; font-size: 0.78rem; font-weight: 700;">💡 Módulo de Ideias</span>
+              <span class="badge badge-primary" style="padding: 4px 10px; font-size: 0.72rem; font-weight: 700;">💡 Módulo de Ideias</span>
             </div>
 
             <!-- Formulário para Criar/Elaborar Nova Sugestão -->
@@ -2873,11 +2873,11 @@
   </div>
 
   <!-- Scripts (com versionamento anti-cache) -->
-  <script src="js/config.js?v=20260923_04"></script>
-  <script src="js/mockData.js?v=20260923_04"></script>
-  <script src="js/charts.js?v=20260923_04"></script>
-  <script src="js/navigation.js?v=20260923_04"></script>
-  <script src="js/auth.js?v=20260923_04"></script>
-  <script src="js/app.js?v=20260923_04"></script>
+  <script src="js/config.js?v=20260924_02"></script>
+  <script src="js/mockData.js?v=20260924_02"></script>
+  <script src="js/charts.js?v=20260924_02"></script>
+  <script src="js/navigation.js?v=20260924_02"></script>
+  <script src="js/auth.js?v=20260924_02"></script>
+  <script src="js/app.js?v=20260924_02"></script>
 </body>
 </html>

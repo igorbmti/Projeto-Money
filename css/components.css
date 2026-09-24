@@ -11,7 +11,7 @@
   background-color: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-card);
-  padding: var(--space-6);
+  padding: clamp(12px, 1.1vw + 2px, 18px);
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -24,6 +24,46 @@
 .card:hover {
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow-card);
+}
+
+/* MODULE HERO HEADER (PADRONIZADO EM TODAS AS PÁGINAS) */
+.module-hero-header {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+  border: 1px solid rgba(124, 58, 237, 0.22) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  padding: clamp(10px, 1vh + 3px, 14px) clamp(12px, 1.2vw + 3px, 18px) !important;
+}
+
+.module-hero-header .card-header {
+  margin-bottom: 0;
+  gap: 12px;
+}
+
+.module-hero-icon {
+  width: clamp(34px, 3.2vw, 42px);
+  height: clamp(34px, 3.2vw, 42px);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.module-hero-title {
+  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.22rem) !important;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.module-hero-subtitle {
+  font-size: clamp(0.72rem, 0.68rem + 0.1vw, 0.78rem);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  margin-bottom: 0;
+  line-height: 1.3;
 }
 
 .card-header {
@@ -39,7 +79,7 @@
 }
 
 .card-title {
-  font-size: 1rem;
+  font-size: clamp(0.92rem, 0.88rem + 0.15vw, 1rem);
   font-weight: 700;
   color: var(--text-primary);
   display: flex;
@@ -3360,22 +3400,25 @@ body.light-theme .export-action-btn:hover {
 }
 
 /* ==========================================================================
-   COCKPIT EXECUTIVO DA VISÃO FINANCEIRA (BENTO GRID MODERNO)
+   COCKPIT EXECUTIVO DA VISÃO FINANCEIRA (BENTO GRID MODERNO & FLUIDO)
    ========================================================================== */
 .fin-hero-bento {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1vw, 16px);
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 992px) {
   .fin-hero-bento {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .fin-hero-bento {
     grid-template-columns: 1fr;
   }
@@ -3385,27 +3428,29 @@ body.light-theme .export-action-btn:hover {
   background: linear-gradient(135deg, rgba(20, 26, 41, 0.95) 0%, rgba(13, 18, 30, 0.95) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-card);
-  padding: 20px 22px;
+  padding: clamp(12px, 1vh + 3px, 16px) clamp(14px, 1.2vw + 2px, 18px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 14px;
+  gap: clamp(8px, 0.9vh, 12px);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.35);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .fin-bento-card:hover {
   border-color: rgba(139, 92, 246, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.45), 0 0 20px -8px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.45), 0 0 16px -6px rgba(124, 58, 237, 0.3);
 }
 
 .fin-bento-card.highlight-profit {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 50%, rgba(20, 26, 41, 0.95) 100%);
   border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.15);
 }
 
 .fin-bento-card.highlight-profit::before {
@@ -3422,19 +3467,20 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .fin-bento-title-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .fin-bento-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3466,28 +3512,37 @@ body.light-theme .export-action-btn:hover {
 }
 
 .fin-bento-label {
-  font-size: 0.82rem;
+  font-size: clamp(0.72rem, 0.68rem + 0.1vw, 0.78rem);
   font-weight: 700;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fin-bento-sublabel {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--text-tertiary);
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fin-bento-main-val {
-  font-size: 1.85rem;
+  font-size: clamp(1.22rem, 1.05rem + 0.45vw, 1.55rem);
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-  margin: 4px 0 0 0;
+  line-height: 1.15;
+  margin: 2px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fin-bento-main-val.text-success {
@@ -3502,19 +3557,19 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .fin-health-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.75rem;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
   font-weight: 700;
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
@@ -3522,11 +3577,11 @@ body.light-theme .export-action-btn:hover {
 }
 
 .fin-health-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  box-shadow: 0 0 6px #10b981;
   animation: pulseDot 2s infinite ease-in-out;
 }
 
@@ -3538,14 +3593,14 @@ body.light-theme .export-action-btn:hover {
 .fin-bento-param-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.76rem;
+  gap: 4px;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #ec4899;
   background: rgba(236, 72, 153, 0.12);
   border: 1px solid rgba(236, 72, 153, 0.25);
-  border-radius: 7px;
-  padding: 4px 10px;
+  border-radius: 6px;
+  padding: 3px 8px;
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -3565,35 +3620,38 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
   background: rgba(15, 20, 34, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  padding: 6px;
+  border-radius: 12px;
+  padding: 4px 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .fin-subtab-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
 .fin-subtab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-secondary);
-  font-size: 0.84rem;
+  font-size: clamp(0.76rem, 0.72rem + 0.12vw, 0.82rem);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  white-space: nowrap;
 }
 
 .fin-subtab-btn:hover {
@@ -3611,14 +3669,14 @@ body.light-theme .export-action-btn:hover {
 .fin-tab-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
 }
 
 .fin-tab-pane {
   display: none;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
   animation: fadeInPane 0.25s ease forwards;
 }
@@ -3639,8 +3697,8 @@ body.light-theme .export-action-btn:hover {
 /* 1. HERO ANALYTICS GRID (2 COLUNAS EQUILIBRADAS: DONUT + 4 PILARES) */
 .expense-main-analytics-grid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: var(--space-5);
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(10px, 1vw, 16px);
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -3662,25 +3720,26 @@ body.light-theme .export-action-btn:hover {
   justify-content: space-between;
   height: 100%;
   transition: all 0.25s ease;
+  padding: clamp(12px, 1.1vw + 2px, 16px);
 }
 
 .expense-donut-hero-card:hover {
   border-color: rgba(168, 85, 247, 0.35);
-  box-shadow: 0 8px 26px rgba(168, 85, 247, 0.12);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.12);
 }
 
 .expense-pillars-hero-card:hover {
   border-color: rgba(6, 182, 212, 0.35);
-  box-shadow: 0 8px 26px rgba(6, 182, 212, 0.12);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.12);
 }
 
 /* 2. GRÁFICO DONUT DE DISTRIBUIÇÃO */
 .donut-card-body {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: clamp(12px, 1.2vw, 18px);
   flex: 1;
-  padding: 12px 0 0 0;
+  padding: 8px 0 0 0;
 }
 
 @media (max-width: 600px) {
@@ -3691,8 +3750,8 @@ body.light-theme .export-action-btn:hover {
 }
 
 .donut-canvas-wrapper {
-  width: 155px;
-  height: 155px;
+  width: clamp(115px, 10vw, 140px);
+  height: clamp(115px, 10vw, 140px);
   position: relative;
   flex-shrink: 0;
   display: flex;
@@ -3711,7 +3770,7 @@ body.light-theme .export-action-btn:hover {
 }
 
 .donut-center-label {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 800;
   color: var(--text-tertiary);
   letter-spacing: 0.06em;
@@ -3719,7 +3778,7 @@ body.light-theme .export-action-btn:hover {
 }
 
 .donut-center-val {
-  font-size: 1.12rem;
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.12rem);
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.01em;
@@ -3736,7 +3795,7 @@ body.light-theme .export-action-btn:hover {
 .expense-donut-legend-grid {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 5px;
   width: 100%;
 }
 
@@ -3744,10 +3803,10 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  font-size: 0.78rem;
-  padding: 6px 10px;
-  border-radius: 8px;
+  gap: 8px;
+  font-size: 0.75rem;
+  padding: 5px 8px;
+  border-radius: 7px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.15s ease;
@@ -3762,14 +3821,14 @@ body.light-theme .export-action-btn:hover {
 .expense-legend-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
   overflow: hidden;
 }
 
 .expense-legend-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -3780,12 +3839,13 @@ body.light-theme .export-action-btn:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 0.74rem;
 }
 
 .expense-legend-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 700;
   color: var(--text-primary);
   flex-shrink: 0;
@@ -3793,13 +3853,13 @@ body.light-theme .export-action-btn:hover {
 
 .expense-legend-val {
   font-variant-numeric: tabular-nums;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
 }
 
 .expense-legend-pct {
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
-  min-width: 28px;
+  min-width: 26px;
   text-align: right;
 }
 
@@ -3807,21 +3867,21 @@ body.light-theme .export-action-btn:hover {
 .expense-pillars-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
-  margin-top: 10px;
+  margin-top: 8px;
   justify-content: space-between;
 }
 
 .expense-pillar-item {
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 8px 12px;
+  border-radius: 9px;
+  padding: 6px 10px;
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .expense-pillar-item:hover {
@@ -3834,7 +3894,7 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 
@@ -3916,21 +3976,21 @@ body.light-theme .export-action-btn:hover {
 .expense-quick-chips-ribbon {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   overflow-x: auto;
-  padding: 2px 0 8px 0;
+  padding: 2px 0 6px 0;
   scrollbar-width: thin;
 }
 
 .expense-quick-chip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
+  gap: 4px;
+  padding: 4px 10px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 99px;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-secondary);
   white-space: nowrap;
@@ -3951,13 +4011,13 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 10px 14px;
-  margin-bottom: 12px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
 }
 
 .expense-filter-tabs {
