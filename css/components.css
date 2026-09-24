@@ -11,7 +11,7 @@
   background-color: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-card);
-  padding: clamp(12px, 1.1vw + 2px, 18px);
+  padding: var(--space-6);
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -31,7 +31,7 @@
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
   border: 1px solid rgba(124, 58, 237, 0.22) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
-  padding: clamp(10px, 1vh + 3px, 14px) clamp(12px, 1.2vw + 3px, 18px) !important;
+  padding: 16px 22px !important;
 }
 
 .module-hero-header .card-header {

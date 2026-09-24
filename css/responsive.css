@@ -542,54 +542,54 @@
 @media (min-width: 1024px) and (max-width: 1399px) {
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
+    gap: var(--space-4);
   }
 
   .kpi-card {
-    padding: 10px 12px;
-    min-height: 100px;
+    padding: 16px 18px;
+    min-height: 120px;
   }
 
   .kpi-label {
-    font-size: 0.65rem;
+    font-size: 0.70rem;
   }
 
   .kpi-value {
-    font-size: 1.20rem;
+    font-size: 1.45rem;
   }
 
   .kpi-icon-badge {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
   }
 
   .fin-hero-bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
+    gap: 14px;
   }
 
   .fin-bento-card {
-    padding: 10px 14px;
-    gap: 8px;
+    padding: 16px 18px;
+    gap: 12px;
   }
 
   .fin-bento-main-val {
-    font-size: 1.30rem;
+    font-size: 1.55rem;
   }
 
   .chart-canvas-container {
-    height: 205px;
+    height: 240px;
   }
 
   .distribution-grid,
   .expense-main-analytics-grid {
-    grid-template-columns: 1.08fr 0.92fr;
-    gap: 12px;
+    grid-template-columns: 1.10fr 0.90fr;
+    gap: var(--space-4);
   }
 
   .donut-canvas-wrapper {
-    width: 115px;
-    height: 115px;
+    width: 140px;
+    height: 140px;
   }
 }
 
@@ -599,18 +599,18 @@
 @media (min-width: 1400px) and (max-width: 1899px) {
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
 
   .fin-hero-bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 16px;
   }
 
   .distribution-grid,
   .expense-main-analytics-grid {
-    grid-template-columns: 1.10fr 0.90fr;
-    gap: var(--space-4);
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-5);
   }
 }
 
@@ -621,160 +621,44 @@
   .main-content {
     max-width: 1720px;
     margin: 0 auto;
-    padding: 22px 32px;
-    gap: 22px;
+    padding: 28px 36px;
+    gap: 26px;
   }
 
   .kpi-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
   }
 
   .kpi-card {
-    padding: 16px 20px;
-    min-height: 124px;
+    padding: 20px 24px;
+    min-height: 136px;
   }
 
   .kpi-value {
-    font-size: 1.55rem;
+    font-size: 1.65rem;
   }
 
   .fin-hero-bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
   }
 
   .fin-bento-card {
-    padding: 16px 20px;
+    padding: 20px 24px;
   }
 
   .fin-bento-main-val {
-    font-size: 1.60rem;
+    font-size: 1.75rem;
   }
 
   .chart-canvas-container {
-    height: 250px;
+    height: 275px;
   }
 
   .distribution-grid,
   .expense-main-analytics-grid {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 20px;
-  }
-}
-
-/* ==========================================================================
-   AJUSTE DE PROPORÇÃO VERTICAL DINÂMICA (VIEWPORTS COM ALTURA ≤ 820px)
-   Garante que o dashboard e métricas nunca fiquem cortados em notebooks HD
-   ========================================================================== */
-@media (min-width: 900px) and (max-height: 820px) {
-  :root {
-    --space-4: 8px;
-    --space-5: 10px;
-    --space-6: 12px;
-    --header-height: 54px;
-  }
-
-  .main-content {
-    padding: 8px 14px;
-    gap: 8px;
-  }
-
-  .module-hero-header {
-    padding: 8px 14px !important;
-  }
-
-  .module-hero-icon {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  .module-hero-title {
-    font-size: 1rem !important;
-  }
-
-  .kpi-card {
-    padding: 8px 10px;
-    min-height: 88px;
-    gap: 4px;
-  }
-
-  .kpi-icon-badge {
-    width: 28px;
-    height: 28px;
-  }
-
-  .kpi-value {
-    font-size: 1.15rem;
-  }
-
-  .fin-bento-card {
-    padding: 8px 12px;
-    gap: 6px;
-  }
-
-  .fin-bento-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .fin-bento-main-val {
-    font-size: 1.20rem;
-  }
-
-  .fin-subtab-container {
-    padding: 3px 4px;
-    gap: 4px;
-  }
-
-  .fin-subtab-btn {
-    padding: 4px 10px;
-    font-size: 0.74rem;
-  }
-
-  .chart-canvas-container {
-    height: 185px;
-  }
-
-  .chart-card .card-header {
-    margin-bottom: 4px;
-  }
-
-  .chart-bottom-metrics {
-    padding-top: 6px;
-    gap: 8px;
-  }
-
-  .sidebar-nav-container {
-    padding: 6px 10px;
-    gap: 8px;
-  }
-
-  .sidebar-footer {
-    padding: 6px 10px;
-  }
-
-  .donut-canvas-wrapper {
-    width: 105px;
-    height: 105px;
-  }
-
-  .expense-donut-hero-card,
-  .expense-pillars-hero-card {
-    padding: 8px 12px;
-  }
-
-  .expense-pillar-item {
-    padding: 4px 8px;
-    gap: 2px;
-  }
-
-  .expense-quick-chips-ribbon {
-    padding: 2px 0 4px 0;
-  }
-
-  .expense-filter-bar {
-    padding: 6px 10px;
-    margin-bottom: 6px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
   }
 }

@@ -172,11 +172,11 @@
 
 .sidebar-nav-container {
   flex: 1;
-  padding: clamp(8px, 1vh + 2px, 14px) var(--space-3);
+  padding: clamp(10px, 1.2vh + 2px, 16px) var(--space-4);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.1vh + 2px, 14px);
+  gap: clamp(10px, 1.4vh + 2px, 18px);
 }
 
 .nav-section-title {
@@ -652,14 +652,14 @@
    ========================================================================== */
 .main-content {
   flex: 1;
-  padding: var(--space-5) var(--space-6);
+  padding: var(--space-6);
   width: 100%;
   max-width: var(--max-content-width);
   min-width: 0;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-6);
   box-sizing: border-box;
 }
 
