@@ -537,116 +537,16 @@
 }
 
 /* ==========================================================================
-   BREAKPOINT: NOTEBOOKS & MONITORES COMPACTOS (1024px – 1366px - 13" A 15.6" HD)
-   Suporte a 1366x768, 1280x800, 1080p com escala do Windows 125%/150%
+   BREAKPOINT: DESKTOP & MONITORES (≥ 1024px)
+   Suporte fluido e consistente para todas as resoluções desktop (HD, FHD, 2K, Ultrawide, 4K)
    ========================================================================== */
-@media (min-width: 1024px) and (max-width: 1366px) {
-  .main-content {
-    padding: 16px 20px;
-    gap: 16px;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  .kpi-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .kpi-card {
-    padding: 12px 14px;
-    min-height: 106px;
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .kpi-label {
-    font-size: 0.68rem;
-  }
-
-  .kpi-value {
-    font-size: clamp(1.10rem, 0.95rem + 0.35vw, 1.32rem);
-  }
-
-  .kpi-icon-badge {
-    width: 32px;
-    height: 32px;
-  }
-
-  .kpi-trend {
-    font-size: 0.68rem;
-    gap: 4px;
-  }
-
-  .fin-hero-bento {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .fin-bento-card {
-    padding: 14px 16px;
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .fin-bento-main-val {
-    font-size: clamp(1.25rem, 1.10rem + 0.35vw, 1.45rem);
-  }
-
-  .chart-canvas-container {
-    height: 210px;
-  }
-
-  .distribution-grid,
-  .expense-main-analytics-grid {
-    grid-template-columns: 1.10fr 0.90fr;
-    gap: 14px;
-    width: 100%;
-    min-width: 0;
-  }
-
-  .donut-canvas-wrapper {
-    width: 120px;
-    height: 120px;
-  }
-
-  .prod-kpi-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .fin-kpi-quad-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .export-modules-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-  }
-
-  .expense-cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-    gap: 14px;
-  }
-}
-
-/* ==========================================================================
-   BREAKPOINT: DESKTOP & MONITORES LARGOS (≥ 1367px)
-   Suporte fluido para 1440x900, 1536x864, 1600x900, 1920x1080, 2560x1080, 2560x1440, 4K
-   Estrutura unificada e elegante contida em var(--max-content-width)
-   ========================================================================== */
-@media (min-width: 1367px) {
+@media (min-width: 1024px) {
   .main-content {
     max-width: var(--max-content-width);
     margin: 0 auto;
     width: 100%;
-    padding: 20px 24px;
-    gap: 20px;
+    padding: var(--space-6);
+    gap: var(--space-6);
     min-width: 0;
   }
 
@@ -730,4 +630,5 @@
     display: none;
   }
 }
+
 
