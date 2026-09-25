@@ -261,7 +261,7 @@ const ChartsEngine = {
 
     const numBars = dias.length;
     const barSpacing = chartW / numBars;
-    const barWidth = Math.max(Math.min(barSpacing * 0.52, 20), 6);
+    const barWidth = Math.max(Math.min(barSpacing * 0.52, 28), 7);
 
     dias.forEach((dia, idx) => {
       const val = dataValues[idx];

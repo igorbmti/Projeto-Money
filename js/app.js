@@ -1466,10 +1466,10 @@ const App = {
           if (Array.isArray(d.topProdutos) && d.topProdutos.length > 0) {
             MockData.topProdutos = d.topProdutos.map(tp => ({
               id: tp.id,
-              nome: tp.nome,
+              nome: this.cleanMojibake(tp.nome || ''),
               imagem: tp.imagem,
               vendas: parseInt(tp.vendas) || 0,
-              detalhe: tp.categoria || 'Equipamento',
+              detalhe: this.cleanMojibake(tp.categoria || 'Equipamento'),
               faturamento: parseFloat(tp.faturamento) || 0,
               share: `${tp.faturamento > 0 ? ((parseFloat(tp.faturamento) / (d.kpis.faturamento || 1)) * 100).toFixed(1) : 0}%`
             }));
@@ -1479,7 +1479,7 @@ const App = {
             const totalFp = d.formasPagamento.reduce((acc, f) => acc + parseFloat(f.valorTotal || 0), 0) || 1;
             MockData.formasPagamento = d.formasPagamento.map(fp => ({
               id: fp.id,
-              nome: fp.nome,
+              nome: this.cleanMojibake(fp.nome || ''),
               percentual: parseFloat(((parseFloat(fp.valorTotal || 0) / totalFp) * 100).toFixed(1)),
               valor: parseFloat(fp.valorTotal || 0)
             }));
