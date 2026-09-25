@@ -438,11 +438,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-6);
+  padding: 0 max(24px, calc((100% - var(--max-content-width)) / 2 + 24px));
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  transition: padding var(--transition-normal);
 }
 
 .header-left {
@@ -678,8 +679,9 @@
   flex: 1;
   padding: var(--space-6);
   width: 100%;
-  max-width: 100%;
+  max-width: var(--max-content-width);
   min-width: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
