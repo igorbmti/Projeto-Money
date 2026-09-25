@@ -3432,7 +3432,9 @@ body.light-theme .export-action-btn:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
 }
 
 .fin-bento-title-group {
@@ -3440,6 +3442,14 @@ body.light-theme .export-action-btn:hover {
   align-items: center;
   gap: 8px;
   min-width: 0;
+  flex: 1 1 0;
+  overflow: hidden;
+}
+
+.fin-bento-title-texts {
+  min-width: 0;
+  flex: 1 1 0;
+  overflow: hidden;
 }
 
 .fin-bento-icon {
@@ -3477,7 +3487,7 @@ body.light-theme .export-action-btn:hover {
 }
 
 .fin-bento-label {
-  font-size: clamp(0.72rem, 0.68rem + 0.1vw, 0.78rem);
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-transform: uppercase;
@@ -3486,15 +3496,17 @@ body.light-theme .export-action-btn:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
 }
 
 .fin-bento-sublabel {
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   color: var(--text-tertiary);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
 }
 
 .fin-bento-main-val {
@@ -3534,11 +3546,13 @@ body.light-theme .export-action-btn:hover {
   gap: 5px;
   padding: 3px 8px;
   border-radius: 6px;
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
   border: 1px solid rgba(16, 185, 129, 0.3);
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .fin-health-dot {

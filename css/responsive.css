@@ -542,8 +542,7 @@
    ========================================================================== */
 @media (min-width: 1024px) {
   .main-content {
-    max-width: var(--max-content-width);
-    margin: 0 auto;
+    max-width: 100%;
     width: 100%;
     padding: var(--space-6);
     gap: var(--space-6);
