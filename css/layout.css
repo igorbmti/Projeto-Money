@@ -438,11 +438,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-6);
+  padding: 0 max(24px, calc((100% - var(--max-content-width)) / 2 + 24px));
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  transition: padding var(--transition-normal);
 }
 
 .header-left {
